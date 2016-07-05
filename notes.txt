@@ -1,0 +1,14 @@
+// api
+users table
+id | name | password | thumbnail
+
+scores table
+id | user_id | opponent_id | win (bool) | path_id | clicks | time
+
+paths table
+id | user_id | start | end | path (text)
+
+// todos
+1. create database and seed. make sure api works
+2. create an wikipedia web scrape app
+3. create an angular chat app with sockets and auth
