@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
           password: 'foo',
           thumbnail_url: '/assets/thumbnails/bison.gif',
           '1p_score': 0,
-          '2p_score': 760
+          '2p_score': 0
          },
          {
           username: 'Darlene Daring',
@@ -48,14 +48,14 @@ exports.seed = function(knex, Promise) {
           username: 'Helen Humble',
           password: 'foo',
           thumbnail_url: '/assets/thumbnails/honda.gif',
-          '1p_score': 29887,
-          '2p_score': 3145
+          '1p_score': 0,
+          '2p_score': 0
          },
          {
           username: 'Drew Furth',
           password: 'foo',
           thumbnail_url: '/assets/thumbnails/ken.gif',
-          '1p_score': 6090,
+          '1p_score': 0,
           '2p_score': 0
          },
          {
@@ -85,8 +85,40 @@ exports.seed = function(knex, Promise) {
           thumbnail_url: '/assets/thumbnails/zangief.gif',
           '1p_score': 800,
           '2p_score': 3145
+         }
+      ]).returning('id');
+    }).then(ids=>{
+      return knex('paths').insert([
+         {
+          user_id: ids[0], 
+          start: 'foo',
+          end: 'bar',
+          path: 'foo,baz,bar'
          },
-
-      ]);
-    });
+         {
+          user_id: ids[1], 
+          start: 'foo',
+          end: 'bar',
+          path: 'foo,baz,bar'
+         },
+         {
+          user_id: ids[2], 
+          start: 'foo',
+          end: 'bar',
+          path: 'foo,baz,bar'
+         },
+         {
+          user_id: ids[3], 
+          start: 'foo',
+          end: 'bar',
+          path: 'foo,baz,bar'
+         },
+         {
+          user_id: ids[4], 
+          start: 'foo',
+          end: 'bar',
+          path: 'foo,baz,bar'
+         },
+      ]).returning('id');
+    }).then();
 };

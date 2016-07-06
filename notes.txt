@@ -25,3 +25,6 @@ if win
 2. create an wikipedia web scrape app
 3. create an angular chat app with sockets and auth 
 4. homepage - styled
+
+//gif links
+http://wiki.shoryuken.com/Street_Fighter_2:_Champion_Edition
