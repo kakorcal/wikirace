@@ -1,3 +1,16 @@
+// web scrape
+https://www.codementor.io/nodejs/tutorial/how-to-write-a-web-scraper-in-nodejs
+https://scotch.io/tutorials/scraping-the-web-with-node-js
+
+// sockets
+http://chariotsolutions.com/blog/post/getting-chatty-angular-socket-io-nodeexpress-bootstrap/
+https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean
+
+// oauth
+https://github.com/auth0/socketio-jwt
+https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/
+https://auth0.com/blog/2014/01/15/auth-with-socket-io/
+
 // db
 users table
 id | name | password | thumbnail | 1p_score | 2p_score
@@ -19,12 +32,24 @@ if win
 
   **note 1 click counts as .25, hence the final score divides clicks / 4
 
+// gif links
+http://wiki.shoryuken.com/Street_Fighter_2:_Champion_Edition
+
+// Cheat sheet for cURL:
+
+Create: `curl -d '{"todo":{"todo": "hello again"}}' -H "Content-Type: application/json"  http://localhost:3000/todos`
+
+Read: 
+  Index: `curl http://localhost:3000/todos`
+  Show: `curl http://localhost:3000/todos/3`
+
+Update: `curl -d '{"todo":{"todo": "putting is awesome"}}' -H "Content-Type: application/json" -X PUT  http://localhost:3000/todos/4`
+
+Delete: `curl -X DELETE http://localhost:3000/todos/4`
+
 // todos
 7/5 ~ 7/7
 1. create database and seed. make sure api works
 2. create an wikipedia web scrape app
 3. create an angular chat app with sockets and auth 
 4. homepage - styled
-
-//gif links
-http://wiki.shoryuken.com/Street_Fighter_2:_Champion_Edition

@@ -7,9 +7,10 @@ const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 
-if(app.get('env') === 'development'){
-  require('dotenv').load();
-}
+// not sure if will need this
+// if(app.get('env') === 'development'){
+//   require('dotenv').load();
+// }
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
@@ -18,7 +19,7 @@ app.use('/javascripts', express.static(`${__dirname}../client/javascripts`));
 app.use('/stylesheets', express.static(`${__dirname}../client/stylesheets`));
 app.use('/assets', express.static(`${__dirname}../client/assets`));
 app.use('/views', express.static(`${__dirname}../client/views`));
-app.use('/api', routes.users);
+app.use('/api/users', routes.users);
 
 app.get('*', (req, res)=>{
   res.sendFile('views/layout.html', {root: './client'});
@@ -28,6 +29,6 @@ server.listen(PORT, ()=>{
   console.log(`Listening to port ${PORT}`);
 });
 
-io.on('connection', (socket)=>{
-  game.init(io, socket);
-})
+// io.on('connection', (socket)=>{
+//   game.init(io, socket);
+// });

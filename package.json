@@ -2,7 +2,7 @@
   "name": "wikisprint",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,12 +21,14 @@
     "body-parser": "^1.15.2",
     "cheerio": "^0.20.0",
     "express": "^4.14.0",
+    "jsonwebtoken": "^7.0.1",
     "knex": "^0.11.7",
     "morgan": "^1.7.0",
     "pg": "^6.0.1",
     "request": "^2.72.0",
     "socket.io": "^1.4.8",
-    "socket.io-client": "^1.4.8"
+    "socket.io-client": "^1.4.8",
+    "socketio-jwt": "^4.5.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

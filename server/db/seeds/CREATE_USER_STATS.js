@@ -249,79 +249,79 @@ exports.seed = function(knex, Promise) {
       return knex('paths').insert([
         {
           score_id: ids[0],
-          path: ['Transport Layer Security', 'Web browser', 'World Wide Web', 'Tim Berners-Lee', 'England', 'Association football', 'Football']
+          path: ['Transport Layer Security', 'Web browser', 'World Wide Web', 'Tim Berners-Lee', 'England', 'Association football', 'Football'].join(' -> ')
         },
         {
           score_id: ids[1],
-          path: ['Gandalf', 'The Hobbit', 'J.R.R Tolkien', 'Bournemouth', 'England', 'United Kingdom', 'United States of America', 'Apollo 11', 'Moon', 'Colonization of the Moon']
+          path: ['Gandalf', 'The Hobbit', 'J.R.R Tolkien', 'Bournemouth', 'England', 'United Kingdom', 'United States of America', 'Apollo 11', 'Moon', 'Colonization of the Moon'].join(' -> ')
         },
         {
           score_id: ids[2],
-          path: ['Transport Layer Security', 'Taher Elgamal', 'Egypt', 'Association football', 'Football']
+          path: ['Transport Layer Security', 'Taher Elgamal', 'Egypt', 'Association football', 'Football'].join(' -> ')
         },
         {
           score_id: ids[3],
-          path: ['Transport Layer Security', 'Web browser', 'World Wide Web', 'Tim Berners-Lee', 'England', 'Association football', 'Football']
+          path: ['Transport Layer Security', 'Web browser', 'World Wide Web', 'Tim Berners-Lee', 'England', 'Association football', 'Football'].join(' -> ')
         },
         {
           score_id: ids[4],
-          path: ['Brody Jenner', 'Celebrity', 'Model (profession)', 'Performance', 'Performing arts', 'William Shakespeare', 'Romeo and Juliet']
+          path: ['Brody Jenner', 'Celebrity', 'Model (profession)', 'Performance', 'Performing arts', 'William Shakespeare', 'Romeo and Juliet'].join(' -> ')
         },
         {
           score_id: ids[5],
-          path: ['Pulp Fiction (film)', 'Quentin Tarantino', 'Knoxville, Tennesse', 'U.S. state', 'California', 'Los Angeles', 'Dodger Stadium', 'Los Angeles Dodgers']
+          path: ['Pulp Fiction (film)', 'Quentin Tarantino', 'Knoxville, Tennesse', 'U.S. state', 'California', 'Los Angeles', 'Dodger Stadium', 'Los Angeles Dodgers'].join(' -> ')
         },
         {
           score_id: ids[6],
-          path: ['Guernsey', 'Pound sterling', 'Gold penny', 'Silver coin', 'Silver', 'Silver (color)', 'Color']
+          path: ['Guernsey', 'Pound sterling', 'Gold penny', 'Silver coin', 'Silver', 'Silver (color)', 'Color'].join(' -> ')
         },
         {
           score_id: ids[7],
-          path: ['Brody Jenner', 'California', 'United States', 'California', 'United States', 'North America', 'Continent', 'Europe', 'London', 'United Kingdom', 'William Shakespeare', 'Romeo and Juliet']
+          path: ['Brody Jenner', 'California', 'United States', 'California', 'United States', 'North America', 'Continent', 'Europe', 'London', 'United Kingdom', 'William Shakespeare', 'Romeo and Juliet'].join(' -> ')
         },
         {
           score_id: ids[8],
-          path: ['Iowa Intercollegiate Athletic Conference', 'Iowa', 'Maize', 'Mexico', 'Fishing', 'Shrimp', 'Shrimp farming', 'Marine shrimp farming', 'Aquaculture', 'Shrimp farm']
+          path: ['Iowa Intercollegiate Athletic Conference', 'Iowa', 'Maize', 'Mexico', 'Fishing', 'Shrimp', 'Shrimp farming', 'Marine shrimp farming', 'Aquaculture', 'Shrimp farm'].join(' -> ')
         },
         {
           score_id: ids[9],
-          path: ['Bucharest Corporate Center', 'Bucharest', 'London', 'Boris Johnson']
+          path: ['Bucharest Corporate Center', 'Bucharest', 'London', 'Boris Johnson'].join(' -> ')
         },
         {
           score_id: ids[10],
-          path: ['Birmingham City F.C', 'Birmingham', 'Industrial Revolution', 'United Kingdom of Great Britain and Ireland', 'Representation of the People Act 1918', 'Suffragettes', 'Feminism']
+          path: ['Birmingham City F.C', 'Birmingham', 'Industrial Revolution', 'United Kingdom of Great Britain and Ireland', 'Representation of the People Act 1918', 'Suffragettes', 'Feminism'].join(' -> ')
         },
         {
           score_id: ids[11],
-          path: ['Another Cinderella Story', 'Cinderella', 'Eurasia', 'Europe', 'United Kingdom of Great Britain and Ireland', 'London', 'Whitechapel', 'Jack the Ripper']
+          path: ['Another Cinderella Story', 'Cinderella', 'Eurasia', 'Europe', 'United Kingdom of Great Britain and Ireland', 'London', 'Whitechapel', 'Jack the Ripper'].join(' -> ')
         },
         {
           score_id: ids[12],
-          path: ['Flamenco', 'Japan', 'South Korea', 'Seoul Capital Area', 'Seoul']
+          path: ['Flamenco', 'Japan', 'South Korea', 'Seoul Capital Area', 'Seoul'].join(' -> ')
         },
         {
           score_id: ids[13],
-          path: ['Deus Ex: Invisible War', 'Deus Ex: Invisible War characters', 'Deus Ex', 'Illuminati', 'Owl of Minerva', 'Athens', 'Europe', 'Africa', 'Madagascar']
+          path: ['Deus Ex: Invisible War', 'Deus Ex: Invisible War characters', 'Deus Ex', 'Illuminati', 'Owl of Minerva', 'Athens', 'Europe', 'Africa', 'Madagascar'].join(' -> ')
         },
         {
           score_id: ids[14],
-          path: ['Road to Perdition', 'Crime thriller', 'Literary genre', 'Satire']
+          path: ['Road to Perdition', 'Crime thriller', 'Literary genre', 'Satire'].join(' -> ')
         },
         {
           score_id: ids[15],
-          path: ['Drum and bass', 'The Matrix', 'Science fiction film', 'Film genre', 'Fiction', 'Literary fiction', 'Fiction', "Alice's Adventures in Wonderland", 'Fantasy', 'Chronicles of Narnia', 'The Chronicles of Narnia (film series)', 'The Chronicles of Narnia']
+          path: ['Drum and bass', 'The Matrix', 'Science fiction film', 'Film genre', 'Fiction', 'Literary fiction', 'Fiction', "Alice's Adventures in Wonderland", 'Fantasy', 'Chronicles of Narnia', 'The Chronicles of Narnia (film series)', 'The Chronicles of Narnia'].join(' -> ')
         },
         {
           score_id: ids[16],
-          path: ['Income tax in the United States', 'Louver']
+          path: ['Income tax in the United States', 'Louver'].join(' -> ')
         },
         {
           score_id: ids[17],
-          path: ['Progestin', 'Estrogen', 'Greek language', 'Ancient Greek literature', 'Literary genre', 'Comedy', 'Jon Stewart', 'Comedy Central', 'David Letterman']
+          path: ['Progestin', 'Estrogen', 'Greek language', 'Ancient Greek literature', 'Literary genre', 'Comedy', 'Jon Stewart', 'Comedy Central', 'David Letterman'].join(' -> ')
         },
         {
           score_id: ids[18],
-          path: ['Birmingham City F.C.', 'Gary Rowett', 'Association football', "Women's association football", 'Woman', 'Feminism']
+          path: ['Birmingham City F.C.', 'Gary Rowett', 'Association football', "Women's association football", 'Woman', 'Feminism'].join(' -> ')
         }
       ]);
     });
