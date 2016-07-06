@@ -1,6 +1,6 @@
-// api
+// db
 users table
-id | name | password | thumbnail
+id | name | password | thumbnail | 1p_score | 2p_score
 
 scores table
 id | user_id | opponent_id | win (bool) | path_id | clicks | time
@@ -8,7 +8,20 @@ id | user_id | opponent_id | win (bool) | path_id | clicks | time
 paths table
 id | user_id | start | end | path (text)
 
+// scoring system
+if lose, no points
+if win
+  max score in a game = 1000 points (player completes game within 1 click and 5s)
+  starting from 5s, points get deducted from 1000
+  but points will be deducted before 5s if player clicks more than 1 click
+  final score = prev score + (1000 - (time * clicks) / 4)
+  player will not get any points if((time * clicks) / 4 > 1000)
+
+  **note 1 click counts as .25, hence the final score divides clicks / 4
+
 // todos
+7/5 ~ 7/7
 1. create database and seed. make sure api works
 2. create an wikipedia web scrape app
-3. create an angular chat app with sockets and auth
+3. create an angular chat app with sockets and auth 
+4. homepage - styled
