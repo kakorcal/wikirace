@@ -1,18 +1,183 @@
-// TWO PLAYER MATCHES
+// Darlene Daring
+  [
+    {
+      clicks: 7,
+      time: 38, 
+      points: 933, 
+      result: 'win', 
+      game_type: '1',
+      path: ['Transport Layer Security', 'Web browser', 'World Wide Web', 'Tim Berners-Lee', 'England', 'Association football', 'Football']
+    },
+    {
+      clicks: 10,
+      time: 67, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Gandalf', 'The Hobbit', 'J.R.R Tolkien', 'Bournemouth', 'England', 'United Kingdom', 'United States of America', 'Apollo 11', 'Moon', 'Colonization of the Moon']
+    },
+  ]
 
-// Jack Jumping 
-  { 
-    id: 1
-    games_played: 4
-    win: 3,
-    lose: 1
-    1p_score: 
-  }
+// Eric Exciting
+  [
+    {
+      clicks: 5,
+      time: 67, 
+      points: 916, 
+      result: 'win', 
+      game_type: '2',
+      path: ['Transport Layer Security', 'Taher Elgamal', 'Egypt', 'Association football', 'Football']
+    },
+    {
+      clicks: 7,
+      time: 102, 
+      points: 821, 
+      result: 'win', 
+      game_type: '1',
+      path: ['Brody Jenner', 'Celebrity', 'Model (profession)', 'Performance', 'Performing arts', 'William Shakespeare', 'Romeo and Juliet']
+    },
+    {
+      clicks: 8,
+      time: 101, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Pulp Fiction (film)', 'Quentin Tarantino', 'Knoxville, Tennesse', 'U.S. state', 'California', 'Los Angeles', 'Dodger Stadium', 'Los Angeles Dodgers']
+    },
+  ]
 
-// Ivan Indignant 
-  {
-    id: 2,
-    games_played: 2,
-    
+// Francine Flippant
+  [
+    {
+      clicks: 7,
+      time: 38, 
+      points: 933, 
+      result: 'win', 
+      game_type: '1',
+      path: ['Guernsey', 'Pound sterling', 'Gold penny', 'Silver coin', 'Silver', 'Silver (color)', 'Color']
+    },
+  ]
 
-  }
+// George Gorgeous
+  [
+    {
+      clicks: 12,
+      time: 85, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Brody Jenner', 'California', 'United States', 'California', 'United States', 'North America', 'Continent', 'Europe', 'London', 'United Kingdom', 'William Shakespeare', 'Romeo and Juliet']
+    },
+    {
+      clicks: 10,
+      time: 90, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Iowa Intercollegiate Athletic Conference', 'Iowa', 'Maize', 'Mexico', 'Fishing', 'Shrimp', 'Shrimp farming', 'Marine shrimp farming', 'Aquaculture', 'Shrimp farm']
+    },
+    {
+      clicks: 4,
+      time: 32, 
+      points: 962, 
+      result: 'win', 
+      game_type: '2',
+      path: ['Bucharest Corporate Center', 'Bucharest', 'London', 'Boris Johnson']
+    },
+  ]
+
+// Drew Furth
+  [
+    {
+      clicks: 7,
+      time: 54, 
+      points: 905, 
+      result: 'win', 
+      game_type: '1',
+      path: ['Birmingham City F.C', 'Birmingham', 'Industrial Revolution', 'United Kingdom of Great Britain and Ireland', 'Representation of the People Act 1918', 'Suffragettes', 'Feminism']
+    },
+  ]
+
+// Ivan Indignant
+  [
+    {
+      clicks: 8,
+      time: 48, 
+      points: 904, 
+      result: 'win', 
+      game_type: '2',
+      path: ['Another Cinderella Story', 'Cinderella', 'Eurasia', 'Europe', 'United Kingdom of Great Britain and Ireland', 'London', 'Whitechapel', 'Jack the Ripper']
+    },
+    {
+      clicks: 5,
+      time: 49, 
+      points: 938, 
+      result: 'win', 
+      game_type: '2',
+      path: ['Flamenco', 'Japan', 'South Korea', 'Seoul Capital Area', 'Seoul']
+    },
+    {
+      clicks: 9,
+      time: 96, 
+      points: 784, 
+      result: 'win', 
+      game_type: '1',
+      path: ['Deus Ex: Invisible War', 'Deus Ex: Invisible War characters', 'Deus Ex', 'Illuminati', 'Owl of Minerva', 'Athens', 'Europe', 'Africa', 'Madagascar']
+    },
+    {
+      clicks: 4,
+      time: 24, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Road to Perdition', 'Crime thriller', 'Literary genre', 'Satire']
+    },
+    {
+      clicks: 12,
+      time: 105, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Drum and bass', 'The Matrix', 'Science fiction film', 'Film genre', 'Fiction', 'Literary fiction', 'Fiction', "Alice's Adventures in Wonderland", 'Fantasy', 'Chronicles of Narnia', 'The Chronicles of Narnia (film series)', 'The Chronicles of Narnia']
+    },
+  ]
+
+// Matt Lane
+  [
+    {
+      clicks: 2,
+      time: 5, 
+      points: 1000, 
+      result: 'win', 
+      game_type: '2',
+      path: ['Income tax in the United States', 'Louver']
+    },
+    {
+      clicks: 9,
+      time: 111, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Progestin', 'Estrogen', 'Greek language', 'Ancient Greek literature', 'Literary genre', 'Comedy', 'Jon Stewart', 'Comedy Central', 'David Letterman']
+    },
+    {
+      clicks: 6,
+      time: 43, 
+      points: 935, 
+      result: 'win', 
+      game_type: '2',
+      path: ['Birmingham City F.C.', 'Gary Rowett', 'Association football', "Women's association football", 'Woman', 'Feminism']
+    },
+  ]
+
+// Tom O'Brien
+  [
+    {
+      clicks: 8,
+      time: 61, 
+      points: 0, 
+      result: 'lose', 
+      game_type: '2',
+      path: ['Internet Relay Chat', 'Jarkko Oikarinen', 'Finland', 'Finnish Defence Forces', 'Finnish Navy', 'Navy', 'German battleship Tirpitz', 'Battleship']
+    },
+  ]
