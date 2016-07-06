@@ -7,10 +7,9 @@ const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 
-// not sure if will need this
-// if(app.get('env') === 'development'){
-//   require('dotenv').load();
-// }
+if(app.get('env') === 'development'){
+  require('dotenv').load();
+}
 
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
