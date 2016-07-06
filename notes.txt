@@ -3,7 +3,7 @@ users table
 id | name | password | thumbnail | 1p_score | 2p_score
 
 scores table
-id | user_id | opponent_id | win (bool) | path_id | clicks | time
+id | user_id | opponent_id | path_id | win (bool) | clicks | time
 
 paths table
 id | user_id | start | end | path (text)
