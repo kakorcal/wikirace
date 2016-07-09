@@ -49,7 +49,9 @@ Delete: `curl -X DELETE http://localhost:3000/todos/4`
 
 // todos
 7/5 ~ 7/7
-1. create database and seed. make sure api works
-2. create an wikipedia web scrape app
-3. create an angular chat app with sockets and auth 
-4. homepage - styled
+x1. create database and seed. make sure api works
+  2. create chat app using angular, passport and sockets
+  3. create local strategy with passport
+  4. integrate passport with sockets
+5. create an wikipedia web scrape app
+6. homepage - styled
