@@ -1,5 +1,5 @@
 (()=>{
-  angular.module('app.filter', [])
+  angular.module('wikirace.filter', [])
     .filter('WikiFilter', WikiFilter)
 
   function WikiFilter(){
@@ -7,6 +7,4 @@
 
     };
   }
-
-
 })();

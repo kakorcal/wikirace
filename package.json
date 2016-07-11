@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kakorcal/wikisprint#readme",
   "dependencies": {
+    "angular-socket-io": "^0.7.0",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "cheerio": "^0.20.0",

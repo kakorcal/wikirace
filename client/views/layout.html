@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='wikirace'>
+<head>
+  <meta charset="UTF-8">
+  <title>WIKIRACE</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body ng-cloak layout='row'>
+  <div ng-view flex layout='column'></div>
+
+  <!-- sockets -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
+
+  <!-- bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.js"></script>
+
+  <!-- angular -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-aria.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-messages.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.js"></script>
+
+  <!-- libs -->
+  <script src="/libs/angular-socket-io/socket.js"></script>
+
+  <!-- app -->
+  <script src="/javascripts/app.js"></script>
+  <script src="/javascripts/routes/wikirace.routes.js"></script>
+  <script src="/javascripts/filters/wikirace.filter.js"></script>
+  <script src="/javascripts/services/sockets.service.js"></script>
+  <script src="/javascripts/services/users.service.js"></script>
+</body>
+</html>
