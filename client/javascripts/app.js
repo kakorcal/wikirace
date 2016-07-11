@@ -4,11 +4,15 @@
     'sockets.service',
     'users.service',
     'wikirace.routes',
-    'wikirace.filter'
+    'wikirace.filter',
+    'wikinav.directive'
   ]).config(theme);
 
-  theme.$inject = ['$mdThemingProvider'];
-  function theme($mdThemingProvider){
+  theme.$inject = ['$mdThemingProvider', '$mdIconProvider'];
+  function theme($mdThemingProvider, $mdIconProvider){
+    // alias materials-icons as mi
+    $mdIconProvider.fontSet('mi', 'material-icons');
+
     // config theme to ensure text is always white
     $mdThemingProvider.definePalette('white-palette', {
       // Need 50 and 100 to prevent instantiation error

@@ -22,6 +22,10 @@
       .when('/rankings', {
         templateUrl: 'views/pages/rankings.html',
         controllerAs: 'vm'
+      })      
+      .when('/instructions', {
+        templateUrl: 'views/pages/how_to_play.html',
+        controllerAs: 'vm'
       })
       .when('/auth/login', {
         templateUrl: 'views/pages/auth/login.html',
