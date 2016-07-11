@@ -6,12 +6,22 @@
   position: relative;
 }
 
+/* home.html */
+
 .wiki-view-wrapper {
-  font-family: 'Cardo', serif;
   text-align: center;
 }
 
+.wiki-logo-wrapper {
+  transition: transform 100ms ease-in;
+}
+
+.wiki-logo-wrapper:hover {
+  transform: rotate(20deg);
+}
+
 .wiki-title-wrapper h1 {
+  font-family: 'Cardo', serif;
   font-size: 60px;
   letter-spacing: 1px;
 }
@@ -20,6 +30,7 @@
   font-size: 40px;
 }
 
+/* _nav.html */
 .wiki-nav-item {
   position: absolute;
   text-align: center;
@@ -87,3 +98,20 @@
   background: radial-gradient(#D1C4E9 1%, #7E57C2);  
 }
 
+/* play.html */
+
+.play a span {
+  font-size: 20px;
+}
+
+.play-view {
+  width: 250px;
+}
+
+.play-button-1 {
+  text-align: left;
+}
+
+.play-button-2 {
+  text-align: right;
+}
