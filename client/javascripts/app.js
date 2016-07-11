@@ -1,7 +1,7 @@
 (()=>{
   angular.module('wikirace', [
     'ngMaterial',
-    'socket.service',
+    'sockets.service',
     'users.service',
     'wikirace.routes',
     'wikirace.filter'
