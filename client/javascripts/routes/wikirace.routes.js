@@ -8,10 +8,13 @@
       .when('/', {
         templateUrl: 'views/pages/home.html'
       })
+      .when('/404', {
+        templateUrl: 'views/404.html'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/404'
       });
     $locationProvider.html5Mode(true);
   }
-  
+
 })();
