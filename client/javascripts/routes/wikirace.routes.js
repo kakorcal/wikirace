@@ -33,7 +33,8 @@
       })
       .when('/auth/new', {
         templateUrl: 'views/pages/auth/create_account.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        controller: 'NewAccount'
       })
       .when('/users/:id', {
         templateUrl: 'view/pages/users/show.html',

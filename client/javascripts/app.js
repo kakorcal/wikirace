@@ -1,12 +1,15 @@
 (()=>{
   angular.module('wikirace', [
     'ngMaterial',
+    'ngMessages',
     'sockets.service',
     'users.service',
     'wikirace.routes',
     'wikirace.filter',
-    'wikinav.directive'
-  ]).config(theme);
+    'wikinav.directive',
+    'new_account.controller'
+  ]);
+  // .config(theme);
 
   theme.$inject = ['$mdThemingProvider', '$mdIconProvider'];
   function theme($mdThemingProvider, $mdIconProvider){

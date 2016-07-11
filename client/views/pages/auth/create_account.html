@@ -1,0 +1,32 @@
+<div flex class='wiki-wrapper' layout='row' layout-align='center center'>
+  <div class='wiki-view-wrapper'>
+    <md-content layout-padding>
+      <form name="registerForm" novalidate>
+        <md-input-container class='md-block'>
+          <label for="username">Username:</label>
+          <input type="text" name='username' ng-model='username' required>
+          
+          <!-- errors -->
+          <div ng-messages="registerForm.username.$error">
+            <div ng-message="required">Please Include A Username</div>
+          </div>
+        </md-input-container>
+        <md-input-container class='md-block'>
+          <label for="password">Password:</label>
+          <input type="password" name='password' ng-model='vm.password' required>
+
+          <!-- errors -->
+          <div ng-messages="registerForm.password.$error">
+            <div ng-message="required">Please Include A Password</div>
+          </div>
+        </md-input-container>
+
+        <div layout='column'>
+          <md-button class='md-raised md-primary'>CREATE ACCOUNT</md-button>
+        </div>
+      </form>
+    </md-content>
+
+  </div>
+  <wiki-nav></wiki-nav>  
+</div>
