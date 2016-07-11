@@ -2,8 +2,9 @@
   angular.module('wikirace', [
     'ngMaterial',
     'btford.socket-io',
-    'socket',
-    'api.service',
-    'app.filter'
+    'socket.service',
+    'users.service',
+    'wikirace.routes',
+    'wikirace.filter'
   ]);
 })();

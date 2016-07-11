@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const routes = require('./routes/index');
-const game = require("./game_server");
+// const game = require("./game_server");
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
