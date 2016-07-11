@@ -1,5 +1,5 @@
 {
-  "name": "wikisprint",
+  "name": "wikirace",
   "version": "1.0.0",
   "description": "",
   "main": "./server/app",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kakorcal/wikisprint.git"
+    "url": "git+https://github.com/kakorcal/wikirace.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kakorcal/wikisprint/issues"
+    "url": "https://github.com/kakorcal/wikirace/issues"
   },
-  "homepage": "https://github.com/kakorcal/wikisprint#readme",
+  "homepage": "https://github.com/kakorcal/wikirace#readme",
   "dependencies": {
     "angular-socket-io": "^0.7.0",
     "bcrypt": "^0.8.7",
@@ -24,9 +24,10 @@
     "express": "^4.14.0",
     "jsonwebtoken": "^7.0.1",
     "knex": "^0.11.7",
+    "method-override": "^2.3.6",
     "morgan": "^1.7.0",
     "pg": "^6.0.1",
-    "request": "^2.72.0",
+    "request-promise": "^3.0.0",
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
     "socketio-jwt": "^4.5.0"

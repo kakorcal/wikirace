@@ -14,8 +14,8 @@ if(app.get('env') === 'development'){
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/libs', express.static(`${__dirname}../client/libs`));
-app.use('/javascripts', express.static(`${__dirname}../node_modules`));
+app.use('/libs', express.static(`${__dirname}../node_modules`));
+app.use('/javascripts', express.static(`${__dirname}../client/javascripts`));
 app.use('/stylesheets', express.static(`${__dirname}../client/stylesheets`));
 app.use('/assets', express.static(`${__dirname}../client/assets`));
 app.use('/views', express.static(`${__dirname}../client/views`));
