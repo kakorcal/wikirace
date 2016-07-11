@@ -27,12 +27,19 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  transition: transform 300ms ease-in-out;
+}
+
+.wiki-nav-item:hover {
+  transform: scale(1.2, 1.2);
 }
 
 .wiki-nav-item a {
   display: block;
   position: relative;
   top: 18%;
+  text-decoration: none;
+  color: #444444;
 }
 
 .wiki-nav-item h3 {
@@ -45,31 +52,31 @@
   right: 0;
   left: 0;
   margin: 0 auto;
-  background: aliceblue;  
+  background: radial-gradient(#FFCCBC 1%, #FF3D00);  
 }
 
 .nav-2 {
   top: 25%;
   left: 25%;
-  background: aliceblue;  
+  background: radial-gradient(#BBDEFB 1%, #2962FF);  
 }
 
 .nav-3 {
   top: 25%;
   right: 25%;
-  background: aliceblue;  
+  background: radial-gradient(#E0F2F1 1%, #1DE9B6);  
 }
 
 .nav-4 {
   bottom: 25%;
   left: 25%;
-  background: aliceblue;  
+  background: radial-gradient(#FFF9C4 1%, #FDD835);  
 }
 
 .nav-5 {
   bottom: 25%;
   right: 25%;
-  background: aliceblue;  
+  background: radial-gradient(#F8BBD0 1%, #FF4081);  
 }
 
 .nav-6 {
@@ -77,6 +84,6 @@
   right: 0;
   left: 0;  
   margin: 0 auto;
-  background: aliceblue;  
+  background: radial-gradient(#D1C4E9 1%, #7E57C2);  
 }
 
