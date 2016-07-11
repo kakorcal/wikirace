@@ -3,7 +3,6 @@
     .service('Socket', Socket);
   
   Socket.$inject = ['socketFactory'];
-
   function Socket(socketFactory){
     return socketFactory();
   }

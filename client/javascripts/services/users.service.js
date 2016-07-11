@@ -3,7 +3,6 @@
     .service('UserService', UserService);
 
   UserService.$inject = ['$http'];
-
   function UserService($http){
     const BASE_URL = '/api/users';
     

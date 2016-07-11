@@ -8,7 +8,6 @@
   ]).config(theme);
 
   theme.$inject = ['$mdThemingProvider'];
-
   function theme($mdThemingProvider){
     // config theme to ensure text is always white
     $mdThemingProvider.definePalette('white-palette', {

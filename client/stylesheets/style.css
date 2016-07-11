@@ -2,15 +2,19 @@
   display: none!important;
 }
 
-.center-view-wrapper {
+.wiki-wrapper {
+  position: relative;
+}
+
+.wiki-view-wrapper {
   font-family: 'Cardo', serif;
 }
 
-.title-wrapper h1 {
+.wiki-title-wrapper h1 {
   font-size: 70px;
   letter-spacing: 1px;
 }
 
-.title-wrapper h1 span {
+.wiki-title-wrapper h1 span {
   font-size: 50px;
 }
