@@ -1,28 +1,28 @@
 <div flex class='wiki-wrapper' layout='row' layout-align='center center'>
   <div class='wiki-view-wrapper'>
     <md-content layout-padding>
-      <form name="registerForm" novalidate>
+      <form name="registerForm" ng-submit='vm.onFormSubmit(vm.user)' novalidate>
         <md-input-container class='md-block'>
           <label for="username">Username:</label>
-          <input type="text" name='username' ng-model='username' required>
+          <input type="text" name='username' ng-model='vm.user.username' required>
           
           <!-- errors -->
-          <div ng-messages="registerForm.username.$error">
+          <div ng-messages="registerForm.username.$error" ng-if="registerForm.username.$touched" md-auto-hide="false" md-auto-hide="false">
             <div ng-message="required">Please Include A Username</div>
           </div>
         </md-input-container>
         <md-input-container class='md-block'>
           <label for="password">Password:</label>
-          <input type="password" name='password' ng-model='vm.password' required>
+          <input type="password" name='password' ng-model='vm.user.password' required>
 
           <!-- errors -->
-          <div ng-messages="registerForm.password.$error">
+          <div ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched" md-auto-hide="false">
             <div ng-message="required">Please Include A Password</div>
           </div>
         </md-input-container>
 
         <div layout='column'>
-          <md-button type='submit' class='md-raised md-primary'>CREATE ACCOUNT</md-button>
+          <md-button type='submit' ng-disabled='!registerForm.$valid' class='md-raised md-primary'>CREATE ACCOUNT</md-button>
         </div>
       </form>
     </md-content>

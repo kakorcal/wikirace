@@ -11,7 +11,7 @@
   ]);
 
   //***************************************************************************
-    // will not use a custom theme due to conflicts with ngMessages
+  // will not use a custom theme until conflicts with ngMessages are resolved
   //***************************************************************************
   // .config(theme);
 

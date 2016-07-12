@@ -19,6 +19,7 @@ app.use('/assets', express.static(`${__dirname}/../client/assets`));
 app.use('/views', express.static(`${__dirname}/../client/views`));
 app.use('/libs', express.static(`${__dirname}/../node_modules`));
 app.use('/api/users', routes.users);
+app.use('/auth', routes.auth);
 
 app.get('*', (req, res)=>{
   res.sendFile('/views/layout.html', {root: './client'});
