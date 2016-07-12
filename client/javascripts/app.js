@@ -9,6 +9,10 @@
     'wikinav.directive',
     'new_account.controller'
   ]);
+
+  //***************************************************************************
+    // will not use a custom theme due to conflicts with ngMessages
+  //***************************************************************************
   // .config(theme);
 
   theme.$inject = ['$mdThemingProvider', '$mdIconProvider'];
