@@ -2,6 +2,7 @@
   angular.module('wikirace', [
     'ngMaterial',
     'ngMessages',
+    'ngBootbox',
     'sockets.service',
     'users.service',
     'wikirace.routes',

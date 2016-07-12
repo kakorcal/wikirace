@@ -2,8 +2,8 @@
   angular.module('new_account.controller', [])
     .controller('NewAccount', NewAccount)
   
-  NewAccount.$inject = ['UserService', '$location'];
-  function NewAccount(UserService, $location){
+  NewAccount.$inject = ['UserService', '$location', '$ngBootbox'];
+  function NewAccount(UserService, $location, $ngBootbox){
     let vm = this;
     vm.user = {};
       
@@ -12,7 +12,7 @@
       user.thumbnail_url = '/assets/thumbnails/blanka.gif';
       user['1p_score'] = 0;
       user['2p_score'] = 0;
-      
+
       // send username and password to db
       UserService.createUser({user}).then(res=>{
         if(res.data === 'Account Created!'){
@@ -21,7 +21,9 @@
           $location.path('/');                  
         }else{
           // otherwise send error popup saying that the username already exists
-          alert(res.data);
+          $ngBootbox.alert(res.data).then(()=>{
+            console.log(res.data);
+          });
         }
       }).catch(err=>{
         alert('An Error Has Occurred In The Database');
