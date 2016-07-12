@@ -26,9 +26,9 @@ passport.use(new LocalStrategy({
 
         if(!res) {
           // applies only when logging in
-          return done(null, false, 'Incorrect Password');
+          return done(null, false, {message: 'Incorrect Password'});
         }else{
-          return done(null, user, 'Login Successful');
+          return done(null, user, {message: 'Login Successful', id: user.id});
         }
       });
     }).catch(err=>{
@@ -45,6 +45,7 @@ passport.serializeUser(function(user, done){
 
 passport.deserializeUser(function(id, done){
   console.log('DESERIALIZE');
+  eval(require('locus'));
   knex('users').where("id", id).first().then(user => {
     done(null, user);
   }).catch(err => {
@@ -55,9 +56,15 @@ passport.deserializeUser(function(id, done){
 router.post('/new', (req, res, next)=>{
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
     bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
-      const credentials = _.assign(_.omit(req.body.user, 'password'), {password: hash});
+      const credentials = _.assign(_.omit(req.body.user, 'password'), {
+        password: hash,
+        thumbnail_url: '/assets/thumbnails/blanka.gif',
+        '1p_score': 0,
+        '2p_score': 0
+      });
+
       knex('users').insert(credentials).then(()=>{
-        passport.authenticate('local', (err, user, message)=>{
+        passport.authenticate('local', (err, user, data)=>{
           console.log('Authenticate after creating account');
           // if there is an err, goto the next middleware
           // in this case, it will bubble up to the error handlers located in app.js
@@ -70,12 +77,12 @@ router.post('/new', (req, res, next)=>{
           req.logIn(user, err=>{
             // This callback is invoked only after serializing and deserializing
             if(err) return next(err);
-            res.send(message);
+            res.send(data);
           });
         })(req, res, next);
       }).catch(err=>{
         // applies only when creating an account
-        res.send('Username Already Exists');
+        res.send({message: 'Username Already Exists'});
       });
     });
   });

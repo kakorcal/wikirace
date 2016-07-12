@@ -8,22 +8,17 @@
     vm.user = {};
       
     vm.onFormSubmit = function(user){
-      // initialize default
-      user.thumbnail_url = '/assets/thumbnails/blanka.gif';
-      user['1p_score'] = 0;
-      user['2p_score'] = 0;
-
       // send username and password to db
       UserService.createUser({user}).then(({data})=>{
-        if(data === 'Login Successful'){
+        if(data.message === 'Login Successful'){
           // if username doesn't exist in db, authenticate with sockets
           // and redirect them to the users/:id page
-          $ngBootbox.alert(data).then(()=>{
+          $ngBootbox.alert(data.message).then(()=>{
             $location.path('/');                  
           });
-        }else if(data === 'Username Already Exists'){
+        }else if(data.message === 'Username Already Exists'){
           // otherwise send error popup saying that the username already exists
-          $ngBootbox.alert(data).then(()=>{
+          $ngBootbox.alert(data.message).then(()=>{
             console.log(data);
           });
         }

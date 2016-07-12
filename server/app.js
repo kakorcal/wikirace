@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/index');
 const server = require('http').Server(app);
+const passport = require('passport');
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3333;
@@ -12,7 +13,8 @@ if(app.get('env') === 'development'){
 
 app.use(require('morgan')('dev'));
 app.use(require('cookie-session')({secret: process.env.LOCAL_SECRET}));
-app.use(require('passport').initialize());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
