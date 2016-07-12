@@ -8,12 +8,12 @@
         templateUrl: 'views/pages/home.html'
       })
       .when('/play', {
-        templateUrl: 'views/pages/game/play.html',
-        controllerAs: 'vm'
+        templateUrl: 'views/pages/game/play.html'
       })
       .when('/play/one-player', {
         templateUrl: 'views/pages/game/one_player.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        controller: 'OnePlayerGame'
       })
       .when('/play/two-player', {
         templateUrl: 'views/pages/game/two_player.html',

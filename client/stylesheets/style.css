@@ -116,3 +116,12 @@
 .play-button-2 {
   text-align: right;
 }
+
+/* game */
+#wiki-titlebar {
+  background: #2962FF;
+}
+
+#wiki-sidebar {
+  background: #1DE9B6;
+}

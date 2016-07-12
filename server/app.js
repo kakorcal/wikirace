@@ -5,6 +5,7 @@ const server = require('http').Server(app);
 const passport = require('passport');
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
+const game = require('./sockets/game_server');
 const PORT = process.env.PORT || 3333;
 
 if(app.get('env') === 'development'){
@@ -54,6 +55,5 @@ server.listen(PORT, ()=>{
 });
 
 io.on('connection', socket=>{
-  console.log('CLIENT HANDSHAKE');
-  // game.init(io, socket);
+  game.init(io, socket);
 });

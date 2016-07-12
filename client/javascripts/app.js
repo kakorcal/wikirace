@@ -8,7 +8,8 @@
     'wikirace.routes',
     'wikirace.filter',
     'wikinav.directive',
-    'new_account.controller'
+    'new_account.controller',
+    'one_player.controller'
   ]);
 
   //***************************************************************************
