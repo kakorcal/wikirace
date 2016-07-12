@@ -15,6 +15,7 @@
       return $http.get(`${USER_URL}/${id}`);
     };
 
+    // TODO: Add this to the auth service
     this.createUser = function(data){
       return $http.post(AUTH_URL, data);
     }

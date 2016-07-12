@@ -14,19 +14,23 @@
       user['2p_score'] = 0;
 
       // send username and password to db
-      UserService.createUser({user}).then(res=>{
-        if(res.data === 'Account Created!'){
+      UserService.createUser({user}).then(({data})=>{
+        if(data === 'Login Successful'){
           // if username doesn't exist in db, authenticate with sockets
           // and redirect them to the users/:id page
-          $location.path('/');                  
-        }else{
+          $ngBootbox.alert(data).then(()=>{
+            $location.path('/');                  
+          });
+        }else if(data === 'Username Already Exists'){
           // otherwise send error popup saying that the username already exists
-          $ngBootbox.alert(res.data).then(()=>{
-            console.log(res.data);
+          $ngBootbox.alert(data).then(()=>{
+            console.log(data);
           });
         }
       }).catch(err=>{
-        alert('An Error Has Occurred In The Database');
+        $ngBootbox.alert('An Error Has Occurred In The Database').then(()=>{
+          console.log(err);
+        });
       });
     };
   }

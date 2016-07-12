@@ -3,7 +3,7 @@ const router = express.Router();
 const knex = require('../db/knex');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').LocalStrategy;
+const LocalStrategy = require('passport-local').Strategy;
 const _ = require('lodash');
 const SALT_WORK_FACTOR = 10;
 
@@ -20,7 +20,6 @@ passport.use(new LocalStrategy({
     knex('users').where({username}).first().then(user=>{
       // applies only when logging in
       if(!user) return done(null, false, 'Username Does Not Exist');
-      
       // using for both creating account and logging in
       bcrypt.compare(password, user.password, (err, res)=>{
         if(err) return done(err);
@@ -46,7 +45,7 @@ passport.serializeUser(function(user, done){
 
 passport.deserializeUser(function(id, done){
   console.log('DESERIALIZE');
-  knex('users').where("id",id).first().then(user => {
+  knex('users').where("id", id).first().then(user => {
     done(null, user);
   }).catch(err => {
     done(err);
@@ -55,13 +54,13 @@ passport.deserializeUser(function(id, done){
 
 router.post('/new', (req, res, next)=>{
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
-    bcrypt.genHash(req.body.user.password, salt, (err, hash)=>{
+    bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
       const credentials = _.assign(_.omit(req.body.user, 'password'), {password: hash});
       knex('users').insert(credentials).then(()=>{
         passport.authenticate('local', (err, user, message)=>{
           console.log('Authenticate after creating account');
-          // This line is from the example in the docs, so unsure of what 
-          // middleware is invoked next if err exists
+          // if there is an err, goto the next middleware
+          // in this case, it will bubble up to the error handlers located in app.js
           if(err) return next(err);
           // if user has successfully created an account or verified their 
           // credentials call the logIn method. 
@@ -71,7 +70,7 @@ router.post('/new', (req, res, next)=>{
           req.logIn(user, err=>{
             // This callback is invoked only after serializing and deserializing
             if(err) return next(err);
-            res.send('Account Created!');
+            res.send(message);
           });
         })(req, res, next);
       }).catch(err=>{

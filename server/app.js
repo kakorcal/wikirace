@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const routes = require('./routes/index');
-const passport = require('passport');
-const session = require('cookie-session');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
@@ -13,10 +11,10 @@ if(app.get('env') === 'development'){
 }
 
 app.use(require('morgan')('dev'));
+app.use(require('cookie-session')({secret: process.env.LOCAL_SECRET}));
+app.use(require('passport').initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({secret: process.env.LOCAL_SECRET}));
-app.use(passport.initialize());
 
 // static files
 app.use('/javascripts', express.static(`${__dirname}/../client/javascripts`));
