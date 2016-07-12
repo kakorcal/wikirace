@@ -53,5 +53,8 @@ x1. create database and seed. make sure api works
   2. create chat app using angular, passport and sockets
   3. create local strategy with passport
   4. integrate passport with sockets
-5. create an wikipedia web scrape app
-6. homepage - styled
+x5. create an wikipedia web scrape app
+x6. homepage - styled
+
+7/12
+7. Finish auth with local strategy
