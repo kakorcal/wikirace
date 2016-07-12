@@ -45,7 +45,7 @@ passport.serializeUser(function(user, done){
 
 passport.deserializeUser(function(id, done){
   console.log('DESERIALIZE');
-  eval(require('locus'));
+  
   knex('users').where("id", id).first().then(user => {
     done(null, user);
   }).catch(err => {

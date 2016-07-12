@@ -14,7 +14,7 @@
           // if username doesn't exist in db, authenticate with sockets
           // and redirect them to the users/:id page
           $ngBootbox.alert(data.message).then(()=>{
-            $location.path('/');                  
+            $location.path('/users');                  
           });
         }else if(data.message === 'Username Already Exists'){
           // otherwise send error popup saying that the username already exists

@@ -19,12 +19,8 @@
         templateUrl: 'views/pages/game/two_player.html',
         controllerAs: 'vm'
       })
-      .when('/rankings', {
-        templateUrl: 'views/pages/rankings.html',
-        controllerAs: 'vm'
-      })      
       .when('/instructions', {
-        templateUrl: 'views/pages/how_to_play.html',
+        templateUrl: 'views/pages/game/how_to_play.html',
         controllerAs: 'vm'
       })
       .when('/auth/login', {
@@ -36,9 +32,16 @@
         controllerAs: 'vm',
         controller: 'NewAccount'
       })
+      .when('/users', {
+        templateUrl: 'views/pages/users/rankings.html',
+        controllerAs: 'vm'
+      })      
       .when('/users/:id', {
         templateUrl: 'view/pages/users/show.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          user: getUserById
+        }
       })
       .when('/users/:id/edit', {
         templateUrl: 'view/pages/users/edit.html',
@@ -62,5 +65,4 @@
   function getUserById(UserService, $route){
     return UserService.getSingleUser($route.current.params.id);
   }
-
 })();
