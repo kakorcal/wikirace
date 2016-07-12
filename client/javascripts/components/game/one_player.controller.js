@@ -1,5 +1,5 @@
 (()=>{
-  angular.module('one_player.controller', [])
+  angular.module('one_player.controller', ['ngSanitize'])
     .controller('OnePlayerGame', OnePlayerGame);
 
   OnePlayerGame.$inject = ['Socket', '$location', '$ngBootbox'];
