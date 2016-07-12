@@ -17,16 +17,36 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({secret: process.env.LOCAL_SECRET}));
 app.use(passport.initialize());
+
+// static files
 app.use('/javascripts', express.static(`${__dirname}/../client/javascripts`));
 app.use('/stylesheets', express.static(`${__dirname}/../client/stylesheets`));
 app.use('/assets', express.static(`${__dirname}/../client/assets`));
 app.use('/views', express.static(`${__dirname}/../client/views`));
 app.use('/libs', express.static(`${__dirname}/../node_modules`));
+
+// routes
 app.use('/api/users', routes.users);
 app.use('/auth', routes.auth);
 
 app.get('*', (req, res)=>{
   res.sendFile('/views/layout.html', {root: './client'});
+});
+
+// error handlers
+// props to https://github.com/mjhea0/mean-auth/blob/master/server/app.js
+app.use((req, res, next)=>{
+  let err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res)=>{
+  res.status(err.status || 500);
+  res.end(JSON.stringify({
+    message: err.message,
+    error: {}
+  }));
 });
 
 server.listen(PORT, ()=>{
