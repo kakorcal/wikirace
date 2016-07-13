@@ -3,6 +3,7 @@
     'ngMaterial',
     'ngMessages',
     'ngBootbox',
+    'ngScrollGlue',
     'sockets.service',
     'users.service',
     'wikirace.routes',

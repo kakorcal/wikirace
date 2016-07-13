@@ -125,3 +125,8 @@
 #wiki-sidebar {
   background: #1DE9B6;
 }
+
+#wiki-sidebar-time,
+#wiki-sidebar-clicks {
+  background: #FF6E40;
+}

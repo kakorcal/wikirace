@@ -9,7 +9,7 @@
     vm.quitGame = function(){
       $ngBootbox.confirm('Are You Sure?').then(()=>{
         Socket.disconnect(true);
-        $location.path('/');
+        $location.path('/play');
       });
     };
 
