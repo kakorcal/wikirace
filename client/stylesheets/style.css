@@ -217,3 +217,24 @@
 .paused {
   pointer-events: none;
 }
+
+.loading-finish {
+  display: none;
+}
+
+.loading-tween {
+  animation-name: pulse;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes pulse {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

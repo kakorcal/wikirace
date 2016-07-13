@@ -46,7 +46,7 @@
     </md-toolbar>
     <md-content flex layout-padding id='wiki'>
       <div id='init-view' ng-hide='vm.isPlaying || vm.isWin'>
-        <h1 ng-hide='vm.first && vm.last'>LOADING...</h1>
+        <h1 ng-class="vm.first && vm.last ? 'loading-finish' : 'loading-tween'">LOADING...</h1>
         <div ng-show='vm.first && vm.last'>
           <h1>FROM: {{vm.first}}</h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div id='loading-view' ng-hide='!vm.isLoading'>
-        <h1>LOADING...</h1>
+        <h1 class='loading-tween'>LOADING...</h1>
       </div>
       <div id="victory-view" ng-show='vm.isWin'>
         <h1>YOU WIN!!!</h1>
