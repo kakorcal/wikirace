@@ -17,7 +17,8 @@
       })
       .when('/play/two-player', {
         templateUrl: 'views/pages/game/two_player.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        controller: 'TwoPlayerGame'
       })
       .when('/instructions', {
         templateUrl: 'views/pages/game/how_to_play.html',

@@ -2,6 +2,7 @@
   angular.module('wikirace', [
     'ngMaterial',
     'ngMessages',
+    'ngSanitize',
     'ngBootbox',
     'ngScrollGlue',
     'timer',
@@ -11,7 +12,8 @@
     'wikirace.filter',
     'wikinav.directive',
     'new_account.controller',
-    'one_player.controller'
+    'one_player.controller',
+    'two_player.controller'
   ]);
 
   //***************************************************************************

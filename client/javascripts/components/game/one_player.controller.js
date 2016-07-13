@@ -1,5 +1,5 @@
 (()=>{
-  angular.module('one_player.controller', ['ngSanitize'])
+  angular.module('one_player.controller', [])
     .controller('OnePlayerGame', OnePlayerGame)
     .directive('compile', compile);
   

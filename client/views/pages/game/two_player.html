@@ -1,0 +1,73 @@
+<div layout='row'>
+  <md-toolbar id='wiki-titlebar'>
+    <div class='md-toolbar-tools'>
+      <h4 flex>WIKIRACE</h4>
+      <md-button ng-click='vm.toggleSound()' class='md-primary md-raised md-hue-3'>Mute</md-button>
+      <md-button ng-click='vm.toggleTime()' class='md-accent md-raised md-hue-1'>{{vm.timerRunning ? 'Pause' : 'Play'}}</md-button>
+      <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
+    </div>
+  </md-toolbar>  
+</div>
+<div flex layout='row'>
+  <md-sidenav
+    flex='20'
+    md-is-locked-open="$mdMedia('gt-md')" 
+    md-component-id="left" 
+    class="md-whiteframe-z2">
+    <md-toolbar layout='row' layout-padding id='wiki-sidebar-time'>
+      <div class="md-toolbar-tools" layout-align='center center'>
+        <h4>TIME: <timer interval="1000" autostart='false'>{{mminutes}}:{{sseconds}}</timer></h4>
+      </div>
+    </md-toolbar>
+    <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
+      <md-content flex id='wiki-sidebar-list' scroll-glue>
+        <md-list flex>
+          <md-list-item class='noright' ng-repeat='article in vm.articles'>
+            <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
+            <div class="md-list-item-text" layout="column">
+              <p>{{article.title | truncate: 17}}</p>
+            </div>
+            <md-divider ></md-divider>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-toolbar>    
+    <md-toolbar layout='row' layout-padding id='wiki-sidebar-clicks'>
+      <div class="md-toolbar-tools" layout-align="space-around center">
+        <h4>CLICKS: {{vm.clicks}}</h4>
+      </div>
+    </md-toolbar>
+  </md-sidenav>
+  <md-content flex layout='column'>
+    <md-toolbar layout-align='center center' id='wiki-path'>
+      <div class="md-toolbar-tools" ng-hide='!vm.isPlaying'>
+        <h4>FROM: {{vm.first}} <i class="fa fa-arrow-right"></i> TO: {{vm.last}}</h4>
+      </div>
+    </md-toolbar>
+    <md-content flex layout-padding id='wiki'>
+      <div id='init-view' ng-hide='vm.isPlaying || vm.isWin'>
+        <h1 ng-class="vm.first && vm.last ? 'loading-finish' : 'loading-tween'">LOADING...</h1>
+        <div ng-show='vm.first && vm.last'>
+          <h1>FROM: {{vm.first}}</h1>
+          <h1><i class='fa fa-arrow-down'></i></h1>
+          <h1>TO: {{vm.last}}</h1>    
+          <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>START GAME!!!</md-button>              
+          <md-button ng-click='vm.changeArticles()' class='md-raised wiki-button'>CHANGE ARTICLES</md-button>    
+        </div>
+      </div>
+      <div id='loading-view' ng-hide='!vm.isLoading'>
+        <h1 class='loading-tween'>LOADING...</h1>
+      </div>
+      <div id="victory-view" ng-show='vm.isWin'>
+        <h1>YOU WIN!!!</h1>
+        <h1>SCORE: {{vm.points}}</h1>
+        <md-button ng-click='vm.resetGame()' class='md-raised wiki-button'>PLAY AGAIN?</md-button>
+      </div>
+      <div id='article-view' ng-hide='vm.isLoading || vm.isWin' ng-class="vm.timerRunning ? 'playing' : 'paused'">
+        <style scoped>{{vm.styles}}</style>
+        <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
+        <div ng-show='vm.content' compile='vm.content'></div>
+      </div>
+    </md-content> 
+  </md-content>
+</div>
