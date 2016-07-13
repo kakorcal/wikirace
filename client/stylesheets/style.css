@@ -138,12 +138,28 @@
 
 #wiki-sidebar-time h4,
 #wiki-sidebar-clicks h4,
-#wiki-titlebar h4 {
+#wiki-titlebar h4,
+#wiki-path h4 {
   font-size: 18px;
   margin: 10px;
   line-height: 1.1;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  font-family: sans-serif;
+}
+
+#wiki-path {
+  height: 80px;
+  background: #7E57C2;
+}
+
+#wiki-sidebar-list p {
+  font-size: 16px;
 }
 
 #init-view, #loading-view {
@@ -156,10 +172,31 @@
   transform: translateY(-50%);
 }
 
+#path-view {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+
+#init-view h1, #loading-view h1{
+  color: #000;
+  background: none;
+  font-weight: normal;
+  margin: 0;
+  overflow: hidden;
+  padding-top: .5em;
+  padding-bottom: .17em;
+  border: none;
+  line-height: 1.1;
+  font-size: 188%;
+}
+
 #start-button {
   color: white;
-  font-size: 30px;
-  padding: 18px 30px;
+  font-size: 188%;
+  padding: 8px 20px;
   margin-top: 35px;
 }
 

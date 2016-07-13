@@ -42,6 +42,7 @@
       $scope.$broadcast('timer-start');
       vm.timerRunning = true;
       vm.isPlaying = true;
+      vm.isLoading = true;
       Socket.emit('Generate Article', `/wiki/${vm.first}`);
     };
     

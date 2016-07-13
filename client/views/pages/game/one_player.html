@@ -22,10 +22,10 @@
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
       <md-content flex id='wiki-sidebar-list' scroll-glue>
         <md-list flex>
-          <md-list-item class="md-2-line" ng-repeat='article in vm.articles'>
+          <md-list-item class='noright' ng-repeat='article in vm.articles'>
             <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
             <div class="md-list-item-text" layout="column">
-              <h3>{{article.title | truncate: 20}}</h3>
+              <p>{{article.title | truncate: 17}}</p>
             </div>
             <md-divider ></md-divider>
           </md-list-item>
@@ -34,27 +34,34 @@
     </md-toolbar>    
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-clicks'>
       <div class="md-toolbar-tools" layout-align="space-around center">
-        <h4>Clicks: {{vm.clicks}}</h4>
+        <h4>CLICKS: {{vm.clicks}}</h4>
       </div>
     </md-toolbar>
   </md-sidenav>
-  <md-content flex layout-padding id='wiki'>
-    <div id='init-view' ng-hide='vm.isPlaying'>
-      <h1 ng-hide='vm.first && vm.last'>LOADING...</h1>
-      <div ng-show='vm.first && vm.last'>
-        <h1>FROM: {{vm.first}}</h1>
-        <h1><i class='fa fa-arrow-down'></i></h1>
-        <h1>TO: {{vm.last}}</h1>    
-        <md-button ng-click='vm.startGame()' id='start-button' class='md-raised'>START!!!</md-button>    
+  <md-content flex layout='column'>
+    <md-toolbar layout-align='center center' id='wiki-path'>
+      <div class="md-toolbar-tools" ng-hide='!vm.isPlaying'>
+        <h4>FROM: {{vm.first}} <i class="fa fa-arrow-right"></i> TO: {{vm.last}}</h4>
       </div>
-    </div>
-    <div id='loading-view' ng-hide='!vm.isLoading'>
-      <h1>LOADING...</h1>
-    </div>
-    <div id='article-view' ng-hide='vm.isLoading'>
-      <style scoped>{{vm.styles}}</style>
-      <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
-      <div ng-show='vm.content' compile='vm.content'></div>
-    </div>
- </md-content> 
+    </md-toolbar>
+    <md-content flex layout-padding id='wiki'>
+      <div id='init-view' ng-hide='vm.isPlaying'>
+        <h1 ng-hide='vm.first && vm.last'>LOADING...</h1>
+        <div ng-show='vm.first && vm.last'>
+          <h1>FROM: {{vm.first}}</h1>
+          <h1><i class='fa fa-arrow-down'></i></h1>
+          <h1>TO: {{vm.last}}</h1>    
+          <md-button ng-click='vm.startGame()' id='start-button' class='md-raised'>START!!!</md-button>    
+        </div>
+      </div>
+      <div id='loading-view' ng-hide='!vm.isLoading'>
+        <h1>LOADING...</h1>
+      </div>
+      <div id='article-view' ng-hide='vm.isLoading'>
+        <style scoped>{{vm.styles}}</style>
+        <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
+        <div ng-show='vm.content' compile='vm.content'></div>
+      </div>
+    </md-content> 
+  </md-content>
 </div>
