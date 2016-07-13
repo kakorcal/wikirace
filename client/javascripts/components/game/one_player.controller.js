@@ -5,6 +5,7 @@
   OnePlayerGame.$inject = ['Socket', '$location', '$ngBootbox'];
   function OnePlayerGame(Socket, $location, $ngBootbox){
     let vm = this;
+    vm.clicks = 0;
     
     vm.quitGame = function(){
       $ngBootbox.confirm('Are You Sure?').then(()=>{

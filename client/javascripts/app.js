@@ -4,6 +4,7 @@
     'ngMessages',
     'ngBootbox',
     'ngScrollGlue',
+    'timer',
     'sockets.service',
     'users.service',
     'wikirace.routes',

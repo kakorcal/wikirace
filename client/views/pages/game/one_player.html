@@ -16,7 +16,7 @@
     class="md-whiteframe-z2">
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-time'>
       <div class="md-toolbar-tools" layout-align='center center'>
-        <h4>TIME: 00:00</h4>
+        <h4>TIME: <timer interval="1000">{{mminutes}}:{{sseconds}}</timer></h4>
       </div>
     </md-toolbar>
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
@@ -76,16 +76,11 @@
     </md-toolbar>    
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-clicks'>
       <div class="md-toolbar-tools" layout-align="space-around center">
-        <h4>Guest 1: 0</h4>
+        <h4>Clicks: {{vm.clicks}}</h4>
       </div>
     </md-toolbar>
   </md-sidenav>
   <md-content flex layout-padding id='wiki'>
-<!-- 
-    <style>{{vm.styles}}</style>
-    <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
-    <div ng-show='vm.content' compile='vm.content'></div>
--->  
     <div>
       <h1 ng-hide='vm.first && vm.second'>LOADING...</h1>
       <p ng-show='vm.first && vm.second'>{{vm.first}}</p>
