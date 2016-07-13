@@ -30,14 +30,7 @@ exports.init = (io, socket)=>{
         
         content = $('#bodyContent').html()
           .replace(/href=('|"|‘|’|“|”).+?('|"|‘|’|“|”)/g, match=>{
-            if(match.includes('/wiki/') && match.search(/(jpg|jpeg|png|gif)/) === -1){
-              console.log(match);
-              return `href='#' ng-click=vm.generateArticle('${match.substring(6, match.length-1)}')`;
-            }else if(match.includes('#')){
-              return `target='_self' class='clickable' ng-click=vm.onHashClick('${match.substring(7, match.length-1)}')`;
-            }else{
-              return "class='disabled'";
-            }
+            return processLinks(match);
           });
 
         linkTags = $("link[rel='stylesheet']").map((idx, elem)=>{
@@ -75,4 +68,18 @@ function generateRandomTitle(){
     .catch(err=>{
       return err;
     });
+}
+
+// TODO: this does not work for this case: //species.wikimedia.org/wiki/Sitta_przewalskii
+function processLinks(str){
+  if(str.includes('/wiki/') && str.search(/(:|#|jpg|jpeg|png|gif)/) === -1){
+    // regular links
+    return `href='#' ng-click=vm.generateArticle('${str.substring(6, str.length-1)}')`;
+  }else if(str.includes('#')){
+    // anchor tags
+    return `target='_self' class='clickable' ng-click=vm.onHashClick('${str.substring(7, str.length-1)}')`;
+  }else{
+    // disable everything else
+    return "class='disabled'";
+  }
 }

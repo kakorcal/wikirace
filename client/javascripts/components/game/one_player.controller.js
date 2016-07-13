@@ -50,7 +50,7 @@
     };
     
     vm.toggleSound = function(){
-      
+      // TODO: Add bgm and fx
     };
 
     vm.toggleTime = function(){
@@ -138,9 +138,6 @@
         }
       }
     });
-
-    // Socket.on('End Game', ()=>{
-    // });
 
     Socket.on('Error', data=>{
       $ngBootbox.alert('An Error Has Occurred', ()=>{
