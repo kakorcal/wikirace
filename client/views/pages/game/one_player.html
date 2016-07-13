@@ -51,7 +51,8 @@
           <h1>FROM: {{vm.first}}</h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
           <h1>TO: {{vm.last}}</h1>    
-          <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>START!!!</md-button>    
+          <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>START GAME!!!</md-button>              
+          <md-button ng-click='vm.changeArticles()' class='md-raised wiki-button'>CHANGE ARTICLES</md-button>    
         </div>
       </div>
       <div id='loading-view' ng-hide='!vm.isLoading'>

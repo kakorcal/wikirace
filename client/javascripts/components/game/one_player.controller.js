@@ -66,7 +66,9 @@
     };
 
     vm.changeArticles = function(){
-
+      vm.first = null;
+      vm.last = null;
+      Socket.emit('Setup One Player Game');
     };
 
     vm.resetGame = function(){
