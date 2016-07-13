@@ -125,6 +125,12 @@
 
 #wiki-titlebar {
   background: #2962FF;
+  height: 80px;
+}
+
+#wiki-titlebar .md-toolbar-tools {
+  height: 80px;
+  max-height: 80px;
 }
 
 #wiki-sidebar, #start-button {
@@ -145,12 +151,12 @@
   line-height: 1.1;
   color: white;
   font-weight: 600;
+  font-family: sans-serif;
   padding: 0;
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
   -webkit-margin-start: 0;
   -webkit-margin-end: 0;
-  font-family: sans-serif;
 }
 
 #wiki-path {
@@ -202,4 +208,8 @@
 
 #wiki .infobox {
   border-collapse: separate;
+}
+
+.paused {
+  pointer-events: none;
 }

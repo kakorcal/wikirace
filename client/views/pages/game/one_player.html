@@ -57,7 +57,7 @@
       <div id='loading-view' ng-hide='!vm.isLoading'>
         <h1>LOADING...</h1>
       </div>
-      <div id='article-view' ng-hide='vm.isLoading'>
+      <div id='article-view' ng-hide='vm.isLoading' ng-class="vm.timerRunning ? 'playing' : 'paused'">
         <style scoped>{{vm.styles}}</style>
         <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
         <div ng-show='vm.content' compile='vm.content'></div>

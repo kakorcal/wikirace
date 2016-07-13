@@ -29,8 +29,8 @@
     // END
   //***************************************************************************
 
-  OnePlayerGame.$inject = ['$scope', '$sce', 'Socket', '$location', '$ngBootbox'];
-  function OnePlayerGame($scope, $sce, Socket, $location, $ngBootbox){
+  OnePlayerGame.$inject = ['$scope', 'Socket', '$location', '$ngBootbox'];
+  function OnePlayerGame($scope, Socket, $location, $ngBootbox){
     let vm = this;
     vm.clicks = 0;
     vm.articles = [];
@@ -89,6 +89,10 @@
       vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
       vm.isLoading = false;
       vm.articles.push({title: data.text, thumbnail: vm.thumbnail});
+
+      if(data.text === vm.last){
+        console.log('You Win!');
+      }
     });
 
     Socket.on('Error', data=>{

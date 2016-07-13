@@ -11,7 +11,7 @@ exports.init = (io, socket)=>{
   //***************************************************************************
   socket.on('Setup One Player Game', ()=>{
     // get two random articles
-    Promise.all([generateRandomTitle(), generateRandomTitle()]).then(titles=>{
+    Promise.all([generateRandomTitle('/wiki/Alaska'), generateRandomTitle('/wiki/Yukon')]).then(titles=>{
       socket.emit('Receive Titles', titles);
     }).catch(err=>{
       socket.emit('Error', 'Failed To Retrieve Data');
@@ -60,8 +60,8 @@ exports.init = (io, socket)=>{
 //***************************************************************************
   // HELPERS
 //***************************************************************************
-function generateRandomTitle(){
-  return rp({uri: `${BASE_URL}${RANDOM_PAGE}`, transform: body=>cheerio.load(body)})
+function generateRandomTitle(STR){
+  return rp({uri: `${BASE_URL}${STR}`, transform: body=>cheerio.load(body)})
     .then($=>{
       return $('#firstHeading').text();
     })
