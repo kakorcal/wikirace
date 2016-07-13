@@ -101,7 +101,7 @@
     };
 
     $scope.$on('timer-stopped', (e, time)=>{
-      vm.time = time.seconds;
+      vm.time = (time.minutes * 60) + time.seconds;
     });
     
     // SOCKET LISTENERS
@@ -125,7 +125,7 @@
         vm.isPlaying = false;
         vm.isWin = true;
         if(vm.time > 5){
-          vm.points = (1000 - (vm.time * vm.clicks) / 4);
+          vm.points = (1000 - (vm.time * (vm.clicks / 4)));
         }else{
           vm.points = 1000;
         }
