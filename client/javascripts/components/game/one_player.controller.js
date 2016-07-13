@@ -65,6 +65,26 @@
       }
     };
 
+    vm.changeArticles = function(){
+
+    };
+
+    vm.resetGame = function(){
+      $scope.$broadcast('timer-reset');
+      vm.clicks = 0;
+      vm.time = 0;
+      vm.points = 0;
+      vm.articles = [];
+      vm.isWin = false;
+      vm.first = null;
+      vm.last = null;
+      vm.title = null;
+      vm.content = null;
+      vm.styles = null;
+      vm.thumbnail = null;
+      Socket.emit('Setup One Player Game');
+    };
+
     vm.quitGame = function(){
       $ngBootbox.confirm('Are You Sure?').then(()=>{
         Socket.disconnect(true);
@@ -102,7 +122,6 @@
         vm.timerRunning = false;
         vm.isPlaying = false;
         vm.isWin = true;
-
         if(vm.time > 5){
           vm.points = (1000 - (vm.time * vm.clicks) / 4);
         }else{

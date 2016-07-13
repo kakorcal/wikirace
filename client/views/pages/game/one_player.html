@@ -60,7 +60,7 @@
       <div id="victory-view" ng-show='vm.isWin'>
         <h1>YOU WIN!!!</h1>
         <h1>SCORE: {{vm.points}}</h1>
-        <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>PLAY AGAIN?</md-button>
+        <md-button ng-click='vm.resetGame()' class='md-raised wiki-button'>PLAY AGAIN?</md-button>
       </div>
       <div id='article-view' ng-hide='vm.isLoading || vm.isWin' ng-class="vm.timerRunning ? 'playing' : 'paused'">
         <style scoped>{{vm.styles}}</style>
