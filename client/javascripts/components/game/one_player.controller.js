@@ -69,8 +69,8 @@
     };
 
     vm.generateArticle = function(path){
-      vm.isLoading = true;
       vm.clicks++;
+      vm.isLoading = true;
       Socket.emit('Generate Article', path);
     };
     
@@ -85,7 +85,9 @@
       vm.title = data.title;
       vm.content = data.content;
       vm.styles = data.styles;
+      vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
       vm.isLoading = false;
+      vm.articles.push({title: data.text, thumbnail: vm.thumbnail});
     });
 
     Socket.on('Error', data=>{

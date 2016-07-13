@@ -22,13 +22,13 @@
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
       <md-content flex id='wiki-sidebar-list' scroll-glue>
         <md-list flex>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
+          <md-list-item class="md-2-line" ng-repeat='article in vm.articles'>
+            <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
             <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
+              <h3>{{article.title | truncate: 20}}</h3>
             </div>
+            <md-divider ></md-divider>
           </md-list-item>
-          <md-divider ></md-divider>
         </md-list>
       </md-content>
     </md-toolbar>    

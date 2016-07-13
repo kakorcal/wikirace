@@ -166,23 +166,3 @@
 #wiki .infobox {
   border-collapse: separate;
 }
-/*
-.infobox tbody td,
-.infobox tbody th {
-  text-align: center;
-}*/
-/*
-.thumbinner {
-  display: table;
-}
-
-.thumbimage {
-  width: 100%;
-  height: auto;
-}
-
-.thumbcaption {
-  display: table-caption;
-  caption-side: bottom;
-}*/
-

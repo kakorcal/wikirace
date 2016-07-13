@@ -19,11 +19,15 @@ exports.init = (io, socket)=>{
   });
 
   socket.on('Generate Article', PATH=>{
-    let title, content, linkTags, styles;
+    let title, text, content, thumbnail, linkTags, styles;
 
     rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})
       .then($=>{
         title = $('#firstHeading').html();
+        text = $('#firstHeading').text();
+
+        thumbnail = $('#mw-content-text .infobox .image img').attr('src');
+        
         content = $('#bodyContent').html()
           .replace(/href=('|"|‘|’|“|”)\/wiki\/.+?('|"|‘|’|“|”)/g, match=>{
             return `href='#' ng-click=vm.generateArticle(${match.substring(5, match.length)})`;
@@ -37,7 +41,7 @@ exports.init = (io, socket)=>{
       })
       .then(stylesheets=>{
         styles = stylesheets.join('');
-        socket.emit('Receive Article', {title, content, styles});
+        socket.emit('Receive Article', {title, text, content, thumbnail, styles});
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
