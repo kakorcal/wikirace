@@ -16,7 +16,7 @@
     class="md-whiteframe-z2">
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-time'>
       <div class="md-toolbar-tools" layout-align='center center'>
-        <h4>TIME: <timer interval="1000">{{mminutes}}:{{sseconds}}</timer></h4>
+        <h4>TIME: <timer interval="1000" autostart='false'>{{mminutes}}:{{sseconds}}</timer></h4>
       </div>
     </md-toolbar>
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
@@ -82,9 +82,13 @@
   </md-sidenav>
   <md-content flex layout-padding id='wiki'>
     <div id='loading-view'>
-      <h1 flex ng-hide='vm.first && vm.second'>LOADING...</h1>
-      <p ng-show='vm.first && vm.second'>{{vm.first}}</p>
-      <p ng-show='vm.first && vm.second'>{{vm.second}}</p>
+      <h1 ng-hide='vm.first && vm.second'>LOADING...</h1>
+      <div ng-show='vm.first && vm.second'>
+        <h1>FROM: {{vm.first}}</h1>
+        <h1><i class='fa fa-arrow-down'></i></h1>
+        <h1>TO: {{vm.second}}</h1>    
+        <md-button ng-click='vm.startGame()' id='start-button' class='md-raised'>START!!!</md-button>    
+      </div>
     </div>
  </md-content> 
 </div>

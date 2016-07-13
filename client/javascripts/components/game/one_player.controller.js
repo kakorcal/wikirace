@@ -8,6 +8,12 @@
     vm.clicks = 0;
     vm.timerRunning = false;
     vm.isPlaying = false;
+
+    vm.startGame = function(){
+      $scope.$broadcast('timer-start');
+      vm.timerRunning = true;
+      vm.isPlaying = true;
+    };
     
     vm.toggleSound = function(){
       

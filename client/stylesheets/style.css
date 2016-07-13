@@ -127,7 +127,7 @@
   background: #2962FF;
 }
 
-#wiki-sidebar {
+#wiki-sidebar, #start-button {
   background: #1DE9B6;
 }
 
@@ -144,4 +144,11 @@
   text-align: center;
   /*TODO: add support for other browsers*/
   transform: translateY(-50%);
+}
+
+#start-button {
+  color: white;
+  font-size: 30px;
+  padding: 18px 30px;
+  margin-top: 35px;
 }
