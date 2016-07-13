@@ -133,7 +133,7 @@
   max-height: 80px;
 }
 
-#wiki-sidebar, #start-button {
+#wiki-sidebar {
   background: #1DE9B6;
 }
 
@@ -168,7 +168,7 @@
   font-size: 16px;
 }
 
-#init-view, #loading-view {
+#init-view, #loading-view, #victory-view {
   position: absolute;
   left: 0;
   right: 0;
@@ -186,7 +186,9 @@
   text-align: center;
 }
 
-#init-view h1, #loading-view h1{
+#init-view h1, 
+#loading-view h1,
+#victory-view h1{
   color: #000;
   background: none;
   font-weight: normal;
@@ -199,11 +201,13 @@
   font-size: 188%;
 }
 
-#start-button {
+#init-view .wiki-button,
+#victory-view .wiki-button {
   color: white;
   font-size: 188%;
   padding: 8px 20px;
   margin-top: 35px;
+  background: #1DE9B6;
 }
 
 #wiki .infobox {

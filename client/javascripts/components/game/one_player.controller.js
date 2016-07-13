@@ -33,10 +33,13 @@
   function OnePlayerGame($scope, Socket, $location, $ngBootbox){
     let vm = this;
     vm.clicks = 0;
+    vm.time = 0;
+    vm.points = 0;
     vm.articles = [];
     vm.timerRunning = false;
     vm.isPlaying = false;
     vm.isLoading = false;
+    vm.isWin = false;
 
     vm.startGame = function(){
       $scope.$broadcast('timer-start');
@@ -74,6 +77,10 @@
       vm.isLoading = true;
       Socket.emit('Generate Article', path);
     };
+
+    $scope.$on('timer-stopped', (e, time)=>{
+      vm.time = time.seconds;
+    });
     
     // SOCKET LISTENERS
     Socket.connect().emit('Setup One Player Game');
@@ -90,10 +97,22 @@
       vm.isLoading = false;
       vm.articles.push({title: data.text, thumbnail: vm.thumbnail});
 
-      if(data.text === vm.last){
-        console.log('You Win!');
+      if(data.text === vm.last) {
+        $scope.$broadcast('timer-stop');
+        vm.timerRunning = false;
+        vm.isPlaying = false;
+        vm.isWin = true;
+
+        if(vm.time > 5){
+          vm.points = (1000 - (vm.time * vm.clicks) / 4);
+        }else{
+          vm.points = 1000;
+        }
       }
     });
+
+    // Socket.on('End Game', ()=>{
+    // });
 
     Socket.on('Error', data=>{
       $ngBootbox.alert('An Error Has Occurred', ()=>{

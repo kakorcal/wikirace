@@ -45,19 +45,24 @@
       </div>
     </md-toolbar>
     <md-content flex layout-padding id='wiki'>
-      <div id='init-view' ng-hide='vm.isPlaying'>
+      <div id='init-view' ng-hide='vm.isPlaying || vm.isWin'>
         <h1 ng-hide='vm.first && vm.last'>LOADING...</h1>
         <div ng-show='vm.first && vm.last'>
           <h1>FROM: {{vm.first}}</h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
           <h1>TO: {{vm.last}}</h1>    
-          <md-button ng-click='vm.startGame()' id='start-button' class='md-raised'>START!!!</md-button>    
+          <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>START!!!</md-button>    
         </div>
       </div>
       <div id='loading-view' ng-hide='!vm.isLoading'>
         <h1>LOADING...</h1>
       </div>
-      <div id='article-view' ng-hide='vm.isLoading' ng-class="vm.timerRunning ? 'playing' : 'paused'">
+      <div id="victory-view" ng-show='vm.isWin'>
+        <h1>YOU WIN!!!</h1>
+        <h1>SCORE: {{vm.points}}</h1>
+        <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>PLAY AGAIN?</md-button>
+      </div>
+      <div id='article-view' ng-hide='vm.isLoading || vm.isWin' ng-class="vm.timerRunning ? 'playing' : 'paused'">
         <style scoped>{{vm.styles}}</style>
         <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
         <div ng-show='vm.content' compile='vm.content'></div>
