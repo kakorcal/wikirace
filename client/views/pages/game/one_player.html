@@ -1,7 +1,7 @@
 <div layout='row'>
   <md-toolbar id='wiki-titlebar'>
     <div class='md-toolbar-tools'>
-      <h3 flex>WIKIRACE</h3>
+      <h4 flex>WIKIRACE</h4>
       <md-button ng-click='vm.toggleSound()' class='md-primary md-raised md-hue-3'>Mute</md-button>
       <md-button ng-click='vm.toggleTime()' class='md-accent md-raised md-hue-1'>{{vm.timerRunning ? 'Pause' : 'Play'}}</md-button>
       <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
@@ -29,48 +29,6 @@
             </div>
           </md-list-item>
           <md-divider ></md-divider>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
-            <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
-            </div>
-          </md-list-item>
-          <md-divider ></md-divider>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
-            <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
-            </div>
-          </md-list-item>
-          <md-divider ></md-divider>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
-            <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
-            </div>
-          </md-list-item>
-          <md-divider ></md-divider>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
-            <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
-            </div>
-          </md-list-item>
-          <md-divider ></md-divider>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
-            <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
-            </div>
-          </md-list-item>
-          <md-divider ></md-divider>
-          <md-list-item class="md-2-line">
-            <img src='/assets/thumbnails/balrog.gif' class="md-avatar" alt="pic" />
-            <div class="md-list-item-text" layout="column">
-              <h3>Blah Blah</h3>
-            </div>
-          </md-list-item>
-          <md-divider ></md-divider>
         </md-list>
       </md-content>
     </md-toolbar>    
@@ -81,7 +39,7 @@
     </md-toolbar>
   </md-sidenav>
   <md-content flex layout-padding id='wiki'>
-    <div id='loading-view' ng-hide='vm.isPlaying'>
+    <div id='init-view' ng-hide='vm.isPlaying'>
       <h1 ng-hide='vm.first && vm.last'>LOADING...</h1>
       <div ng-show='vm.first && vm.last'>
         <h1>FROM: {{vm.first}}</h1>
@@ -90,8 +48,11 @@
         <md-button ng-click='vm.startGame()' id='start-button' class='md-raised'>START!!!</md-button>    
       </div>
     </div>
-    <div id='article-view'>
-      <style>{{vm.styles}}</style>
+    <div id='loading-view' ng-hide='!vm.isLoading'>
+      <h1>LOADING...</h1>
+    </div>
+    <div id='article-view' ng-hide='vm.isLoading'>
+      <style scoped>{{vm.styles}}</style>
       <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
       <div ng-show='vm.content' compile='vm.content'></div>
     </div>

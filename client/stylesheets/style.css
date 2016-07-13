@@ -136,7 +136,17 @@
   background: #FF6E40;
 }
 
-#loading-view {
+#wiki-sidebar-time h4,
+#wiki-sidebar-clicks h4,
+#wiki-titlebar h4 {
+  font-size: 18px;
+  margin: 10px;
+  line-height: 1.1;
+  color: white;
+  font-weight: 500;
+}
+
+#init-view, #loading-view {
   position: absolute;
   left: 0;
   right: 0;
@@ -152,3 +162,31 @@
   padding: 18px 30px;
   margin-top: 35px;
 }
+
+.mw-content-ltr h2{
+  clear: both;
+}
+
+.infobox {
+  max-width: 22em;
+}
+
+.infobox tbody td,
+.infobox tbody th {
+  text-align: center;
+}
+
+.thumbinner {
+  display: table;
+}
+
+.thumbimage {
+  width: 100%;
+  height: auto;
+}
+
+.thumbcaption {
+  display: table-caption;
+  caption-side: bottom;
+}
+

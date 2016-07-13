@@ -36,6 +36,7 @@
     vm.articles = [];
     vm.timerRunning = false;
     vm.isPlaying = false;
+    vm.isLoading = false;
 
     vm.startGame = function(){
       $scope.$broadcast('timer-start');
@@ -68,6 +69,8 @@
     };
 
     vm.generateArticle = function(path){
+      vm.isLoading = true;
+      vm.clicks++;
       Socket.emit('Generate Article', path);
     };
     
@@ -82,6 +85,7 @@
       vm.title = data.title;
       vm.content = data.content;
       vm.styles = data.styles;
+      vm.isLoading = false;
     });
 
     Socket.on('Error', data=>{
