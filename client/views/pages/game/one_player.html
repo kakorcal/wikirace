@@ -81,14 +81,19 @@
     </md-toolbar>
   </md-sidenav>
   <md-content flex layout-padding id='wiki'>
-    <div id='loading-view'>
-      <h1 ng-hide='vm.first && vm.second'>LOADING...</h1>
-      <div ng-show='vm.first && vm.second'>
+    <div id='loading-view' ng-hide='vm.isPlaying'>
+      <h1 ng-hide='vm.first && vm.last'>LOADING...</h1>
+      <div ng-show='vm.first && vm.last'>
         <h1>FROM: {{vm.first}}</h1>
         <h1><i class='fa fa-arrow-down'></i></h1>
-        <h1>TO: {{vm.second}}</h1>    
+        <h1>TO: {{vm.last}}</h1>    
         <md-button ng-click='vm.startGame()' id='start-button' class='md-raised'>START!!!</md-button>    
       </div>
+    </div>
+    <div id='article-view'>
+      <style>{{vm.styles}}</style>
+      <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
+      <div ng-show='vm.content' compile='vm.content'></div>
     </div>
  </md-content> 
 </div>

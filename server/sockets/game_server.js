@@ -1,3 +1,4 @@
+'use strict';
 const cheerio = require('cheerio');
 const rp = require('request-promise');
 const BASE_URL = 'https://en.wikipedia.org';
@@ -11,11 +12,38 @@ exports.init = (io, socket)=>{
   socket.on('Setup One Player Game', ()=>{
     // get two random articles
     Promise.all([generateRandomTitle(), generateRandomTitle()]).then(titles=>{
-      socket.emit('Retrieve Article Titles', titles);
+      socket.emit('Receive Titles', titles);
     }).catch(err=>{
       socket.emit('Error', 'Failed To Retrieve Data');
     });
   });
+
+  socket.on('Generate Article', PATH=>{
+    let title, content, linkTags, styles;
+
+    rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})
+      .then($=>{
+        title = $('#firstHeading').html();
+        content = $('#bodyContent').html()
+          .replace(/href=('|"|‘|’|“|”)\/wiki\/.+?('|"|‘|’|“|”)/g, match=>{
+            return `href='#' ng-click=vm.generateArticle(${match.substring(5, match.length)})`;
+          });
+        
+        linkTags = $("link[rel='stylesheet']").map((idx, elem)=>{
+          return rp(`${BASE_URL}${elem.attribs.href}`);
+        }).get();        
+
+        return Promise.all(linkTags);
+      })
+      .then(stylesheets=>{
+        styles = stylesheets.join('');
+        socket.emit('Receive Article', {title, content, styles});
+      })
+      .catch(err=>{
+        socket.emit('Error', 'Failed To Retrieve Data');
+      });
+  });
+
   //***************************************************************************
     // END
   //***************************************************************************
