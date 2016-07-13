@@ -3,7 +3,7 @@
     <div class='md-toolbar-tools'>
       <h3 flex>WIKIRACE</h3>
       <md-button ng-click='vm.toggleSound()' class='md-primary md-raised md-hue-3'>Mute</md-button>
-      <md-button ng-click='vm.toggleTime()' class='md-accent md-raised md-hue-1'>Pause</md-button>
+      <md-button ng-click='vm.toggleTime()' class='md-accent md-raised md-hue-1'>{{vm.timerRunning ? 'Pause' : 'Play'}}</md-button>
       <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
     </div>
   </md-toolbar>  
