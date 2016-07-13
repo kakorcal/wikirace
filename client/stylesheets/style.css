@@ -163,19 +163,15 @@
   margin-top: 35px;
 }
 
-.mw-content-ltr h2{
-  clear: both;
+#wiki .infobox {
+  border-collapse: separate;
 }
-
-.infobox {
-  max-width: 22em;
-}
-
+/*
 .infobox tbody td,
 .infobox tbody th {
   text-align: center;
-}
-
+}*/
+/*
 .thumbinner {
   display: table;
 }
@@ -188,5 +184,5 @@
 .thumbcaption {
   display: table-caption;
   caption-side: bottom;
-}
+}*/
 
