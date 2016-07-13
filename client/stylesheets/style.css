@@ -118,6 +118,11 @@
 }
 
 /* game */
+
+#wiki {
+  position: relative;
+}
+
 #wiki-titlebar {
   background: #2962FF;
 }
@@ -129,4 +134,14 @@
 #wiki-sidebar-time,
 #wiki-sidebar-clicks {
   background: #FF6E40;
+}
+
+#loading-view {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  text-align: center;
+  /*TODO: add support for other browsers*/
+  transform: translateY(-50%);
 }

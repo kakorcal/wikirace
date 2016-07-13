@@ -81,8 +81,8 @@
     </md-toolbar>
   </md-sidenav>
   <md-content flex layout-padding id='wiki'>
-    <div>
-      <h1 ng-hide='vm.first && vm.second'>LOADING...</h1>
+    <div id='loading-view'>
+      <h1 flex ng-hide='vm.first && vm.second'>LOADING...</h1>
       <p ng-show='vm.first && vm.second'>{{vm.first}}</p>
       <p ng-show='vm.first && vm.second'>{{vm.second}}</p>
     </div>

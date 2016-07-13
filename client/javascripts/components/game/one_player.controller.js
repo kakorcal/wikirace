@@ -6,19 +6,22 @@
   function OnePlayerGame($scope, Socket, $location, $ngBootbox){
     let vm = this;
     vm.clicks = 0;
-    vm.timerRunning = true;
+    vm.timerRunning = false;
+    vm.isPlaying = false;
     
     vm.toggleSound = function(){
       
     };
 
     vm.toggleTime = function(){
-      if(vm.timerRunning){
-        $scope.$broadcast('timer-stop');
-        vm.timerRunning = false;
-      }else{
-        $scope.$broadcast('timer-resume');
-        vm.timerRunning = true;
+      if(vm.isPlaying){
+        if(vm.timerRunning){
+          $scope.$broadcast('timer-stop');
+          vm.timerRunning = false;
+        }else{
+          $scope.$broadcast('timer-resume');
+          vm.timerRunning = true;
+        }
       }
     };
 
