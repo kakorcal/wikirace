@@ -29,10 +29,17 @@ exports.init = (io, socket)=>{
         thumbnail = $('#mw-content-text .infobox .image img').attr('src');
         
         content = $('#bodyContent').html()
-          .replace(/href=('|"|‘|’|“|”)\/wiki\/.+?('|"|‘|’|“|”)/g, match=>{
-            return `href='#' ng-click=vm.generateArticle(${match.substring(5, match.length)})`;
+          .replace(/href=('|"|‘|’|“|”).+?('|"|‘|’|“|”)/g, match=>{
+            if(match.includes('/wiki/') && match.search(/(jpg|jpeg|png|gif)/) === -1){
+              console.log(match);
+              return `href='#' ng-click=vm.generateArticle('${match.substring(6, match.length-1)}')`;
+            }else if(match.includes('#')){
+              return `target='_self' class='clickable' ng-click=vm.onHashClick('${match.substring(7, match.length-1)}')`;
+            }else{
+              return "class='disabled'";
+            }
           });
-        
+
         linkTags = $("link[rel='stylesheet']").map((idx, elem)=>{
           return rp(`${BASE_URL}${elem.attribs.href}`);
         }).get();        

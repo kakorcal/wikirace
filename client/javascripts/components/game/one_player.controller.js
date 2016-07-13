@@ -29,8 +29,8 @@
     // END
   //***************************************************************************
 
-  OnePlayerGame.$inject = ['$scope', 'Socket', '$location', '$ngBootbox'];
-  function OnePlayerGame($scope, Socket, $location, $ngBootbox){
+  OnePlayerGame.$inject = ['$scope', 'Socket', '$location', '$ngBootbox', '$anchorScroll'];
+  function OnePlayerGame($scope, Socket, $location, $ngBootbox, $anchorScroll){
     let vm = this;
     vm.clicks = 0;
     vm.time = 0;
@@ -69,6 +69,13 @@
       vm.first = null;
       vm.last = null;
       Socket.emit('Setup One Player Game');
+    };
+
+    vm.onHashClick = function(hash){
+      let old = $location.hash();
+      $location.hash(hash);
+      $anchorScroll();
+      $location.hash(old);
     };
 
     vm.resetGame = function(){

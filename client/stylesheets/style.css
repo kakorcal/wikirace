@@ -218,6 +218,16 @@
   pointer-events: none;
 }
 
+.clickable {
+  cursor: pointer;;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+}
+
 .loading-finish {
   display: none;
 }
