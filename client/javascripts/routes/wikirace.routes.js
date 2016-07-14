@@ -95,7 +95,7 @@
         }
         // if you try to access a user who is not yourself
         if(err.status === 401){
-          $location.path('/users');
+          $location.path('/');
           return $q.reject(err);
         }
         return $q.reject(err);
@@ -108,7 +108,6 @@
   Authorize.$inject = ['$rootScope', '$location', '$window', 'UserService'];
   function Authorize($rootScope, $location, $window, UserService) {
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-      let currentUser = JSON.parse($window.localStorage.getItem('user'));
 
       // if you try access a restricted page without logging in
       if (next.restricted && !$window.localStorage.getItem("token")) {
@@ -116,11 +115,6 @@
           $location.path('/signup');
         else
           $location.path('/login');
-      }
-
-      // redirect to users if a logged in user tries to go to another user show page
-      if(next.restricted && currentUser.id !== +next.params.id){
-        $location.path('/users');
       }
       
       // if you try to log in or sign up once logged in

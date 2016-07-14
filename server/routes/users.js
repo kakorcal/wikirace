@@ -21,10 +21,10 @@ function checkHeaders(req,res,next){
 }
 
 // middleware to check the token against params to authorize a user
-function checkToken(req,res,next){
+function checkToken(req, res, next){
   try {
-    var decoded = jwt.verify(req.headers.authorization.split(" ")[1], SECRET);
-    if(req.params.id && decoded.id === req.params.id){
+    let decoded = jwt.verify(req.headers.authorization.split(" ")[1], SECRET);
+    if(req.params.id && decoded.id === +req.params.id){
       req.decoded_id = decoded.id;
       next();
     }else {
@@ -84,10 +84,6 @@ router.post('/login', (req, res, next)=>{
 
 });
 
-router.get('/logout', (req, res)=>{
-
-});
-
 router.get('/users', (req, res)=>{
   knex.select(['u.id', 'u.username', 'u.thumbnail_url', 'u.1p_score', 'u.2p_score'])
     .from('users as u').then(users=>{
@@ -97,8 +93,8 @@ router.get('/users', (req, res)=>{
     });
 });
 
-router.get('/users/:id', (req, res)=>{
-  knex('users').where('id', +req.params.id).first().then(user=>{
+router.get('/users/:id', checkToken, (req, res)=>{
+  knex('users').where('id', req.decoded_id).first().then(user=>{
     delete user.password;
     res.send(user);
   }).catch(err=>{
