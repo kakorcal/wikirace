@@ -18,7 +18,7 @@
           // success
           $ngBootbox.alert(data.success).then(()=>{
             UserService.setCurrentUser(data);
-            $location.path('/users');
+            $location.path(`/users/${data.user.id}`);
           });
         }
       }).catch(err=>{

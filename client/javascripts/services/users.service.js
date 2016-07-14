@@ -8,8 +8,8 @@
     // AUTH
     // TODO: Separate auth methods into auth service
     this.login = function(user){
-      console.log('LOGIN', user);
-      return $http.post('/auth/login', user)
+      console.log('LOGIN');
+      return $http.post('/api/login', user)
     };
 
     this.logout = function(){
@@ -23,12 +23,13 @@
     };
 
     this.setCurrentUser = function(data){
-      console.log('SET CURRENT USER', data);
+      console.log('SET CURRENT USER');
       $window.localStorage.setItem("token", data.token);
       $window.localStorage.setItem("user", JSON.stringify(data.user));
     };
 
     this.getCurrentUser = function(){
+      console.log('GET CURRENT USER');
       return JSON.parse($window.localStorage.getItem("user"));
     };
     
