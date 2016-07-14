@@ -28,7 +28,7 @@ function checkToken(req,res,next){
 function checkTokenForAll(req,res,next){
   try {
     var decoded = jwt.verify(req.headers.authorization.split(" ")[1], secret);
-      next();
+    next();
   }
   catch(err) {
     res.status(500).send(err.message);
@@ -36,22 +36,30 @@ function checkTokenForAll(req,res,next){
 }
 
 router.post('/new', (req, res, next)=>{
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
-    bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
-      const credentials = _.assign(_.omit(req.body.user, 'password'), {
-        password: hash,
-        thumbnail_url: '/assets/thumbnails/blanka.gif',
-        '1p_score': 0,
-        '2p_score': 0
-      });
+  knex('users').where({username: req.body.user.username}).then(user=>{
+    if(user){
+      // if user already exists
+      res.json({message: 'Username Already Exists'});
+    }else{
+      bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
+        bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
+          const credentials = _.assign(_.omit(req.body.user, 'password'), {
+            password: hash,
+            thumbnail_url: '/assets/thumbnails/blanka.gif',
+            '1p_score': 0,
+            '2p_score': 0
+          });
 
-      knex('users').insert(credentials).then(()=>{
-        
-      }).catch(err=>{
-        // applies only when creating an account
-        res.send({message: 'Username Already Exists'});
+          knex('users').insert(credentials, '*').then(newUser=>{
+            let listedItems = {id: newUser.id, username: newUser.username};
+            token = jwt.sign({id: newUser.id}, SECRET);
+            res.json({token, user: listedItems});
+          }).catch(err=>{
+            res.json({message: 'An Error Has Occurred In The Database'});
+          });
+        });
       });
-    });
+    }
   });
 });
 
