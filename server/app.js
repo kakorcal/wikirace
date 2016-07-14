@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/index');
 const server = require('http').Server(app);
-// const passport = require('passport');
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const game = require('./sockets/game_server');
@@ -14,9 +13,6 @@ if(app.get('env') === 'development'){
 }
 
 app.use(require('morgan')('tiny'));
-// app.use(require('cookie-session')({secret: process.env.LOCAL_SECRET}));
-// app.use(passport.initialize());
-// app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -28,8 +24,8 @@ app.use('/views', express.static(`${__dirname}/../client/views`));
 app.use('/libs', express.static(`${__dirname}/../node_modules`));
 
 // routes
-app.use('/api/users', routes.users);
-app.use('/auth', routes.auth);
+// app.use('/auth', routes.auth);
+app.use('/api', routes.users);
 
 app.get('*', (req, res)=>{
   res.sendFile('/views/layout.html', {root: './client'});

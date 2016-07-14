@@ -6,7 +6,34 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const SALT_WORK_FACTOR = 10;
+const SECRET = process.env.LOCAL_SECRET;
 let token;
+
+// middleware to check the token against params to authorize a user
+function checkToken(req,res,next){
+  try {
+    var decoded = jwt.verify(req.headers.authorization.split(" ")[1], SECRET);
+    if(req.params.id && decoded.id === req.params.id){
+      req.decoded_id = decoded.id;
+      next();
+    }else {
+      res.status(401).send("Not Authorized");
+    }
+  } catch(err) {
+    res.status(500).send(err.message);
+  }
+}
+
+// middleware to check the token in general
+function checkTokenForAll(req,res,next){
+  try {
+    var decoded = jwt.verify(req.headers.authorization.split(" ")[1], secret);
+      next();
+  }
+  catch(err) {
+    res.status(500).send(err.message);
+  }
+}
 
 router.post('/new', (req, res, next)=>{
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
