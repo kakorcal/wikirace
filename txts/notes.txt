@@ -56,5 +56,12 @@ x1. create database and seed. make sure api works
 x5. create an wikipedia web scrape app
 x6. homepage - styled
 
-7/12
-7. Finish auth with local strategy
+7/14 ~ 7/17
+7. Finish auth with jwt
+8. Finish two player game
+9. ensure stats gets stored to db
+
+7/18~7/19
+9. Create rankings and how to pages
+10. refactor
+11. debug heroku errors

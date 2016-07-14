@@ -13,7 +13,7 @@ if(app.get('env') === 'development'){
   require('dotenv').load();
 }
 
-app.use(require('morgan')('dev'));
+app.use(require('morgan')('tiny'));
 // app.use(require('cookie-session')({secret: process.env.LOCAL_SECRET}));
 // app.use(passport.initialize());
 // app.use(passport.session());
