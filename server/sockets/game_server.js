@@ -22,7 +22,7 @@ exports.init = (io, socket)=>{
   //***************************************************************************
 
   socket.on('Generate Article', PATH=>{
-    let title, text, content, thumbnail, linkTags, styles;
+    let title, text, content, thumbnail, linkTags, styles, path;
 
     rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})
       .then($=>{
@@ -44,7 +44,8 @@ exports.init = (io, socket)=>{
       })
       .then(stylesheets=>{
         styles = stylesheets.join('');
-        socket.emit('Receive Article', {title, text, content, thumbnail, styles});
+        path = PATH;
+        socket.emit('Receive Article', {title, text, content, thumbnail, styles, path});
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');

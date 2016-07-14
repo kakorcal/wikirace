@@ -180,6 +180,14 @@
   background: #7E57C2;
 }
 
+#wiki-sidebar-list md-list {
+  padding: 0;
+}
+
+#wiki-sidebar-list button {
+  color: #000;
+}
+
 #wiki-sidebar-list p {
   font-size: 16px;
 }

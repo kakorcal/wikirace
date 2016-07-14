@@ -124,7 +124,7 @@
       vm.styles = data.styles;
       vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
       vm.isLoading = false;
-      vm.articles.push({title: data.text, thumbnail: vm.thumbnail});
+      vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
 
       if(data.text === vm.last) {
         $scope.$broadcast('timer-stop');

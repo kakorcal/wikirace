@@ -21,8 +21,8 @@
     </md-toolbar>
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
       <md-content flex id='wiki-sidebar-list' scroll-glue>
-        <md-list flex>
-          <md-list-item class='noright' ng-repeat='article in vm.articles'>
+        <md-list flex ng-class="vm.timerRunning ? 'playing' : 'paused'">
+          <md-list-item class='noright' ng-click='vm.generateArticle(article.path)' ng-repeat='article in vm.articles'>
             <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
             <div class="md-list-item-text" layout="column">
               <p>{{article.title | truncate: 17}}</p>
