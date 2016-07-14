@@ -26,12 +26,23 @@
       })
       .when('/auth/login', {
         templateUrl: 'views/pages/auth/login.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        preventWhenLoggedIn: true
+      })
+      .when('/auth/logout',{
+        restricted: true,
+        resolve: {
+          app: function(UserService, $location){
+            UserService.logout();
+            $location.path("/login");
+          }
+        }
       })
       .when('/auth/new', {
         templateUrl: 'views/pages/auth/create_account.html',
         controllerAs: 'vm',
         controller: 'NewAccount',
+        preventWhenLoggedIn: true,
         signup: true
       })
       .when('/users', {

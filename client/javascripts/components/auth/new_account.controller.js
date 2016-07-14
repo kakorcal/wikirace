@@ -9,10 +9,20 @@
     vm.onFormSubmit = function(user){
       // send username and password to db
       UserService.signup({user}).then(function(data){
-        UserService.setCurrentUser(data);
-        $location.path('/users');
+        if(data.message === 'Username Already Exists'){
+          $ngBootbox.alert(data.message).then(()=>{
+            console.log(data.message);
+          });
+        }else{
+          debugger;
+          UserService.setCurrentUser(data);
+          debugger;
+          $location.path('/users');
+        }
       }).catch(function(data){
-        $scope.errors = data.data;
+        $ngBootbox.alert(data).then(()=>{
+          console.log(data);
+        });
       });
       // UserService.signup({user}).then(({data})=>{
       //   if(data.message === 'Login Successful'){
@@ -28,11 +38,11 @@
       //       console.log(data);
       //     });
       //   }
-      }).catch(err=>{
-        $ngBootbox.alert('An Error Has Occurred In The Database').then(()=>{
-          console.log(err);
-        });
-      });
+      // }).catch(err=>{
+      //   $ngBootbox.alert('An Error Has Occurred In The Database').then(()=>{
+      //     console.log(err);
+      //   });
+      // });
     };
   }
 })();

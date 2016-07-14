@@ -2,10 +2,10 @@
   angular.module('users.service', [])
     .service('UserService', UserService);
 
-  UserService.$inject = ['$http'];
-  function UserService($http){
+  UserService.$inject = ['$http', '$window'];
+  function UserService($http, $window){
     const USER_URL = '/api/users';
-    const user = {};
+    var user = {};
 
     // AUTH
     // TODO: Separate auth methods into auth service
@@ -25,15 +25,17 @@
     };
 
     this.signup = function(user){
-      console.log('SIGNUP', user);
+      console.log('SIGNUP');
       return $http.post('/api/new', user);
     };
 
-    this.setCurrentUser = function(data){
+    this.setCurrentUser = function({data}){
       console.log('SET CURRENT USER', data);
-      user = data.data.user
-      $window.localStorage.setItem("token", data.data.token);
-      $window.localStorage.setItem("user", JSON.stringify(data.data.user));
+      debugger;
+      user = data.user; 
+      $window.localStorage.setItem("token", data.token);
+      $window.localStorage.setItem("user", JSON.stringify(data.user));
+      debugger;
     };
 
     this.getCurrentUser = function(){

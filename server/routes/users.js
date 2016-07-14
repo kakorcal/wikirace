@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').load();
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
@@ -48,9 +49,10 @@ function checkTokenForAll(req,res,next){
 router.use(checkHeaders);
 
 router.post('/new', (req, res, next)=>{
-  knex('users').where({username: req.body.user.username}).then(user=>{
+  knex('users').where({username: req.body.user.username}).first().then(user=>{
     if(user){
       // if user already exists
+      eval(require('locus'));
       res.json({message: 'Username Already Exists'});
     }else{
       bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
@@ -61,15 +63,16 @@ router.post('/new', (req, res, next)=>{
             '1p_score': 0,
             '2p_score': 0
           });
-
-          knex('users').insert(credentials, '*').then(newUser=>{
+          knex('users').insert(credentials, '*').then(([newUser])=>{
             let listedItems = {id: newUser.id, username: newUser.username};
             token = jwt.sign({id: newUser.id}, SECRET);
+            eval(require('locus'));
             res.json({token, user: listedItems});
           }).catch(err=>{
+            eval(require('locus'));
             res.json({message: 'An Error Has Occurred In The Database'});
           });
-          
+
         });
       });
     }
