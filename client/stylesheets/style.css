@@ -190,6 +190,7 @@
 
 #wiki-sidebar-list p {
   font-size: 16px;
+  line-height: normal;
 }
 
 #init-view, #loading-view, #victory-view {
@@ -238,25 +239,29 @@
   border-collapse: separate;
 }
 
-.paused {
+.wiki-playing {
+
+}
+
+.wiki-paused {
   pointer-events: none;
 }
 
-.clickable {
+.wiki-clickable {
   cursor: pointer;;
 }
 
-.disabled {
+.wiki-disabled {
   pointer-events: none;
   cursor: default;
   text-decoration: none;
 }
 
-.loading-finish {
+.wiki-loading-finish {
   display: none;
 }
 
-.loading-tween {
+.wiki-loading-tween {
   animation-name: pulse;
   animation-duration: 500ms;
   animation-iteration-count: infinite;

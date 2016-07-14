@@ -4,6 +4,8 @@ const rp = require('request-promise');
 const BASE_URL = 'https://en.wikipedia.org';
 const RANDOM_PAGE = '/wiki/Special:RandomInCategory/Featured_articles';
 
+// TODO: find random category first. and within that category, select two articles
+
 exports.init = (io, socket)=>{
   console.log('CLIENT HANDSHAKE');
   //***************************************************************************
@@ -76,11 +78,11 @@ function processLinks(str){
   if(str.includes('/wiki/') && str.search(/(:|#|jpg|jpeg|png|gif)/) === -1){
     // regular links
     return `href='#' ng-click=vm.generateArticle('${str.substring(6, str.length-1)}')`;
-  }else if(str.includes('#')){
+  }else if(str.includes('#') && str.search(/(\/wiki\/|http)/) === -1){
     // anchor tags
-    return `target='_self' class='clickable' ng-click=vm.onHashClick('${str.substring(7, str.length-1)}')`;
+    return `target='_self' class='wiki-clickable' ng-click=vm.onHashClick('${str.substring(7, str.length-1)}')`;
   }else{
     // disable everything else
-    return "class='disabled'";
+    return "class='wiki-disabled'";
   }
 }

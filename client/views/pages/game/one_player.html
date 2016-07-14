@@ -21,7 +21,7 @@
     </md-toolbar>
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
       <md-content flex id='wiki-sidebar-list' scroll-glue>
-        <md-list flex ng-class="vm.timerRunning ? 'playing' : 'paused'">
+        <md-list flex ng-class="vm.timerRunning ? 'wiki-playing' : 'wiki-paused'">
           <md-list-item class='noright' ng-click='vm.generateArticle(article.path)' ng-repeat='article in vm.articles'>
             <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
             <div class="md-list-item-text" layout="column">
@@ -46,7 +46,7 @@
     </md-toolbar>
     <md-content flex layout-padding id='wiki'>
       <div id='init-view' ng-hide='vm.isPlaying || vm.isWin'>
-        <h1 ng-class="vm.first && vm.last ? 'loading-finish' : 'loading-tween'">LOADING...</h1>
+        <h1 ng-class="vm.first && vm.last ? 'wiki-loading-finish' : 'wiki-loading-tween'">LOADING...</h1>
         <div ng-show='vm.first && vm.last'>
           <h1>FROM: {{vm.first}}</h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
@@ -56,14 +56,14 @@
         </div>
       </div>
       <div id='loading-view' ng-hide='!vm.isLoading'>
-        <h1 class='loading-tween'>LOADING...</h1>
+        <h1 class='wiki-loading-tween'>LOADING...</h1>
       </div>
       <div id="victory-view" ng-show='vm.isWin'>
         <h1>YOU WIN!!!</h1>
         <h1>SCORE: {{vm.points}}</h1>
         <md-button ng-click='vm.resetGame()' class='md-raised wiki-button'>PLAY AGAIN?</md-button>
       </div>
-      <div id='article-view' ng-hide='vm.isLoading || vm.isWin' ng-class="vm.timerRunning ? 'playing' : 'paused'">
+      <div id='article-view' ng-hide='vm.isLoading || vm.isWin' ng-class="vm.timerRunning ? 'wiki-playing' : 'wiki-paused'">
         <style scoped>{{vm.styles}}</style>
         <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
         <div ng-show='vm.content' compile='vm.content'></div>
