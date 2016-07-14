@@ -58,14 +58,14 @@ router.post('/new', (req, res, next)=>{
         if(err) res.json({error: 'An Error Has Occurred In The Database'});
         bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
           if(err) res.json({error: 'An Error Has Occurred In The Database'});
-
+          
           const credentials = _.assign(_.omit(req.body.user, 'password'), {
             password: hash,
             thumbnail_url: '/assets/thumbnails/blanka.gif',
             '1p_score': 0,
             '2p_score': 0
           });
-
+          
           knex('users').insert(credentials, '*').then(([newUser])=>{
             // create token
             let listedItems = {id: newUser.id, username: newUser.username};

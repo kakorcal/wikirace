@@ -1,13 +1,19 @@
 (()=>{
   angular.module('wikinav.directive', [])
     .directive('wikiNav', wikiNav)
-    // this directive is dependent on having the wiki-wrapper class 
-    // as the container
-    function wikiNav(){
+    // this directive is dependent on having the wiki-wrapper class as the container
+    wikiNav.$inject = ['UserService'];
+    function wikiNav(UserService){
       return {
         restrict: 'E',
         scope: {},
-        templateUrl: 'views/partials/_nav.html'
+        templateUrl: 'views/partials/_nav.html',
+        link: function(scope, element, attrs){
+          scope.currentUser = UserService.getCurrentUser();
+          scope.$watch(UserService.currentUser, user=>{
+            scope.currentUser = UserService.getCurrentUser();
+          });
+        }
       }
     }
 })();

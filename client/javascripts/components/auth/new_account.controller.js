@@ -8,7 +8,7 @@
       
     vm.onFormSubmit = function(user){
       // send username and password to db
-      UserService.signup({user}).then(data=>{
+      UserService.signup({user}).then(({data})=>{
         if(data.error){
           // error
           $ngBootbox.alert(data.error).then(()=>{

@@ -52,6 +52,7 @@
       .when('/users/:id', {
         templateUrl: 'view/pages/users/show.html',
         controllerAs: 'vm',
+        restricted: true,
         resolve: {
           user: getUserById
         }

@@ -3,7 +3,7 @@
     <p>
       <i class='fa fa-gamepad fa-3x'></i>
     </p>
-    <h3>PLAY GAME</h3>      
+    <h3>PLAY GAME {{currentUser}}</h3>      
   </a>
 </div>
 <div class="wiki-nav-item nav-2" md-ink-ripple="#fff">
@@ -23,19 +23,31 @@
   </a>
 </div>
 <div class="wiki-nav-item nav-4" md-ink-ripple="#fff">
-  <a href='/auth/login'>
+  <a href='/auth/login' ng-hide='currentUser'>
     <p>
       <i class="fa fa-key fa-3x"></i>
     </p>
     <h3>LOGIN</h3>      
   </a>
+  <a href='/auth/logout' ng-hide='!currentUser'>
+    <p>
+      <i class="fa fa-sign-out fa-3x"></i>
+    </p>
+    <h3>LOGOUT</h3>      
+  </a>
 </div>
 <div class="wiki-nav-item nav-5" md-ink-ripple="#fff">
-  <a href='/auth/new'>
+  <a href='/auth/new' ng-hide='currentUser'>
     <p>
       <i class="fa fa-user-plus fa-3x"></i>
     </p>
     <h3>NEW ACCOUNT</h3>      
+  </a>
+  <a href='/users' ng-hide='!currentUser'>
+    <p>
+      <i class="fa fa-user fa-3x"></i>
+    </p>
+    <h3>YOUR STATS</h3>      
   </a>
 </div>
 <div class="wiki-nav-item nav-6" md-ink-ripple="#fff">
