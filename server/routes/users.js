@@ -9,6 +9,16 @@ const SALT_WORK_FACTOR = 10;
 const SECRET = process.env.LOCAL_SECRET;
 let token;
 
+// only allow AJAX calls to prevent tampering in the browser bar
+function checkHeaders(req,res,next){
+  if(!req.headers["x-requested-with"]) {
+    res.sendFile(path.join(__dirname, '../../client', 'index.html'));
+  }
+  else {
+    next();
+  }
+}
+
 // middleware to check the token against params to authorize a user
 function checkToken(req,res,next){
   try {
@@ -35,6 +45,8 @@ function checkTokenForAll(req,res,next){
   }
 }
 
+router.use(checkHeaders);
+
 router.post('/new', (req, res, next)=>{
   knex('users').where({username: req.body.user.username}).then(user=>{
     if(user){
@@ -57,6 +69,7 @@ router.post('/new', (req, res, next)=>{
           }).catch(err=>{
             res.json({message: 'An Error Has Occurred In The Database'});
           });
+          
         });
       });
     }

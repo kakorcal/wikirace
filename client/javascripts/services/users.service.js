@@ -15,7 +15,6 @@
 
     this.login = function(user){
       console.log('LOGIN', user);
-      var service = this;
       return $http.post('/auth/login', user)
     };
 
@@ -27,11 +26,11 @@
 
     this.signup = function(user){
       console.log('SIGNUP', user);
-      return $http.post('/auth/new', user);
+      return $http.post('/api/new', user);
     };
 
     this.setCurrentUser = function(data){
-      console.log('SET CURRENT USER', user);
+      console.log('SET CURRENT USER', data);
       user = data.data.user
       $window.localStorage.setItem("token", data.data.token);
       $window.localStorage.setItem("user", JSON.stringify(data.data.user));

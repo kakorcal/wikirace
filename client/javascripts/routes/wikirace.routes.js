@@ -1,8 +1,8 @@
 (()=>{
   angular.module('wikirace.routes', ['ngRoute']).config(routes);
 
-  routes.$inject = ['$routeProvider', '$locationProvider'];
-  function routes($routeProvider, $locationProvider){
+  routes.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
+  function routes($routeProvider, $locationProvider, $httpProvider){
     $routeProvider
       .when('/', {
         templateUrl: 'views/pages/home.html'
@@ -31,7 +31,8 @@
       .when('/auth/new', {
         templateUrl: 'views/pages/auth/create_account.html',
         controllerAs: 'vm',
-        controller: 'NewAccount'
+        controller: 'NewAccount',
+        signup: true
       })
       .when('/users', {
         templateUrl: 'views/pages/users/rankings.html',
@@ -54,8 +55,58 @@
       .otherwise({
         redirectTo: '/404'
       });
+
     $locationProvider.html5Mode(true);
+    $httpProvider.interceptors.push('AuthInterceptor');
   }
+
+  angular.module('wikirace.routes').service('AuthInterceptor', AuthInterceptor);
+
+  AuthInterceptor.$inject = ['$window', '$location', '$q'];
+  function AuthInterceptor($window, $location, $q){
+    return {
+      request: function(config){
+        // prevent browser bar tampering for /api routes
+        config.headers['X-Requested-With'] = 'XMLHttpRequest';
+        var token = $window.localStorage.getItem("token");
+        if(token)
+          config.headers.Authorization = "Bearer " + token;
+        return $q.resolve(config);
+      },
+      responseError: function(err){
+        // if you mess around with the token, log them out and destroy it
+        if(err.data === "invalid token" || err.data === "invalid signature" || err.data === "jwt malformed"){
+          $location.path("/logout");
+          return $q.reject(err);
+        }
+        // if you try to access a user who is not yourself
+        if(err.status === 401){
+          $location.path('/users');
+          return $q.reject(err);
+        }
+        return $q.reject(err);
+      }
+    };
+  };
+
+  angular.module('wikirace.routes').run(Authorize);
+
+  Authorize.$inject = ['$rootScope', '$location', '$window', 'UserService'];
+  function Authorize($rootScope, $location, $window, UserService) {
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+      // if you try access a restricted page without logging in
+      if (next.restricted && !$window.localStorage.getItem("token")) {
+        if(current && current.signup)
+          $location.path('/signup');
+        else
+          $location.path('/login');
+      }
+      // if you try to log in or sign up once logged in
+      if (next.preventWhenLoggedIn && $window.localStorage.getItem("token")) {
+        $location.path('/users');
+      }
+    });
+  };
 
   getAllUsers.$inject = ['UserService'];
   function getAllUsers(UserService){
