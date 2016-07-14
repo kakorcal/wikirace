@@ -52,27 +52,28 @@ router.post('/new', (req, res, next)=>{
   knex('users').where({username: req.body.user.username}).first().then(user=>{
     if(user){
       // if user already exists
-      eval(require('locus'));
-      res.json({message: 'Username Already Exists'});
+      res.json({error: 'Username Already Exists'});
     }else{
       bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
+        if(err) res.json({error: 'An Error Has Occurred In The Database'});
         bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
+          if(err) res.json({error: 'An Error Has Occurred In The Database'});
+
           const credentials = _.assign(_.omit(req.body.user, 'password'), {
             password: hash,
             thumbnail_url: '/assets/thumbnails/blanka.gif',
             '1p_score': 0,
             '2p_score': 0
           });
+          
           knex('users').insert(credentials, '*').then(([newUser])=>{
+            // create token
             let listedItems = {id: newUser.id, username: newUser.username};
             token = jwt.sign({id: newUser.id}, SECRET);
-            eval(require('locus'));
-            res.json({token, user: listedItems});
+            res.json({token, user: listedItems, success: 'Login Successful'});
           }).catch(err=>{
-            eval(require('locus'));
-            res.json({message: 'An Error Has Occurred In The Database'});
+            res.json({error: 'An Error Has Occurred In The Database'});
           });
-
         });
       });
     }

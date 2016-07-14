@@ -31,11 +31,9 @@
 
     this.setCurrentUser = function({data}){
       console.log('SET CURRENT USER', data);
-      debugger;
       user = data.user; 
       $window.localStorage.setItem("token", data.token);
       $window.localStorage.setItem("user", JSON.stringify(data.user));
-      debugger;
     };
 
     this.getCurrentUser = function(){
