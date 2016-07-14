@@ -32,10 +32,7 @@
       .when('/auth/logout',{
         restricted: true,
         resolve: {
-          app: function(UserService, $location){
-            UserService.logout();
-            $location.path("/login");
-          }
+          app: onLogout
         }
       })
       .when('/auth/new', {
@@ -128,5 +125,13 @@
   getUserById.$inject = ['UserService', '$route'];
   function getUserById(UserService, $route){
     return UserService.getSingleUser($route.current.params.id);
+  }
+
+  onLogout.$inject = ['UserService', '$location', '$ngBootbox'];
+  function onLogout(UserService, $location, $ngBootbox){
+    $ngBootbox.alert('Logging Out').then(()=>{
+      UserService.logout();
+      $location.path("/");
+    });
   }
 })();

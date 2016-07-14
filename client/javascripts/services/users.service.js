@@ -13,8 +13,7 @@
     };
 
     this.logout = function(){
-      console.log('LOGOUT', user);
-      user = null;
+      console.log('LOGOUT');
       $window.localStorage.clear();
     };
 
