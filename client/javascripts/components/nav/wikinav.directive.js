@@ -10,7 +10,7 @@
         templateUrl: 'views/partials/_nav.html',
         link: function(scope, element, attrs){
           scope.currentUser = UserService.getCurrentUser();
-          scope.$watch(UserService.currentUser, user=>{
+          scope.$watch(scope.currentUser, ()=>{
             scope.currentUser = UserService.getCurrentUser();
           });
         }
