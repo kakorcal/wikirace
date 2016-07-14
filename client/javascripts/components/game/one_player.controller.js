@@ -131,11 +131,16 @@
         vm.timerRunning = false;
         vm.isPlaying = false;
         vm.isWin = true;
-        if(vm.time > 5){
-          vm.points = (1000 - (vm.time * (vm.clicks / 4)));
-        }else{
-          vm.points = 1000;
-        }
+        Socket.emit('Player Win');
+      }
+    });
+
+    Socket.on('Finish Game', ()=>{
+      if(vm.time > 5){
+        vm.points = (1000 - (vm.time * (vm.clicks / 4)));
+        if(vm.points < 0) vm.points = 0;
+      }else{
+        vm.points = 1000;
       }
     });
 
