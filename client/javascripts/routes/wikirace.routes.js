@@ -71,7 +71,11 @@
   }
 
   angular.module('wikirace.routes').service('AuthInterceptor', AuthInterceptor);
-
+  
+  //***************************************************************************
+  // props to elie for the jwt example
+  // https://github.com/gSchool/angular-curriculum/tree/master/Unit-3/examples/auth_example
+  //***************************************************************************
   AuthInterceptor.$inject = ['$window', '$location', '$q'];
   function AuthInterceptor($window, $location, $q){
     return {
@@ -104,6 +108,8 @@
   Authorize.$inject = ['$rootScope', '$location', '$window', 'UserService'];
   function Authorize($rootScope, $location, $window, UserService) {
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
+      let currentUser = JSON.parse($window.localStorage.getItem('user'));
+
       // if you try access a restricted page without logging in
       if (next.restricted && !$window.localStorage.getItem("token")) {
         if(current && current.signup)
@@ -111,9 +117,15 @@
         else
           $location.path('/login');
       }
+
+      // redirect to users if a logged in user tries to go to another user show page
+      if(next.restricted && currentUser.id !== +next.params.id){
+        $location.path('/users');
+      }
+      
       // if you try to log in or sign up once logged in
       if (next.preventWhenLoggedIn && $window.localStorage.getItem("token")) {
-        $location.path('/users');
+        $location.path('/');
       }
     });
   };
@@ -125,7 +137,6 @@
 
   getUserById.$inject = ['UserService', '$route'];
   function getUserById(UserService, $route){
-    debugger;
     return UserService.getSingleUser($route.current.params.id);
   }
 

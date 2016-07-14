@@ -99,11 +99,10 @@ router.get('/users', (req, res)=>{
 
 router.get('/users/:id', (req, res)=>{
   knex('users').where('id', +req.params.id).first().then(user=>{
-    eval(require('locus'));
     delete user.password;
-    res.json(user);
+    res.send(user);
   }).catch(err=>{
-    res.json(err);
+    res.send(err);
   });
 });
 
