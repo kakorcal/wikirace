@@ -9,9 +9,10 @@
         scope: {},
         templateUrl: 'views/partials/_nav.html',
         link: function(scope, element, attrs){
-          scope.currentUser = UserService.getCurrentUser();
-          scope.$watch(scope.currentUser, ()=>{
-            scope.currentUser = UserService.getCurrentUser();
+          scope.vm = {};
+          scope.vm.currentUser = UserService.getCurrentUser();
+          scope.$watch(scope.vm.currentUser, ()=>{
+            scope.vm.currentUser = UserService.getCurrentUser();
           });
         }
       }

@@ -47,8 +47,9 @@
         controllerAs: 'vm'
       })      
       .when('/users/:id', {
-        templateUrl: 'view/pages/users/show.html',
+        templateUrl: 'views/pages/users/show.html',
         controllerAs: 'vm',
+        controller: 'UserShowController',
         restricted: true,
         resolve: {
           user: getUserById
@@ -124,6 +125,7 @@
 
   getUserById.$inject = ['UserService', '$route'];
   function getUserById(UserService, $route){
+    debugger;
     return UserService.getSingleUser($route.current.params.id);
   }
 

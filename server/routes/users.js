@@ -65,7 +65,7 @@ router.post('/new', (req, res, next)=>{
             '1p_score': 0,
             '2p_score': 0
           });
-          
+
           knex('users').insert(credentials, '*').then(([newUser])=>{
             // create token
             let listedItems = {id: newUser.id, username: newUser.username};
@@ -99,10 +99,11 @@ router.get('/users', (req, res)=>{
 
 router.get('/users/:id', (req, res)=>{
   knex('users').where('id', +req.params.id).first().then(user=>{
+    eval(require('locus'));
     delete user.password;
-    res.send(user);
+    res.json(user);
   }).catch(err=>{
-    res.send(err);
+    res.json(err);
   });
 });
 

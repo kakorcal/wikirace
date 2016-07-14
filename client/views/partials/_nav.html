@@ -23,13 +23,13 @@
   </a>
 </div>
 <div class="wiki-nav-item nav-4" md-ink-ripple="#fff">
-  <a href='/auth/login' ng-hide='currentUser'>
+  <a href='/auth/login' ng-hide='vm.currentUser'>
     <p>
       <i class="fa fa-key fa-3x"></i>
     </p>
     <h3>LOGIN</h3>      
   </a>
-  <a href='/auth/logout' ng-hide='!currentUser'>
+  <a href='/auth/logout' ng-hide='!vm.currentUser'>
     <p>
       <i class="fa fa-sign-out fa-3x"></i>
     </p>
@@ -37,13 +37,13 @@
   </a>
 </div>
 <div class="wiki-nav-item nav-5" md-ink-ripple="#fff">
-  <a href='/auth/new' ng-hide='currentUser'>
+  <a href='/auth/new' ng-hide='vm.currentUser'>
     <p>
       <i class="fa fa-user-plus fa-3x"></i>
     </p>
     <h3>NEW ACCOUNT</h3>      
   </a>
-  <a href='/users' ng-hide='!currentUser'>
+  <a ng-href='/users/{{vm.currentUser.id}}' ng-hide='!vm.currentUser'>
     <p>
       <i class="fa fa-user fa-3x"></i>
     </p>

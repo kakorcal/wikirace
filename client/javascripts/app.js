@@ -13,7 +13,8 @@
     'wikinav.directive',
     'new_account.controller',
     'one_player.controller',
-    'two_player.controller'
+    'two_player.controller',
+    'userShow.controller'
   ]);
 
   //***************************************************************************
