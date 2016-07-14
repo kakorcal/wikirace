@@ -13,9 +13,8 @@ let token;
 // only allow AJAX calls to prevent tampering in the browser bar
 function checkHeaders(req,res,next){
   if(!req.headers["x-requested-with"]) {
-    res.sendFile(path.join(__dirname, '../../client', 'index.html'));
-  }
-  else {
+    res.sendFile('/views/layout.html', {root: './client'});
+  }else {
     next();
   }
 }
@@ -35,16 +34,16 @@ function checkToken(req, res, next){
   }
 }
 
-// middleware to check the token in general
-function checkTokenForAll(req,res,next){
-  try {
-    var decoded = jwt.verify(req.headers.authorization.split(" ")[1], secret);
-    next();
-  }
-  catch(err) {
-    res.status(500).send(err.message);
-  }
-}
+// // middleware to check the token in general
+// function checkTokenForAll(req,res,next){
+//   try {
+//     var decoded = jwt.verify(req.headers.authorization.split(" ")[1], secret);
+//     next();
+//   }
+//   catch(err) {
+//     res.status(500).send(err.message);
+//   }
+// }
 
 router.use(checkHeaders);
 
@@ -102,7 +101,7 @@ router.get('/users/:id', checkToken, (req, res)=>{
   });
 });
 
-router.put('/users/:id', (req, res)=>{
+router.put('/users/:id', checkToken, (req, res)=>{
   knex('users').where('id', +req.params.id).update(req.body.user).then(()=>{
     res.send('Update Successful');
   }).catch(err=>{
@@ -110,7 +109,7 @@ router.put('/users/:id', (req, res)=>{
   });
 });
 
-router.delete('/users/:id', (req, res)=>{
+router.delete('/users/:id', checkToken, (req, res)=>{
   knex('users').where('id', +req.params.id).del().then(()=>{
     res.send('Delete Successful');
   }).catch(err=>{
