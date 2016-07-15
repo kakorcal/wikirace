@@ -65,30 +65,35 @@ router.post('/new', (req, res)=>{
         });
       });
     }
+  })
+  .catch(err=>{
+    res.json({error: 'An Error Has Occurred In The Database'});
   });
 });
 
 router.post('/login', (req, res)=>{
-  eval(require('locus'));
   knex('users').where({username: req.body.user.username}).first().then(user=>{
     if(!user){
       res.json({error: 'Invalid Credentials'});
     }else{
       // check password
-      bcrypt.compare(req.body.user.password, user.password, (err, res)=>{
+      bcrypt.compare(req.body.user.password, user.password, (err, isValid)=>{
         if(err) res.json({error: 'An Error Has Occurred In The Database'});
         
-        if(!res){
+        if(!isValid){
           res.json({error: 'Invalid Credentials'})
         }else{
           // password correct
           // create token
-          let listedItems = {id: newUser.id, username: newUser.username};
-          token = jwt.sign({id: newUser.id}, SECRET);
+          let listedItems = {id: user.id, username: user.username};
+          token = jwt.sign({id: user.id}, SECRET);
           res.json({token, user: listedItems, success: 'Login Successful'});
         }       
       });
     }
+  })
+  .catch(err=>{
+    res.json({error: 'An Error Has Occurred In The Database'});
   });
 });
 

@@ -9,7 +9,6 @@
     // TODO: Separate auth methods into auth service
     this.login = function(user){
       console.log('LOGIN');
-      debugger;
       return $http.post('/api/login', user);
     };
 

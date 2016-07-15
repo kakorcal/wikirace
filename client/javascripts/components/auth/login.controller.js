@@ -3,12 +3,11 @@
     .controller('LoginController', LoginController);
 
   LoginController.$inject = ['UserService', '$location', '$ngBootbox'];
-  function LoginController(UserService, $location){
+  function LoginController(UserService, $location, $ngBootbox){
     let vm = this;
       
     vm.onFormSubmit = function(user){
       // send username and password to db
-      debugger;
       UserService.login({user}).then(({data})=>{
         if(data.error){
           // error
