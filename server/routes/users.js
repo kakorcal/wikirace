@@ -54,8 +54,9 @@ router.post('/new', (req, res)=>{
             '2p_score': 0
           });
 
-          knex('users').insert(credentials, '*').then(([newUser])=>{
+          knex('users').insert(credentials, '*').then(data=>{
             // create token
+            let newUser = data[0];
             let listedItems = {id: newUser.id, username: newUser.username};
             token = jwt.sign({id: newUser.id}, SECRET);
             res.json({token, user: listedItems, success: 'Login Successful'});
