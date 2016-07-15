@@ -29,8 +29,8 @@
     // END
   //***************************************************************************
 
-  OnePlayerGame.$inject = ['$scope', '$window', 'Socket', '$location', '$ngBootbox', '$anchorScroll'];
-  function OnePlayerGame($scope, $window, Socket, $location, $ngBootbox, $anchorScroll){
+  OnePlayerGame.$inject = ['$scope', '$window', '$timeout','Socket', '$location', '$ngBootbox', '$anchorScroll'];
+  function OnePlayerGame($scope, $window, $timeout, Socket, $location, $ngBootbox, $anchorScroll){
     let vm = this;
     vm.clicks = 0;
     vm.time = 0;
@@ -79,7 +79,10 @@
     };
 
     vm.resetGame = function(){
+      // TODO: make transitions between views smoother
+      // maybe use $timeout
       $scope.$broadcast('timer-reset');
+      vm.isWin = false;
       vm.clicks = 0;
       vm.time = 0;
       vm.points = 0;
@@ -90,7 +93,6 @@
       vm.content = null;
       vm.styles = null;
       vm.thumbnail = null;
-      vm.isWin = false;
       Socket.emit('Setup One Player Game');
     };
 

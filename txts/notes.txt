@@ -61,11 +61,12 @@ XFinish auth with jwt
 
 7/15
 Xfix sidebar list divider
-animate sidebar and init-view on ng-leave
+Xanimate sidebar and init-view on ng-leave
 style ngbootbox
 add user stats page
-add rankings page
+Xadd rankings page
 get random category, then two random pages in that category
+make game view transitions smoother
 
 7/16 ~ 7/17
 Finish two player game

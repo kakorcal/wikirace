@@ -43,7 +43,7 @@
         preventWhenLoggedIn: true,
         signup: true
       })
-      .when('/users', {
+      .when('/rankings', {
         templateUrl: 'views/pages/users/rankings.html',
         controllerAs: 'vm',
         controller: 'UserIndexController',

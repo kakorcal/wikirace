@@ -8,9 +8,9 @@ const bodyParser = require('body-parser');
 const game = require('./sockets/game_server');
 const PORT = process.env.PORT || 3333;
 
-if(app.get('env') === 'development'){
-  require('dotenv').load();
-}
+// if(app.get('env') === 'development'){
+//   require('dotenv').load();
+// }
 
 app.use(require('morgan')('tiny'));
 app.use(bodyParser.json());

@@ -270,7 +270,7 @@
   animation-direction: alternate;
 }
 
-#wiki-repeat.ng-leave {
+.wiki-repeat.ng-leave {
   animation-name: leave;
   animation-duration: 500ms;
   animation-iteration-count: 1;
@@ -295,4 +295,60 @@
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
   }
+}
+
+/* rankings.html */
+
+.wikiracer-nav {
+  margin-bottom: 10px;
+}
+
+.wikiracer-nav strong {
+  font-size: 19px;
+  margin-right: 6px;
+  position: relative;
+  top: 3px;
+}
+
+.wikiracer-rankings {
+  width: 400px;
+  height: 350px;
+  overflow: scroll;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.wikiracer-rankings table {
+  border: none;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table>thead>tr>th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+}
+
+.table>tbody>tr>td>img {
+  width: 40px;
+  height: auto;
+}
+
+.table>tbody>td>img {
+  width: 60px;
+}
+
+.showrank {
+  display: block;
+}
+
+.hiderank {
+  display: none;
 }

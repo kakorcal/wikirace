@@ -1,6 +1,59 @@
 <div flex class='wiki-wrapper' layout='row' layout-align='center center'>
   <div class="wiki-view-wrapper">
-    <h1>Top Wikiracers</h1>
+    <div class='wikiracer-nav'>
+      <strong>Top Wikiracers: </strong>
+      <md-button class='md-raised' ng-class='vm.buttonOne' ng-click="vm.toggleGameType('oneplayer')">One Player</md-button>
+      <md-button class='md-raised' ng-class='vm.buttonTwo' ng-click="vm.toggleGameType('twoplayer')">Two Player</md-button>
+    </div>
+    <div class='wikiracer-rankings' ng-class="vm.gameType === 'oneplayer' ? 'showrank' : 'hiderank'">
+      <table class='table table-striped table-bordered table-fixed'>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in vm.oneplayer track by $index">
+            <td><strong>{{$index + 1}}</strong></td>
+            <td>
+              <img src="{{user.thumbnail_url}}" alt="pic">
+            </td>
+            <td>
+              <strong>{{user.username}}</strong>
+            </td>
+            <td><strong>{{user['1p_score']}}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class='wikiracer-rankings' ng-class="vm.gameType === 'twoplayer' ? 'showrank' : 'hiderank'">
+      <table class='table table-striped table-bordered table-fixed'>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in vm.twoplayer track by $index">
+            <td><strong>{{$index + 1}}</strong></td>
+            <td>
+              <img src="{{user.thumbnail_url}}" alt="pic">
+            </td>
+            <td>
+              <strong>{{user.username}}</strong>
+            </td>
+            <td><strong>{{user['2p_score']}}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <wiki-nav></wiki-nav>
 </div>
