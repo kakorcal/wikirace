@@ -69,7 +69,27 @@ router.post('/new', (req, res)=>{
 });
 
 router.post('/login', (req, res)=>{
-
+  eval(require('locus'));
+  knex('users').where({username: req.body.user.username}).first().then(user=>{
+    if(!user){
+      res.json({error: 'Invalid Credentials'});
+    }else{
+      // check password
+      bcrypt.compare(req.body.user.password, user.password, (err, res)=>{
+        if(err) res.json({error: 'An Error Has Occurred In The Database'});
+        
+        if(!res){
+          res.json({error: 'Invalid Credentials'})
+        }else{
+          // password correct
+          // create token
+          let listedItems = {id: newUser.id, username: newUser.username};
+          token = jwt.sign({id: newUser.id}, SECRET);
+          res.json({token, user: listedItems, success: 'Login Successful'});
+        }       
+      });
+    }
+  });
 });
 
 router.get('/users', (req, res)=>{
