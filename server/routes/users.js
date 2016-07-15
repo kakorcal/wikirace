@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const SALT_WORK_FACTOR = 10;
-const SECRET = process.env.LOCAL_SECRET;
+const SECRET = process.env.JWT_SECRET;
 let token;
 
 // only allow AJAX calls to prevent tampering in the browser bar
@@ -34,20 +34,9 @@ function checkToken(req, res, next){
   }
 }
 
-// // middleware to check the token in general
-// function checkTokenForAll(req,res,next){
-//   try {
-//     var decoded = jwt.verify(req.headers.authorization.split(" ")[1], secret);
-//     next();
-//   }
-//   catch(err) {
-//     res.status(500).send(err.message);
-//   }
-// }
-
 router.use(checkHeaders);
 
-router.post('/new', (req, res, next)=>{
+router.post('/new', (req, res)=>{
   knex('users').where({username: req.body.user.username}).first().then(user=>{
     if(user){
       // if user already exists
@@ -79,7 +68,7 @@ router.post('/new', (req, res, next)=>{
   });
 });
 
-router.post('/login', (req, res, next)=>{
+router.post('/login', (req, res)=>{
 
 });
 

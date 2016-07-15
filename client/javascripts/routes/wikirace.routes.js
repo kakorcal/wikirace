@@ -27,6 +27,7 @@
       .when('/auth/login', {
         templateUrl: 'views/pages/auth/login.html',
         controllerAs: 'vm',
+        controller: 'LoginController',
         preventWhenLoggedIn: true
       })
       .when('/auth/logout',{
@@ -111,10 +112,11 @@
 
       // if you try access a restricted page without logging in
       if (next.restricted && !$window.localStorage.getItem("token")) {
-        if(current && current.signup)
+        if(current && current.signup){
           $location.path('/signup');
-        else
+        }else{
           $location.path('/login');
+        }
       }
       
       // if you try to log in or sign up once logged in

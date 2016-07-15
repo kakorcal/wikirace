@@ -11,6 +11,7 @@
     'wikirace.routes',
     'wikirace.filter',
     'wikinav.directive',
+    'login.controller',
     'new_account.controller',
     'one_player.controller',
     'two_player.controller',

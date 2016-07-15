@@ -6,6 +6,5 @@
   function UserShowController({data:user}, UserService, $location){
     let vm = this;
     vm.user = user;
-    console.log(vm.user);
   }
 })();
