@@ -10,6 +10,7 @@
         templateUrl: 'views/partials/_nav.html',
         link: function(scope, element, attrs){
           scope.vm = {};
+          // on initial loading, determine if currentUser exists
           scope.vm.currentUser = UserService.getCurrentUser();
           scope.$watch(scope.vm.currentUser, ()=>{
             scope.vm.currentUser = UserService.getCurrentUser();

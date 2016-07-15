@@ -6,7 +6,7 @@ https://scotch.io/tutorials/scraping-the-web-with-node-js
 http://chariotsolutions.com/blog/post/getting-chatty-angular-socket-io-nodeexpress-bootstrap/
 https://scotch.io/tutorials/a-realtime-room-chat-app-using-node-webkit-socket-io-and-mean
 
-// oauth
+// auth
 https://github.com/auth0/socketio-jwt
 https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/
 https://auth0.com/blog/2014/01/15/auth-with-socket-io/
@@ -49,19 +49,30 @@ Delete: `curl -X DELETE http://localhost:3000/todos/4`
 
 // todos
 7/5 ~ 7/7
-x1. create database and seed. make sure api works
-  2. create chat app using angular, passport and sockets
-  3. create local strategy with passport
-  4. integrate passport with sockets
-x5. create an wikipedia web scrape app
-x6. homepage - styled
+Xcreate database and seed. make sure api works
+  create chat app using angular, passport and sockets
+  Xcreate local strategy with passport
+  integrate passport with sockets
+Xcreate an wikipedia web scrape app
+Xhomepage - styled
 
 7/14 ~ 7/17
-7. Finish auth with jwt
-8. Finish two player game
-9. ensure stats gets stored to db
+XFinish auth with jwt
+
+7/15
+fix sidebar list divider
+animate sidebar and init-view on ng-leave
+style ngbootbox
+add rankings page
+add user stats page
+get random category, then two random pages in that category
+
+7/16 ~ 7/17
+Finish two player game
+ensure stats gets stored to db
 
 7/18~7/19
-9. Create rankings and how to pages
-10. refactor
-11. debug heroku errors
+Create rankings and how to pages
+refactor
+debug heroku errors
+add tests
