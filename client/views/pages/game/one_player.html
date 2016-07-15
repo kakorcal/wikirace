@@ -22,7 +22,7 @@
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
       <md-content flex id='wiki-sidebar-list' scroll-glue>
         <md-list flex ng-class="vm.timerRunning ? 'wiki-playing' : 'wiki-paused'">
-          <div ng-repeat='article in vm.articles'>
+          <div id='wiki-repeat' ng-repeat='article in vm.articles'>
             <md-list-item class='noright' ng-click='vm.generateArticle(article.path)'>
               <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
               <div class="md-list-item-text" layout="column">

@@ -42,7 +42,6 @@
     vm.isWin = false;
 
     vm.startGame = function(){
-      console.log($window.localStorage.getItem('user'));
       $scope.$broadcast('timer-start');
       vm.timerRunning = true;
       vm.isPlaying = true;
@@ -85,13 +84,13 @@
       vm.time = 0;
       vm.points = 0;
       vm.articles = [];
-      vm.isWin = false;
       vm.first = null;
       vm.last = null;
       vm.title = null;
       vm.content = null;
       vm.styles = null;
       vm.thumbnail = null;
+      vm.isWin = false;
       Socket.emit('Setup One Player Game');
     };
 

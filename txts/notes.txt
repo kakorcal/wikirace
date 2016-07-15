@@ -60,11 +60,11 @@ Xhomepage - styled
 XFinish auth with jwt
 
 7/15
-fix sidebar list divider
+Xfix sidebar list divider
 animate sidebar and init-view on ng-leave
 style ngbootbox
-add rankings page
 add user stats page
+add rankings page
 get random category, then two random pages in that category
 
 7/16 ~ 7/17
