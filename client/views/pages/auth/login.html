@@ -1,19 +1,19 @@
 <div flex class='wiki-wrapper' layout='row' layout-align='center center'>
   <div class='wiki-view-wrapper'>
     <md-content layout-padding>
-      <form name="loginForm" novalidate>
+      <form name="loginForm" ng-submit='vm.onFormSubmit(vm.user)' novalidate>
         <md-input-container class='md-block'>
           <label for="username">Username:</label>
-          <input type="text" name='username' ng-model='username' required>
+          <input type="text" name='username' ng-model='vm.user.username' required>
           
           <!-- errors -->
-          <div ng-messages="loginForm.username.$error">
+          <div ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched" md-auto-hide="false">
             <div ng-message="required">Please Include A Username</div>
           </div>
         </md-input-container>
         <md-input-container class='md-block'>
           <label for="password">Password:</label>
-          <input type="password" name='password' ng-model='vm.password' required>
+          <input type="password" name='password' ng-model='vm.user.password' required>
 
           <!-- errors -->
           <div ng-messages="loginForm.password.$error">
@@ -22,7 +22,7 @@
         </md-input-container>
 
         <div layout='column'>
-          <md-button type='submit' class='md-raised md-accent'>LOGIN</md-button>
+          <md-button type='submit' ng-disabled='!loginForm.$valid' class='md-raised md-accent'>LOGIN</md-button>
         </div>
       </form>
     </md-content>
