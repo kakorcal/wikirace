@@ -29,8 +29,8 @@
     // END
   //***************************************************************************
 
-  OnePlayerGame.$inject = ['$scope', 'Socket', '$location', '$ngBootbox', '$anchorScroll'];
-  function OnePlayerGame($scope, Socket, $location, $ngBootbox, $anchorScroll){
+  OnePlayerGame.$inject = ['$scope', '$window', 'Socket', '$location', '$ngBootbox', '$anchorScroll'];
+  function OnePlayerGame($scope, $window, Socket, $location, $ngBootbox, $anchorScroll){
     let vm = this;
     vm.clicks = 0;
     vm.time = 0;
@@ -42,6 +42,7 @@
     vm.isWin = false;
 
     vm.startGame = function(){
+      console.log($window.localStorage.getItem('user'));
       $scope.$broadcast('timer-start');
       vm.timerRunning = true;
       vm.isPlaying = true;
