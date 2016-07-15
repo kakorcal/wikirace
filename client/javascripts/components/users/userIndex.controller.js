@@ -1,6 +1,6 @@
 (()=>{
-  anguler.module('userIndex.controller', [])
-    .controller('UserIndexController', UserIndexController)
+  angular.module('userIndex.controller', [])
+    .controller('UserIndexController', UserIndexController);
   
   UserIndexController.$inject = ['users'];
   function UserIndexController({data:users}){
