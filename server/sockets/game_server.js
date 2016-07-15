@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const rp = require('request-promise');
 const BASE_URL = 'https://en.wikipedia.org';
 const RANDOM_PAGE = '/wiki/Special:RandomInCategory/Featured_articles';
+const RANDOM_CATEGORY = '/wiki/';
 
 // TODO: find random category first. and within that category, select two articles
 

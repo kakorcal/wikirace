@@ -45,7 +45,11 @@
       })
       .when('/users', {
         templateUrl: 'views/pages/users/rankings.html',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        controller: 'UserIndexController',
+        resolve: {
+          users: getAllUsers
+        }
       })      
       .when('/users/:id', {
         templateUrl: 'views/pages/users/show.html',
@@ -71,12 +75,12 @@
     $httpProvider.interceptors.push('AuthInterceptor');
   }
 
-  angular.module('wikirace.routes').service('AuthInterceptor', AuthInterceptor);
   
   //***************************************************************************
-  // props to elie for the jwt example
+  // props to elie for the $httpProvider and jwt example
   // https://github.com/gSchool/angular-curriculum/tree/master/Unit-3/examples/auth_example
   //***************************************************************************
+  angular.module('wikirace.routes').service('AuthInterceptor', AuthInterceptor);
   AuthInterceptor.$inject = ['$window', '$location', '$q'];
   function AuthInterceptor($window, $location, $q){
     return {
@@ -84,8 +88,7 @@
         // prevent browser bar tampering for /api routes
         config.headers['X-Requested-With'] = 'XMLHttpRequest';
         var token = $window.localStorage.getItem("token");
-        if(token)
-          config.headers.Authorization = "Bearer " + token;
+        if(token) config.headers.Authorization = "Bearer " + token;
         return $q.resolve(config);
       },
       responseError: function(err){
@@ -105,10 +108,9 @@
   };
 
   angular.module('wikirace.routes').run(Authorize);
-
-  Authorize.$inject = ['$rootScope', '$location', '$window', 'UserService'];
-  function Authorize($rootScope, $location, $window, UserService) {
-    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+  Authorize.$inject = ['$rootScope', '$location', '$window'];
+  function Authorize($rootScope, $location, $window) {
+    $rootScope.$on('$routeChangeStart', (event, next, current)=>{
 
       // if you try access a restricted page without logging in
       if (next.restricted && !$window.localStorage.getItem("token")) {

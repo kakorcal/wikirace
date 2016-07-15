@@ -15,7 +15,8 @@
     'new_account.controller',
     'one_player.controller',
     'two_player.controller',
-    'userShow.controller'
+    'userShow.controller',
+    'userIndex.controller'
   ]);
 
   //***************************************************************************
