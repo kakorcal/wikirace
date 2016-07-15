@@ -67,7 +67,7 @@ exports.init = (io, socket)=>{
   // HELPERS
 //***************************************************************************
 function generateRandomTitle(path){
-  return rp({uri: `${BASE_URL}${path}`, transform: body=>cheerio.load(body)})
+  return rp({uri: `${BASE_URL}${RANDOM_PAGE}`, transform: body=>cheerio.load(body)})
     .then($=>{
       return $('#firstHeading').text();
     })

@@ -72,7 +72,7 @@ make game view transitions smoother
 Finish two player game
 ensure stats gets stored to db
 
-7/18~7/19
+7/18 ~ 7/19
 Create rankings and how to pages
 refactor
 debug heroku errors
