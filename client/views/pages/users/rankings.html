@@ -5,8 +5,8 @@
       <md-button class='md-raised' ng-class='vm.buttonOne' ng-click="vm.toggleGameType('oneplayer')">One Player</md-button>
       <md-button class='md-raised' ng-class='vm.buttonTwo' ng-click="vm.toggleGameType('twoplayer')">Two Player</md-button>
     </div>
-    <div class='wikiracer-rankings' ng-class="vm.gameType === 'oneplayer' ? 'showrank' : 'hiderank'">
-      <table class='table table-striped table-bordered table-fixed'>
+    <div class='wikiracer-rankings'>
+      <table ng-show="vm.gameType === 'oneplayer'" class='table table-striped table-bordered table-fixed'>
         <thead>
           <tr>
             <th>Rank</th>
@@ -28,10 +28,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <div class='wikiracer-rankings' ng-class="vm.gameType === 'twoplayer' ? 'showrank' : 'hiderank'">
-      <table class='table table-striped table-bordered table-fixed'>
+      <table ng-show="vm.gameType === 'twoplayer'" class='table table-striped table-bordered table-fixed'>
         <thead>
           <tr>
             <th>Rank</th>
