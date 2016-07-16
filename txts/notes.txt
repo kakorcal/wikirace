@@ -62,11 +62,12 @@ XFinish auth with jwt
 7/15
 Xfix sidebar list divider
 Xanimate sidebar and init-view on ng-leave
-style ngbootbox
+Xstyle ngbootbox
 add user stats page
 Xadd rankings page
 get random category, then two random pages in that category
 make game view transitions smoother
+Xdeploy to heroku with db and secret
 
 7/16 ~ 7/17
 Finish two player game

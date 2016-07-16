@@ -42,12 +42,12 @@ router.post('/new', (req, res)=>{
   knex('users').where({username: req.body.user.username}).first().then(user=>{
     if(user){
       // if user already exists
-      res.json({error: 'Username Already Exists'});
+      res.send({error: 'Username Already Exists'});
     }else{
       bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt)=>{
-        if(err) res.json({error: 'An Error Has Occurred In The Database'});
+        if(err) res.send({error: 'An Error Has Occurred In The Database'});
         bcrypt.hash(req.body.user.password, salt, (err, hash)=>{
-          if(err) res.json({error: 'An Error Has Occurred In The Database'});
+          if(err) res.send({error: 'An Error Has Occurred In The Database'});
           
           const credentials = _.assign(_.omit(req.body.user, 'password'), {
             password: hash,
@@ -61,42 +61,42 @@ router.post('/new', (req, res)=>{
             let newUser = data[0];
             let listedItems = {id: newUser.id, username: newUser.username};
             token = jwt.sign({id: newUser.id}, SECRET);
-            res.json({token, user: listedItems, success: 'Login Successful'});
+            res.send({token, user: listedItems, success: 'Login Successful'});
           }).catch(err=>{
-            res.json({error: 'An Error Has Occurred In The Database'});
+            res.send({error: 'An Error Has Occurred In The Database'});
           });
         });
       });
     }
   })
   .catch(err=>{
-    res.json({error: 'An Error Has Occurred In The Database'});
+    res.send({error: 'An Error Has Occurred In The Database'});
   });
 });
 
 router.post('/login', (req, res)=>{
   knex('users').where({username: req.body.user.username}).first().then(user=>{
     if(!user){
-      res.json({error: 'Invalid Credentials'});
+      res.send({error: 'Invalid Credentials'});
     }else{
       // check password
       bcrypt.compare(req.body.user.password, user.password, (err, isValid)=>{
-        if(err) res.json({error: 'An Error Has Occurred In The Database'});
+        if(err) res.send({error: 'An Error Has Occurred In The Database'});
         
         if(!isValid){
-          res.json({error: 'Invalid Credentials'})
+          res.send({error: 'Invalid Credentials'})
         }else{
           // password correct
           // create token
           let listedItems = {id: user.id, username: user.username};
           token = jwt.sign({id: user.id}, SECRET);
-          res.json({token, user: listedItems, success: 'Login Successful'});
+          res.send({token, user: listedItems, success: 'Login Successful'});
         }       
       });
     }
   })
   .catch(err=>{
-    res.json({error: 'An Error Has Occurred In The Database'});
+    res.send({error: 'An Error Has Occurred In The Database'});
   });
 });
 

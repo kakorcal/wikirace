@@ -7,6 +7,15 @@
   position: relative;
 }
 
+/* bootbox */
+.bootbox .modal-dialog .modal-content .modal-body {
+  font-size: 20px;
+}
+
+.bootbox .modal-dialog .modal-content .modal-footer button.btn{
+  font-size: 15px;
+}
+
 /* home.html */
 
 .wiki-view-wrapper {
