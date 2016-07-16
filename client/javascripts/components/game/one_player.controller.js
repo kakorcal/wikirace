@@ -79,21 +79,25 @@
     };
 
     vm.resetGame = function(){
-      // TODO: make transitions between views smoother
-      // maybe use $timeout
       $scope.$broadcast('timer-reset');
-      vm.isWin = false;
-      vm.clicks = 0;
-      vm.time = 0;
-      vm.points = 0;
-      vm.articles = [];
-      vm.first = null;
-      vm.last = null;
       vm.title = null;
       vm.content = null;
       vm.styles = null;
       vm.thumbnail = null;
-      Socket.emit('Setup One Player Game');
+      vm.first = null;
+      vm.last = null;
+
+      // this is janky but it makes the transition a little smoother
+      $timeout(()=>{
+        vm.articles = [];
+        vm.isWin = false;
+        $timeout(()=>{
+          vm.points = 0;
+          vm.clicks = 0;
+          vm.time = 0;
+          Socket.emit('Setup One Player Game');        
+        }, 100);
+      }, 100);
     };
 
     vm.quitGame = function(){
@@ -125,8 +129,8 @@
       vm.content = data.content;
       vm.styles = data.styles;
       vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
-      vm.isLoading = false;
       vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
+      vm.isLoading = false;
 
       if(data.text === vm.last) {
         $scope.$broadcast('timer-stop');

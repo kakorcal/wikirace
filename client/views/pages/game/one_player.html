@@ -42,13 +42,15 @@
   </md-sidenav>
   <md-content flex layout='column'>
     <md-toolbar layout-align='center center' id='wiki-path'>
-      <div class="md-toolbar-tools" ng-hide='!vm.isPlaying'>
+      <div class="md-toolbar-tools" ng-show='vm.isPlaying'>
         <h4>FROM: {{vm.first}} <i class="fa fa-arrow-right"></i> TO: {{vm.last}}</h4>
       </div>
     </md-toolbar>
     <md-content flex layout-padding id='wiki'>
       <div id='init-view' ng-hide='vm.isPlaying || vm.isWin'>
-        <h1 ng-class="vm.first && vm.last ? 'wiki-loading-finish' : 'wiki-loading-tween'">LOADING...</h1>
+        <div ng-hide='vm.first && vm.last'>
+          <h1 class='wiki-loading-tween'>LOADING....</h1>
+        </div>
         <div ng-show='vm.first && vm.last'>
           <h1>FROM: {{vm.first}}</h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
@@ -57,7 +59,7 @@
           <md-button ng-click='vm.changeArticles()' class='md-raised wiki-button'>CHANGE ARTICLES</md-button>    
         </div>
       </div>
-      <div id='loading-view' ng-hide='!vm.isLoading'>
+      <div id='loading-view' ng-show='vm.isLoading'>
         <h1 class='wiki-loading-tween'>LOADING...</h1>
       </div>
       <div id="victory-view" ng-show='vm.isWin'>

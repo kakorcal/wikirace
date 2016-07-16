@@ -267,10 +267,6 @@
   text-decoration: none;
 }
 
-.wiki-loading-finish {
-  display: none;
-}
-
 .wiki-loading-tween {
   animation-name: pulse;
   animation-duration: 500ms;
