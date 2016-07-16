@@ -15,6 +15,9 @@
   "bugs": {
     "url": "https://github.com/kakorcal/wikirace/issues"
   },
+  "engines": {
+    "node": "6.1.0"
+  },
   "homepage": "https://github.com/kakorcal/wikirace#readme",
   "dependencies": {
     "angular-jwt": "0.0.9",
