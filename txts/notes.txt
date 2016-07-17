@@ -69,18 +69,21 @@ Xdeploy to heroku with db and secret
 7/16
 Xmake game view transitions smoother
 Xget random category, then two random pages in that category
-ensure stats gets stored to db
 add user stats page
+add user edit page
+full crud on users
 
 7/17
+ensure stats gets stored to db after playing game
 Finish two player game
-adjust css. ensure its the same on heroku
+Xadjust css. ensure its the same on heroku
 
 7/18 ~ 7/19
 XCreate rankings pages
 Xdebug heroku errors
-add audio
+continue finishing two player game
 how to pages
+add audio
 screencast
 update readme
 refactor

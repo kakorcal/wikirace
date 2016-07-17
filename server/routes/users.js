@@ -110,16 +110,55 @@ router.get('/users', (req, res)=>{
 });
 
 router.get('/users/:id', checkToken, (req, res)=>{
-  knex('users').where('id', req.decoded_id).first().then(user=>{
-    delete user.password;
-    res.send(user);
-  }).catch(err=>{
-    res.send(err);
-  });
+  // TODO: refactor database to account for rank column instead of using sort. temporary hack
+  knex.select(['u.id', 'u.username', 'u.thumbnail_url', 'u.1p_score', 'u.2p_score'])
+    .from('users as u').then(users=>{
+      let user = users.find(user=>user.id === req.decoded_id);
+
+      user.oneplayer_rank = [...users].sort((a, b)=>{
+        return b['1p_score'] - a['1p_score'];
+      }).reduce((acc, cur, idx)=>{
+        if(cur.id === req.decoded_id) acc = idx + 1;
+        return acc;
+      }, -1);
+ 
+      user.twoplayer_rank = [...users].sort((a, b)=>{
+        return b['2p_score'] - a['2p_score'];
+      }).reduce((acc, cur, idx)=>{
+        if(cur.id === req.decoded_id) acc = idx + 1;
+        return acc;
+      }, -1);
+      
+      knex('scores').where('user_id', req.decoded_id).then(scores=>{
+        user.oneplayer_wins = 0;
+        user.oneplayer_loses = 0;
+        user.twoplayer_wins = 0;
+        user.twoplayer_loses = 0;
+
+        scores.forEach(score=>{
+          if(score.game_type === '1'){
+            if(score.result === 'win'){
+              user.oneplayer_wins++;
+            }else{
+              user.oneplayer_loses++;
+            }
+          }else{
+            if(score.result === 'win'){
+              user.twoplayer_wins++;
+            }else{
+              user.twoplayer_loses++;
+            }
+          }
+        });
+        
+        res.send(user);
+      });
+    });
 });
 
 router.put('/users/:id', checkToken, (req, res)=>{
-  knex('users').where('id', +req.params.id).update(req.body.user).then(()=>{
+  // TODO: Users should be able to change their password
+  knex('users').where('id', req.decoded_id).update(req.body.user).then(()=>{
     res.send('Update Successful');
   }).catch(err=>{
     res.send(err);
@@ -127,7 +166,7 @@ router.put('/users/:id', checkToken, (req, res)=>{
 });
 
 router.delete('/users/:id', checkToken, (req, res)=>{
-  knex('users').where('id', +req.params.id).del().then(()=>{
+  knex('users').where('id', req.decoded_id).del().then(()=>{
     res.send('Delete Successful');
   }).catch(err=>{
     res.send(err);

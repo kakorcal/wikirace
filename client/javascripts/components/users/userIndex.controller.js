@@ -17,18 +17,18 @@
     // TODO: not elegant solution. find better one.
 
     vm.gameType = 'oneplayer';
-    vm.buttonOne = 'md-warn md-hue-1';
-    vm.buttonTwo = '';
+    vm.buttonOne = 'md-primary md-hue-3';
+    vm.buttonTwo = null;
 
     vm.toggleGameType = function(type){
       if(type === 'oneplayer'){
         vm.gameType = 'oneplayer';
-        vm.buttonOne = 'md-warn md-hue-1';
-        vm.buttonTwo = '';
+        vm.buttonOne = 'md-primary md-hue-3';
+        vm.buttonTwo = null;
       }else{
         vm.gameType = 'twoplayer';
         vm.buttonTwo = 'md-warn md-hue-1';
-        vm.buttonOne = '';
+        vm.buttonOne = null;
       }
     }
 

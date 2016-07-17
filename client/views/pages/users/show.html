@@ -2,8 +2,8 @@
   <div class="wiki-view-wrapper">
     <div class='wikiracer-nav'>
       <strong>Your Profile: </strong>
-      <md-button class='md-raised md-primary md-hue-3' ng-click="vm.editProfile()">Edit</md-button>
-      <md-button class='md-raised md-warn md-hue-1' ng-click="vm.deleteProfile()">Delete</md-button>
+      <md-button class='md-raised' ng-class='vm.buttonOne' ng-click="vm.toggleGameType('oneplayer')">One Player</md-button>
+      <md-button class='md-raised' ng-class='vm.buttonTwo' ng-click="vm.toggleGameType('twoplayer')">Two Player</md-button>
     </div>
     <div class='wikiracer-stats'>
       <table class='table table-striped table-bordered table-fixed'>
@@ -16,26 +16,26 @@
         <tbody>       
           <tr>
             <th>Rank</th>
-            <td>foo</td>
+            <td>{{vm.rank}}</td>
           </tr>
           <tr>
             <th>Wins</th>
-            <td>foo</td>
+            <td>{{vm.wins}}</td>
           </tr>
           <tr>
             <th>Loses</th>
-            <td>foo</td>
+            <td>{{vm.loses}}</td>
           </tr>
           <tr>
-            <th>1 Player</th>
-            <td>foo</td>
-          </tr>
-          <tr>
-            <th>2 Player</th>
-            <td>foo</td>
+            <th>Score</th>
+            <td>{{vm.score}}</td>
           </tr>
         </tbody>
       </table>
+      <div class='wikiracer-nav wiki-profile-crud'>
+        <md-button class='md-raised md-primary md-hue-3' ng-click="vm.editProfile()">Edit</md-button>
+        <md-button class='md-raised md-warn md-hue-1' ng-click="vm.deleteProfile()">Delete</md-button>
+      </div>
     </div>
   </div>
   <wiki-nav></wiki-nav>
