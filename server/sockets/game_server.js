@@ -1,10 +1,25 @@
 'use strict';
 const cheerio = require('cheerio');
 const rp = require('request-promise');
+const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
-const RANDOM_PAGE = '/wiki/Special:RandomInCategory/Featured_articles';
+const WIKILIST = '/wiki/Wikipedia:WikiProject_';
 
+// const RANDOM_PAGE = '/wiki/Special:RandomInCategory/Featured_articles';
 // TODO: find random category first. and within that category, select two articles
+// get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
+// pick a random category and attach to '/wiki/Special:RandomInCategory/${RANDOM}'
+// if the resulting page is a category page, do the special random search again
+  // example:
+  // start from https://en.wikipedia.org/wiki/Special:RandomInCategory/Companies
+  // this results in https://en.wikipedia.org/wiki/Category:Companies_by_region
+  // so do another search with https://en.wikipedia.org/wiki/Special:RandomInCategory/Companies_by_region
+  // keep going until the query does not include ':'
+// if the resulting path starts with 'List'
+// if the query leads to an article, take out the # if it exists
+
+// another approach:
+// start from a specific page to a general page
 
 exports.init = (io, socket)=>{
   console.log('CLIENT HANDSHAKE');
@@ -13,11 +28,17 @@ exports.init = (io, socket)=>{
   //***************************************************************************
   socket.on('Setup One Player Game', ()=>{
     // get two random articles
-    Promise.all([generateRandomTitle('/wiki/Alaska'), generateRandomTitle('/wiki/Yukon')]).then(titles=>{
-      socket.emit('Receive Titles', titles);
-    }).catch(err=>{
-      socket.emit('Error', 'Failed To Retrieve Data');
-    });
+    Promise.all([generateRandomTopic(), generateRandomTopic()])
+      .then(topics=>{
+        let titles = helpers.findUniqueTopics(topics[0], topics[1]);
+        return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
+      })
+      .then(titles=>{
+        socket.emit('Receive Titles', titles);
+      })
+      .catch(err=>{
+        socket.emit('Error', 'Failed To Retrieve Data');
+      });
   });
   //***************************************************************************
     // END
@@ -66,14 +87,30 @@ exports.init = (io, socket)=>{
 //***************************************************************************
   // HELPERS
 //***************************************************************************
-function generateRandomTitle(){
-  return rp({uri: `${BASE_URL}${RANDOM_PAGE}`, transform: body=>cheerio.load(body)})
+
+function generateTitle(PATH){
+  return rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})
     .then($=>{
       return $('#firstHeading').text();
     })
     .catch(err=>{
       return err;
     });
+}
+
+function generateRandomTopic(){
+  let uri = `${BASE_URL}${WIKILIST}${helpers.getRandomElement(helpers.topics())}/Popular_pages`;
+  return rp({uri, transform: body=>cheerio.load(body)})
+    .then($=>{
+      let paths = $('.wikitable tr td:nth-child(2)').map((idx, elem)=>{
+        return elem.children[0].attribs.href;
+      }).get();
+
+      return paths.length > 100 ? paths.slice(0, 100) : paths;
+    })
+    .catch(err=>{
+      return err;
+    });  
 }
 
 // TODO: this does not work for this case: //species.wikimedia.org/wiki/Sitta_przewalskii

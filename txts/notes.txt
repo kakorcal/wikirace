@@ -67,18 +67,18 @@ Xadd rankings page
 Xdeploy to heroku with db and secret
 
 7/16 ~ 7/17
-make game view transitions smoother
-add user stats page
+Xmake game view transitions smoother
 get random category, then two random pages in that category
 ensure stats gets stored to db
-Finish two player game
+add user stats page
 adjust css. ensure its the same on heroku
+Finish two player game
 
 7/18 ~ 7/19
 XCreate rankings pages
+Xdebug heroku errors
 how to pages
 screencast
 update readme
 refactor
-debug heroku errors
 add tests
