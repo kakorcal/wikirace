@@ -16,7 +16,7 @@
           <input type="password" name='password' ng-model='vm.user.password' required>
 
           <!-- errors -->
-          <div ng-messages="loginForm.password.$error">
+          <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
             <div ng-message="required">Please Include A Password</div>
           </div>
         </md-input-container>
