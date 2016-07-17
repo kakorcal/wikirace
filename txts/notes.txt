@@ -66,17 +66,20 @@ Xstyle ngbootbox
 Xadd rankings page
 Xdeploy to heroku with db and secret
 
-7/16 ~ 7/17
+7/16
 Xmake game view transitions smoother
-get random category, then two random pages in that category
+Xget random category, then two random pages in that category
 ensure stats gets stored to db
 add user stats page
-adjust css. ensure its the same on heroku
+
+7/17
 Finish two player game
+adjust css. ensure its the same on heroku
 
 7/18 ~ 7/19
 XCreate rankings pages
 Xdebug heroku errors
+add audio
 how to pages
 screencast
 update readme
