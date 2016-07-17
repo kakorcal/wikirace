@@ -5,21 +5,18 @@ const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
 
-// const RANDOM_PAGE = '/wiki/Special:RandomInCategory/Featured_articles';
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
 // pick a random category and attach to '/wiki/Special:RandomInCategory/${RANDOM}'
 // if the resulting page is a category page, do the special random search again
   // example:
+  // const RANDOM_PAGE = '/wiki/Special:RandomInCategory/Featured_articles';
   // start from https://en.wikipedia.org/wiki/Special:RandomInCategory/Companies
   // this results in https://en.wikipedia.org/wiki/Category:Companies_by_region
   // so do another search with https://en.wikipedia.org/wiki/Special:RandomInCategory/Companies_by_region
   // keep going until the query does not include ':'
 // if the resulting path starts with 'List'
 // if the query leads to an article, take out the # if it exists
-
-// another approach:
-// start from a specific page to a general page
 
 exports.init = (io, socket)=>{
   console.log('CLIENT HANDSHAKE');
@@ -106,7 +103,7 @@ function generateRandomTopic(){
         return elem.children[0].attribs.href;
       }).get();
 
-      return paths.length > 100 ? paths.slice(0, 100) : paths;
+      return paths.length > 50 ? paths.slice(0, 50) : paths;
     })
     .catch(err=>{
       return err;
