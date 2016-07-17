@@ -1,28 +1,28 @@
 <div flex class='wiki-wrapper' layout='row' layout-align='center center'>
   <div class='wiki-view-wrapper'>
     <md-content layout-padding>
-      <form name="loginForm" ng-submit='vm.onFormSubmit(vm.user)' novalidate>
+      <form name="editForm" ng-submit='vm.onFormSubmit(vm.user)' novalidate>
         <md-input-container class='md-block'>
           <label for="username">Username:</label>
-          <input type="text" name='username' ng-model='vm.user.username' required>
+          <input type="text" name='username' ng-model='vm.user.username'>
           
           <!-- errors -->
-          <div ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched" md-auto-hide="false">
+          <div ng-messages="editForm.username.$error" ng-if="editForm.username.$touched" md-auto-hide="false">
             <div ng-message="required">Please Include A Username</div>
           </div>
         </md-input-container>
         <md-input-container class='md-block'>
-          <label for="password">Password:</label>
-          <input type="password" name='password' ng-model='vm.user.password' required>
+          <label for="thumbnail">Thumbnail:</label>
+          <input type="thumbnail" name='thumbnail' ng-model='vm.user.thumbnail_url' required>
 
           <!-- errors -->
-          <div ng-messages="loginForm.password.$error">
-            <div ng-message="required">Please Include A Password</div>
+          <div ng-messages="editForm.thumbnail.$error">
+            <div ng-message="required">Please Include A Thumbnail</div>
           </div>
         </md-input-container>
 
         <div layout='column'>
-          <md-button type='submit' ng-disabled='!loginForm.$valid' class='md-raised md-accent'>LOGIN</md-button>
+          <md-button type='submit' ng-disabled='!editForm.$valid' class='md-raised md-accent'>Edit</md-button>
         </div>
       </form>
     </md-content>

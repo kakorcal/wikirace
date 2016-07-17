@@ -61,7 +61,7 @@
         }
       })
       .when('/users/:id/edit', {
-        templateUrl: 'view/pages/users/edit.html',
+        templateUrl: 'views/pages/users/edit.html',
         controllerAs: 'vm',
         controller: 'UserEditController'
       })

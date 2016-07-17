@@ -2,14 +2,31 @@
   angular.module('userShow.controller', [])
     .controller('UserShowController', UserShowController);
   
-  UserShowController.$inject = ['user', 'UserService', '$location'];
-  function UserShowController({data:user}, UserService, $location){
+  UserShowController.$inject = ['user', 'UserService', '$location', '$ngBootbox'];
+  function UserShowController({data:user}, UserService, $location, $ngBootbox){
     let vm = this;
     vm.user = user;
     vm.rank = user.oneplayer_rank;
     vm.wins = user.oneplayer_wins;
     vm.loses = user.oneplayer_loses;
     vm.score = user['1p_score'];
+
+    vm.editProfile = function(){
+      $location.path(`/users/${user.id}/edit`);
+    };
+
+    vm.deleteProfile = function(user){
+      $ngBootbox.confirm('Are You Sure? You Cannot Undo This.').then(()=>{
+        UserService.deleteUser(user).then(()=>{
+          UserService.logout();
+          $location.path('/');
+        }).catch(err=>{
+          $ngBootbox.alert('Unknown Error').then(()=>{
+            console.log(err);
+          });
+        });
+      });
+    }
 
     // TODO: not elegant solution. find better one.
     vm.gameType = 'oneplayer';

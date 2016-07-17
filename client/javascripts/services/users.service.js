@@ -46,8 +46,8 @@
       return $http.put(`${USER_URL}/${data.user.id}`, data);
     };
 
-    this.deleteUser = function(id){
-      return $http.delete(`${USER_URL}/${id}`);
+    this.deleteUser = function(user){
+      return $http.delete(`${USER_URL}/${user.id}`);
     }
   }
 })();
