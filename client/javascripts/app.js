@@ -16,7 +16,8 @@
     'one_player.controller',
     'two_player.controller',
     'userShow.controller',
-    'userIndex.controller'
+    'userIndex.controller',
+    'userEdit.controller'
   ]);
 
   //***************************************************************************

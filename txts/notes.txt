@@ -69,7 +69,7 @@ Xdeploy to heroku with db and secret
 7/16
 Xmake game view transitions smoother
 Xget random category, then two random pages in that category
-add user stats page
+Xadd user stats page
 add user edit page
 full crud on users
 
