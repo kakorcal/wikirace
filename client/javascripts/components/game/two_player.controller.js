@@ -34,6 +34,7 @@
     // For two players, the option to pause the game doesn't exist so vm.time is same for both
     let vm = this;
     vm.players = [];
+    vm.extraTitles = null;
     vm.time = 0;
     vm.timerRunning = false;
     vm.gameType = '2';
@@ -57,10 +58,19 @@
 
     Socket.on('Ready To Play', ids=>{
       vm.players = [new Player(ids[0]), new Player(ids[1])];
+      Socket.emit('Load Game');
     });
 
     Socket.on('Not Ready', ids=>{
       vm.players = null;
+    });
+
+    Socket.on('Receive Titles', titles=>{
+      if(!vm.extraTitles){
+        vm.extraTitles = titles;
+      }else{
+        [vm.first, vm.last] = titles;
+      }
     });
 
     Socket.on('Room Full', ()=>{

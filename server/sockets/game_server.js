@@ -4,6 +4,8 @@ const rp = require('request-promise');
 const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
+
+// two player vars
 let gametype = null;
 let players = [];
 
@@ -69,6 +71,24 @@ exports.init = (io, socket)=>{
       socket.emit('Not Ready');
     }
   }); 
+
+  socket.on('Load Game', ()=>{
+    // TODO: should refactor this into a function
+    Promise.all([generateRandomTopic(), generateRandomTopic()])
+      .then(topics=>{
+        let titles = helpers.replaceInvalidTopics(
+            helpers.findUniqueTopics(topics[0], topics[1])
+          );
+        return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
+      })
+      .then(titles=>{
+        console.log(titles);
+        io.to('Wiki Room').emit('Receive Titles', titles);  
+      })
+      .catch(err=>{
+        socket.emit('Error', 'Failed To Retrieve Data');
+      });
+  });
 
   //***************************************************************************
     // END
