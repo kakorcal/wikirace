@@ -34,11 +34,15 @@
     // For two players, the option to pause the game doesn't exist so vm.time is same for both
     let vm = this;
     vm.players = [];
-    vm.countdown = 10;
-    vm.time = 0;
-    vm.timerRunning = false;
+    vm.articles = [];
     vm.extraTitles = null;
+    vm.countdown = 3;
+    vm.time = 0;
     vm.gameType = '2';
+    vm.timerRunning = false;
+    vm.isPlaying = false;
+    vm.isLoading = false;
+    vm.isWin = false;
 
     vm.quitGame = function(){
       $ngBootbox.confirm('Are You Sure?').then(()=>{
@@ -46,6 +50,23 @@
         $location.path('/play');
       });
     };
+
+    vm.onHashClick = function(hash){
+      let old = $location.hash();
+      $location.hash(hash);
+      $anchorScroll();
+      $location.hash(old);
+    };
+
+    vm.generateArticle = function(path){
+      vm.clicks++;
+      vm.isLoading = true;
+      Socket.emit('Generate Article', path);
+    };
+
+    $scope.$on('timer-stopped', (e, time)=>{
+      vm.time = (time.minutes * 60) + time.seconds;
+    });
 
     Socket.connect().emit('Setup Two Player Game');
 
@@ -78,11 +99,37 @@
           vm.countdown--;
           if(vm.countdown === 0){
             $interval.cancel(timer);
+            Socket.emit('Start Game');
           }
         }, 1000);
       }
+    });
 
-    }); 
+    Socket.on('Load First Article', ()=>{
+      $scope.$broadcast('timer-start');
+      vm.timerRunning = true;
+      vm.isPlaying = true;
+      vm.isLoading = true;
+      Socket.emit('Generate Article', `/wiki/${vm.first}`);
+    });
+
+    Socket.on('Receive Article', data=>{
+      console.log('Receive Article');
+      vm.title = data.title;
+      vm.content = data.content;
+      vm.styles = data.styles;
+      vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
+      vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
+      vm.isLoading = false;
+
+      if(data.text === vm.last) {
+        $scope.$broadcast('timer-stop');
+        vm.timerRunning = false;
+        vm.isPlaying = false;
+        vm.isWin = true;
+        Socket.emit('Game Finished');
+      }
+    });
 
     Socket.on('Room Full', ()=>{
       $ngBootbox.alert('Sorry :( please try again at another time').then(()=>{
