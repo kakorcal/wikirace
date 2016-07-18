@@ -51,8 +51,16 @@
       Socket.emit('Check Game Status');
     });
 
+    Socket.on('Player Leave', ()=>{
+      Socket.emit('Check Game Status');
+    });
+
     Socket.on('Ready To Play', ids=>{
-      vm.players.push(new Player(ids[0]), new Player(ids[1]));
+      vm.players = [new Player(ids[0]), new Player(ids[1])];
+    });
+
+    Socket.on('Not Ready', ids=>{
+      vm.players = null;
     });
 
     Socket.on('Room Full', ()=>{
