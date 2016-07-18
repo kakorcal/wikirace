@@ -34,7 +34,6 @@
     // For two players, the option to pause the game doesn't exist so vm.time is same for both
     let vm = this;
     // vm.currentUser = UserService.getCurrentUser();
-    vm.player1 = null;
 
     vm.player1 = new Player(vm);
     vm.player2 = new Player(vm);
@@ -164,7 +163,7 @@
         }).catch(err=>{
           $ngBootbox.alert('An Error Has Occurred', ()=>{
             console.log(err);
-          })
+          });
         });
       }
     });

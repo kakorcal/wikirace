@@ -35,8 +35,7 @@ exports.init = (io, socket)=>{
         return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
       })
       .then(titles=>{
-        let arr = ['Alaska', 'Yukon']
-        socket.emit('Receive Titles', arr);
+        socket.emit('Receive Titles', titles);
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
