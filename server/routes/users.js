@@ -190,7 +190,30 @@ router.delete('/users/:id', checkToken, (req, res)=>{
 
 // GAME STATS
 router.post('/users/:id', checkToken, (req, res)=>{
-  
+  // add score, then path, then add total to users
+  knex('scores').insert(req.body.user.score).returning('id')
+    .then(id=>{
+      return knex('paths').insert({score_id: id[0], path: req.body.user.path});
+    })
+    .then(()=>{
+      return knex.select(['u.1p_score', 'u.2p_score']).from('users as u').where('id', req.decoded_id).first();
+    })
+    .then(total=>{
+      total['1p_score'] = +total['1p_score'];
+      total['2p_score'] = +total['2p_score'];
+      if(req.body.user.score.game_type === '1'){
+        total['1p_score'] += req.body.user.score.points;
+      }else{
+        total['2p_score'] += req.body.user.score.points;
+      }
+      return knex('users').where('id', req.decoded_id).update(total);
+    })
+    .then(()=>{
+      res.send('Added Score To Database');
+    })
+    .catch(err=>{
+      res.send(err);
+    });
 });
 
 module.exports = router;

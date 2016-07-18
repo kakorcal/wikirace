@@ -149,7 +149,7 @@
       console.log('Evaluate Score');
       if(vm.isWin){
         if(vm.time > 5){
-          vm.points = (1000 - (vm.time * (vm.clicks / 4)));
+          vm.points = Math.floor((1000 - (vm.time * (vm.clicks / 4))));
           if(vm.points < 0) vm.points = 0;
         }else{
           vm.points = 1000;
@@ -160,8 +160,13 @@
 
       if(vm.currentUser){
         // add score to db
-        let stats = new Stat(vm);
-        console.log(stats);
+        UserService.addScore({user: new Stat(vm)}).then(({data})=>{
+          console.log(data);
+        }).catch(err=>{
+          $ngBootbox.alert('An Error Has Occurred', ()=>{
+            console.log(err);
+          })
+        });
       }
     });
 
@@ -177,12 +182,16 @@
   }
 
   function Stat(vm){
-    this.user = vm.currentUser;
-    this.points = vm.points;
-    this.clicks = vm.clicks;
-    this.time = vm.time;
-    this.game_type = vm.gameType;
-    this.result = vm.point ? 'win' : 'lose';
+    this.username = vm.currentUser.username;
+    this.id = vm.currentUser.id;
     this.path = vm.articles.map(article => article.title).join(' -> ');
+    this.score = {
+      user_id: vm.currentUser.id,
+      points: vm.points,
+      time: vm.time,
+      clicks: vm.clicks,
+      game_type: vm.gameType,
+      result: vm.points ? 'win' : 'lose'
+    };
   }
 })();

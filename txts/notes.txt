@@ -74,9 +74,9 @@ Xadd user edit page
 Xfull crud on users almost
 
 7/17
-ensure stats gets stored to db after playing game
-Finish two player game
+Xensure stats gets stored to db after playing game for one player
 Xadjust css. ensure its the same on heroku
+Finish two player game
 
 7/18 ~ 7/19
 XCreate rankings pages
