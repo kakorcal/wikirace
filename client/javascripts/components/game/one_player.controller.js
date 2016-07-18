@@ -160,9 +160,8 @@
 
       if(vm.currentUser){
         // add score to db
-        // console.log('user exists');
-      }else{
-        // console.log('guest');
+        let stats = new Stat(vm);
+        console.log(stats);
       }
     });
 
@@ -175,5 +174,15 @@
     $scope.$on('$locationChangeStart', e=>{
       Socket.disconnect(true);
     });
+  }
+
+  function Stat(vm){
+    this.user = vm.currentUser;
+    this.points = vm.points;
+    this.clicks = vm.clicks;
+    this.time = vm.time;
+    this.game_type = vm.gameType;
+    this.result = vm.point ? 'win' : 'lose';
+    this.path = vm.articles.map(article => article.title).join(' -> ');
   }
 })();
