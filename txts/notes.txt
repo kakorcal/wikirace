@@ -71,7 +71,7 @@ Xmake game view transitions smoother
 Xget random category, then two random pages in that category
 Xadd user stats page
 Xadd user edit page
-full crud on users **almost
+Xfull crud on users almost
 
 7/17
 ensure stats gets stored to db after playing game

@@ -194,6 +194,14 @@
   line-height: normal;
 }
 
+#wiki-hints a {
+  text-decoration: underline;
+}
+
+#wiki-hints a:visited {
+  color: white;
+}
+
 #init-view, #loading-view, #victory-view {
   position: absolute;
   left: 0;
