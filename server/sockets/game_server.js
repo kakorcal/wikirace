@@ -27,10 +27,14 @@ exports.init = (io, socket)=>{
     // get two random articles
     Promise.all([generateRandomTopic(), generateRandomTopic()])
       .then(topics=>{
-        let titles = helpers.findUniqueTopics(topics[0], topics[1]);
+        let titles = helpers.replaceInvalidTopics(
+            helpers.findUniqueTopics(topics[0], topics[1])
+          );
+        console.log(titles);
         return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
       })
       .then(titles=>{
+        console.log(titles);
         socket.emit('Receive Titles', titles);
       })
       .catch(err=>{
@@ -86,6 +90,7 @@ exports.init = (io, socket)=>{
 //***************************************************************************
 
 function generateTitle(PATH){
+  console.log('PATH: ', PATH);
   return rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})
     .then($=>{
       return $('#firstHeading').text();
@@ -97,16 +102,17 @@ function generateTitle(PATH){
 
 function generateRandomTopic(){
   let uri = `${BASE_URL}${WIKILIST}${helpers.getRandomElement(helpers.topics())}/Popular_pages`;
+  console.log(uri);
   return rp({uri, transform: body=>cheerio.load(body)})
     .then($=>{
       let paths = $('.wikitable tr td:nth-child(2)').map((idx, elem)=>{
         return elem.children[0].attribs.href;
       }).get();
 
-      return paths.length > 50 ? paths.slice(0, 50) : paths;
+      return paths.length > 30 ? paths.slice(0, 30) : paths;
     })
     .catch(err=>{
-      return err;
+      return err
     });  
 }
 

@@ -11,11 +11,16 @@ module.exports = {
       return this.findUniqueTopics(arr1, arr2);
     }
   },
+  replaceInvalidTopics(arr){
+    return arr.map(cur=>{
+      if(!cur) cur = '/wiki/JavaScript';
+      return cur;
+    });
+  },
   topics(){
+    // link: https://en.wikipedia.org/wiki/Wikipedia:Lists_of_popular_pages_by_WikiProject
     // skipping href that links to inappropriate or inapplicable topics
     return [
-      'Version_0.7',
-      'Vital_articles',
       'Academic_Journals',
       'Actors_and_Filmmakers',
       'Albums',
@@ -29,9 +34,9 @@ module.exports = {
       'Astronomical_objects',
       'Athletics',
       'Automobiles',
-      'Beer/Most_viewed_beer_related_pages',
       'Bible',
       'Bivalves',
+      'Boxing',
       'Brands',
       'Buddhism',
       'Business',
@@ -71,11 +76,13 @@ module.exports = {
       'History',
       'Human_rights',
       'Investment',
+      'Islands',
       'Isotopes',
       'Judaism',
       'Islam',
       'Marketing_%26_Advertising',
       'Mathematics',
+      'Mammals',
       'Michael_Jackson',
       'Military_history',
       'Military_history/American_Civil_War_task_force',
@@ -89,6 +96,7 @@ module.exports = {
       'Philosophy',
       'Philosophy/Ancient',
       'Philosophy/Eastern',
+      'Philosophy/Religion',
       'Physics',
       'Plants',
       'Primates',
