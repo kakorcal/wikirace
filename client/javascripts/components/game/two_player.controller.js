@@ -29,14 +29,15 @@
     // END
   //***************************************************************************
 
-  TwoPlayerGame.$inject = ['$scope', '$window', '$timeout', '$location', '$ngBootbox', '$anchorScroll', 'Socket', 'UserService'];
-  function TwoPlayerGame($scope, $window, $timeout, $location, $ngBootbox, $anchorScroll, Socket, UserService){
+  TwoPlayerGame.$inject = ['$scope', '$window', '$timeout', '$interval', '$location', '$ngBootbox', '$anchorScroll', 'Socket', 'UserService'];
+  function TwoPlayerGame($scope, $window, $timeout, $interval, $location, $ngBootbox, $anchorScroll, Socket, UserService){
     // For two players, the option to pause the game doesn't exist so vm.time is same for both
     let vm = this;
     vm.players = [];
-    vm.extraTitles = null;
+    vm.countdown = 10;
     vm.time = 0;
     vm.timerRunning = false;
+    vm.extraTitles = null;
     vm.gameType = '2';
 
     vm.quitGame = function(){
@@ -66,12 +67,22 @@
     });
 
     Socket.on('Receive Titles', titles=>{
+      // since two people are emitting load game, extra titles get received from the server.
+      // so only set vm.first and vm.last to titles if the extra titles were received.
       if(!vm.extraTitles){
         vm.extraTitles = titles;
       }else{
         [vm.first, vm.last] = titles;
+
+        let timer = $interval(()=>{
+          vm.countdown--;
+          if(vm.countdown === 0){
+            $interval.cancel(timer);
+          }
+        }, 1000);
       }
-    });
+
+    }); 
 
     Socket.on('Room Full', ()=>{
       $ngBootbox.alert('Sorry :( please try again at another time').then(()=>{

@@ -160,7 +160,7 @@ function generateRandomTopic(){
         return elem.children[0].attribs.href;
       }).get();
 
-      return paths.length > 30 ? paths.slice(0, 30) : paths;
+      return paths.length > 20 ? paths.slice(0, 20) : paths;
     })
     .catch(err=>{
       return err
