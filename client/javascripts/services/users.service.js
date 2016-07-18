@@ -49,5 +49,9 @@
     this.deleteUser = function(id){
       return $http.delete(`${USER_URL}/${id}`);
     };
+
+    this.addScore = function(data){
+      return $http.post(`${USER_URL}/${data.user.id}`, data);
+    }
   }
 })();

@@ -29,9 +29,10 @@
     // END
   //***************************************************************************
 
-  OnePlayerGame.$inject = ['$scope', '$window', '$timeout','Socket', '$location', '$ngBootbox', '$anchorScroll'];
-  function OnePlayerGame($scope, $window, $timeout, Socket, $location, $ngBootbox, $anchorScroll){
+  OnePlayerGame.$inject = ['$scope', '$window', '$timeout', '$location', '$ngBootbox', '$anchorScroll', 'Socket', 'UserService'];
+  function OnePlayerGame($scope, $window, $timeout, $location, $ngBootbox, $anchorScroll, Socket, UserService){
     let vm = this;
+    vm.currentUser = UserService.getCurrentUser();
     vm.clicks = 0;
     vm.time = 0;
     vm.points = 0;
@@ -40,6 +41,7 @@
     vm.isPlaying = false;
     vm.isLoading = false;
     vm.isWin = false;
+    vm.gameType = '1';
 
     vm.startGame = function(){
       $scope.$broadcast('timer-start');
@@ -102,7 +104,7 @@
 
     vm.quitGame = function(){
       $ngBootbox.confirm('Are You Sure?').then(()=>{
-        Socket.disconnect(true);
+        Socket.removeAllListeners();
         $location.path('/play');
       });
     };
@@ -121,10 +123,12 @@
     Socket.connect().emit('Setup One Player Game');
 
     Socket.on('Receive Titles', titles=>{
+      console.log('Receive Titles');
       [vm.first, vm.last] = titles;
     });
 
     Socket.on('Receive Article', data=>{
+      console.log('Receive Article');
       vm.title = data.title;
       vm.content = data.content;
       vm.styles = data.styles;
@@ -137,16 +141,28 @@
         vm.timerRunning = false;
         vm.isPlaying = false;
         vm.isWin = true;
-        Socket.emit('Player Win');
+        Socket.emit('Game Finished');
       }
     });
 
-    Socket.on('Finish Game', ()=>{
-      if(vm.time > 5){
-        vm.points = (1000 - (vm.time * (vm.clicks / 4)));
-        if(vm.points < 0) vm.points = 0;
+    Socket.on('Evaluate Score', ()=>{
+      console.log('Evaluate Score');
+      if(vm.isWin){
+        if(vm.time > 5){
+          vm.points = (1000 - (vm.time * (vm.clicks / 4)));
+          if(vm.points < 0) vm.points = 0;
+        }else{
+          vm.points = 1000;
+        }
       }else{
-        vm.points = 1000;
+        vm.points = 0;
+      }
+
+      if(vm.currentUser){
+        // add score to db
+        // console.log('user exists');
+      }else{
+        // console.log('guest');
       }
     });
 

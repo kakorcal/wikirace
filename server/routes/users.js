@@ -188,4 +188,9 @@ router.delete('/users/:id', checkToken, (req, res)=>{
   });
 });
 
+// GAME STATS
+router.post('/users/:id', checkToken, (req, res)=>{
+  
+});
+
 module.exports = router;

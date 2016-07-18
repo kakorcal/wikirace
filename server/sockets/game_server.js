@@ -30,12 +30,11 @@ exports.init = (io, socket)=>{
         let titles = helpers.replaceInvalidTopics(
             helpers.findUniqueTopics(topics[0], topics[1])
           );
-        console.log(titles);
         return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
       })
       .then(titles=>{
-        console.log(titles);
-        socket.emit('Receive Titles', titles);
+        let arr = ['Alaska', 'Yukon']
+        socket.emit('Receive Titles', arr);
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
@@ -44,7 +43,13 @@ exports.init = (io, socket)=>{
   //***************************************************************************
     // END
   //***************************************************************************
+  //***************************************************************************
+    // TWO PLAYER
+  //***************************************************************************
 
+  //***************************************************************************
+    // END
+  //***************************************************************************
   socket.on('Generate Article', PATH=>{
     let title, text, content, thumbnail, linkTags, styles, path = PATH;
 
@@ -75,8 +80,8 @@ exports.init = (io, socket)=>{
       });
   });
 
-  socket.on('Player Win', ()=>{
-    socket.emit('Finish Game');
+  socket.on('Game Finished', ()=>{
+    socket.emit('Evaluate Score');
   });
 
   socket.on('disconnect', ()=>{
@@ -90,7 +95,6 @@ exports.init = (io, socket)=>{
 //***************************************************************************
 
 function generateTitle(PATH){
-  console.log('PATH: ', PATH);
   return rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})
     .then($=>{
       return $('#firstHeading').text();
@@ -102,7 +106,6 @@ function generateTitle(PATH){
 
 function generateRandomTopic(){
   let uri = `${BASE_URL}${WIKILIST}${helpers.getRandomElement(helpers.topics())}/Popular_pages`;
-  console.log(uri);
   return rp({uri, transform: body=>cheerio.load(body)})
     .then($=>{
       let paths = $('.wikitable tr td:nth-child(2)').map((idx, elem)=>{
