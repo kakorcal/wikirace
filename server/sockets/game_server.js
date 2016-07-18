@@ -5,7 +5,6 @@ const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
 let players = [];
-let roomOpen = true;
 
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
@@ -47,7 +46,23 @@ exports.init = (io, socket)=>{
   //***************************************************************************
     // TWO PLAYER
   //***************************************************************************
+  socket.on('Setup Two Player Game', ()=>{
+    // io.engine.clients
+    if(players.length < 2){
+      players.push(socket.client.id);
+      socket.join('Wiki Room');
+      io.to('Wiki Room').emit('Player Join');
+    }else{
+      socket.emit('Room Full');
+    }
+    console.log(players);
+  });
 
+  socket.on('Check Game Status', ()=>{
+    if(players.length === 2){
+      socket.emit('Ready To Play', players);
+    }
+  }); 
   //***************************************************************************
     // END
   //***************************************************************************

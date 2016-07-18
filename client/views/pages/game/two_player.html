@@ -50,6 +50,9 @@
       <div id='init-view' ng-hide='vm.isPlaying || vm.isWin'>
         <div ng-hide='vm.first && vm.last'>
           <h1 class='wiki-loading-tween'>LOADING....</h1>
+          <div>
+            {{vm.players}}
+          </div>
         </div>
         <div ng-show='vm.first && vm.last'>
           <h1>FROM: {{vm.first}}</h1>
