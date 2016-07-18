@@ -165,7 +165,7 @@
         }).catch(err=>{
           $ngBootbox.alert('An Error Has Occurred', ()=>{
             console.log(err);
-          })
+          });
         });
       }
     });
@@ -188,7 +188,7 @@
     this.score = {
       user_id: vm.currentUser.id,
       points: vm.points,
-      time: vm.time,
+      time: vm.time,;
       clicks: vm.clicks,
       game_type: vm.gameType,
       result: vm.points ? 'win' : 'lose'

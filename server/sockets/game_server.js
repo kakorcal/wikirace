@@ -4,6 +4,8 @@ const rp = require('request-promise');
 const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
+let players = [];
+let roomOpen = true;
 
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories

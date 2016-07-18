@@ -82,9 +82,10 @@ Finish two player game
 XCreate rankings pages
 Xdebug heroku errors
 continue finishing two player game
-how to pages
-add audio
+how to page
 screencast
 update readme
-refactor
+// probably won't have time for these:
+add audio
 add tests
+refactor
