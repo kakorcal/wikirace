@@ -13,7 +13,7 @@
 
     vm.onFormSubmit = function(user){
       UserService.editUser({user}).then(({data})=>{
-        $ngBootbox.alert('Profile Edited').then(()=>{
+        $ngBootbox.alert(data).then(()=>{
           console.log(data);
           $location.path(`/users/${user.id}`);
         });

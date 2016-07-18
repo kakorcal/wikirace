@@ -164,12 +164,16 @@ router.put('/users/:id', checkToken, (req, res)=>{
   if(!updatedUser.thumbnail_url) delete updatedUser.thumbnail_url;
   // if id only exists
   if(Object.keys(updatedUser).length === 1){
-    res.send('Update Successful');
+    res.send('Profile Edited');
   }else{
     knex('users').where('id', req.decoded_id).update(updatedUser).then(()=>{
-      res.send('Update Successful');
+      res.send('Profile Edited');
     }).catch(err=>{
-      res.send(err);
+      if(err.constraint === 'users_username_unique'){
+        res.send('This User Already Exists');
+      }else{
+        res.send(err);
+      }
     });
   }
 });
