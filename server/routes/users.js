@@ -121,7 +121,7 @@ router.get('/users/:id', checkToken, (req, res)=>{
         if(cur.id === req.decoded_id) acc = idx + 1;
         return acc;
       }, -1);
- 
+      
       user.twoplayer_rank = [...users].sort((a, b)=>{
         return b['2p_score'] - a['2p_score'];
       }).reduce((acc, cur, idx)=>{
@@ -150,9 +150,11 @@ router.get('/users/:id', checkToken, (req, res)=>{
             }
           }
         });
-        
         res.send(user);
       });
+    })
+    .catch(err=>{
+      res.send(err);
     });
 });
 
