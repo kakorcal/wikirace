@@ -5,24 +5,14 @@
         <md-input-container class='md-block'>
           <label for="username">Username:</label>
           <input type="text" name='username' ng-model='vm.user.username'>
-          
-          <!-- errors -->
-          <div ng-messages="editForm.username.$error" ng-if="editForm.username.$touched" md-auto-hide="false">
-            <div ng-message="required">Please Include A Username</div>
-          </div>
         </md-input-container>
         <md-input-container class='md-block'>
           <label for="thumbnail">Thumbnail:</label>
-          <input type="thumbnail" name='thumbnail' ng-model='vm.user.thumbnail_url' required>
-
-          <!-- errors -->
-          <div ng-messages="editForm.thumbnail.$error">
-            <div ng-message="required">Please Include A Thumbnail</div>
-          </div>
+          <input type="thumbnail" name='thumbnail' ng-model='vm.user.thumbnail_url'>
         </md-input-container>
 
         <div layout='column'>
-          <md-button type='submit' ng-disabled='!editForm.$valid' class='md-raised md-accent'>Edit</md-button>
+          <md-button type='submit' class='md-raised md-accent'>Edit</md-button>
         </div>
       </form>
     </md-content>

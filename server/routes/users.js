@@ -158,11 +158,20 @@ router.get('/users/:id', checkToken, (req, res)=>{
 
 router.put('/users/:id', checkToken, (req, res)=>{
   // TODO: Users should be able to change their password
-  knex('users').where('id', req.decoded_id).update(req.body.user).then(()=>{
+  // if the username field or thumbnail field is null, don't update
+  let updatedUser = req.body.user;
+  if(!updatedUser.username) delete updatedUser.username;
+  if(!updatedUser.thumbnail_url) delete updatedUser.thumbnail_url;
+  // if id only exists
+  if(Object.keys(updatedUser).length === 1){
     res.send('Update Successful');
-  }).catch(err=>{
-    res.send(err);
-  });
+  }else{
+    knex('users').where('id', req.decoded_id).update(updatedUser).then(()=>{
+      res.send('Update Successful');
+    }).catch(err=>{
+      res.send(err);
+    });
+  }
 });
 
 router.delete('/users/:id', checkToken, (req, res)=>{

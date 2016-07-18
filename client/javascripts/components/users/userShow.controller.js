@@ -15,9 +15,10 @@
       $location.path(`/users/${user.id}/edit`);
     };
 
-    vm.deleteProfile = function(user){
+    vm.deleteProfile = function(id){
       $ngBootbox.confirm('Are You Sure? You Cannot Undo This.').then(()=>{
-        UserService.deleteUser(user).then(()=>{
+        UserService.deleteUser(id).then(({data})=>{
+          console.log(data);
           UserService.logout();
           $location.path('/');
         }).catch(err=>{

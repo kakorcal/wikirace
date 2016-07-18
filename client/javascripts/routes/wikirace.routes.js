@@ -63,7 +63,10 @@
       .when('/users/:id/edit', {
         templateUrl: 'views/pages/users/edit.html',
         controllerAs: 'vm',
-        controller: 'UserEditController'
+        controller: 'UserEditController',
+        resolve:{
+          user: getUserById
+        }
       })
       .when('/404', {
         templateUrl: 'views/404.html'

@@ -42,12 +42,12 @@
       return $http.get(`${USER_URL}/${id}`);
     };
 
-    this.updateUser = function(data){
+    this.editUser = function(data){
       return $http.put(`${USER_URL}/${data.user.id}`, data);
     };
 
-    this.deleteUser = function(user){
-      return $http.delete(`${USER_URL}/${user.id}`);
-    }
+    this.deleteUser = function(id){
+      return $http.delete(`${USER_URL}/${id}`);
+    };
   }
 })();
