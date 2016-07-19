@@ -18,7 +18,14 @@
     'userShow.controller',
     'userIndex.controller',
     'userEdit.controller'
-  ]);
+  ]).config(interpolate);
+
+  // Prevent wikipedia templating from conflicting with angular expressions
+  interpolate.$inject = ['$interpolateProvider'];
+  function interpolate($interpolateProvider){
+    $interpolateProvider.startSymbol('<%');
+    $interpolateProvider.endSymbol('%>');
+  }
 
   //***************************************************************************
   // will not use a custom theme until conflicts with ngMessages are resolved

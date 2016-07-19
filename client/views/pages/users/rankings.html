@@ -17,14 +17,14 @@
         </thead>
         <tbody>
           <tr ng-repeat="user in vm.oneplayer track by $index">
-            <td><strong>{{$index + 1}}</strong></td>
+            <td><strong><%$index + 1%></strong></td>
             <td>
-              <img src="{{user.thumbnail_url}}" alt="pic">
+              <img src="<%user.thumbnail_url%>" alt="pic">
             </td>
             <td>
-              <strong>{{user.username}}</strong>
+              <strong><%user.username%></strong>
             </td>
-            <td><strong>{{user['1p_score']}}</strong></td>
+            <td><strong><%user['1p_score']%></strong></td>
           </tr>
         </tbody>
       </table>
@@ -39,14 +39,14 @@
         </thead>
         <tbody>
           <tr ng-repeat="user in vm.twoplayer track by $index">
-            <td><strong>{{$index + 1}}</strong></td>
+            <td><strong><%$index + 1%></strong></td>
             <td>
-              <img src="{{user.thumbnail_url}}" alt="pic">
+              <img src="<%user.thumbnail_url%>" alt="pic">
             </td>
             <td>
-              <strong>{{user.username}}</strong>
+              <strong><%user.username%></strong>
             </td>
-            <td><strong>{{user['2p_score']}}</strong></td>
+            <td><strong><%user['2p_score']%></strong></td>
           </tr>
         </tbody>
       </table>

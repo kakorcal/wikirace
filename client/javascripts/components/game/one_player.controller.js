@@ -1,21 +1,13 @@
 (()=>{
   angular.module('one_player.controller', [])
     .controller('OnePlayerGame', OnePlayerGame)
-    .directive('compile', compile)
-    .config(interpolate);
-
-  // Prevent wikipedia templating from conflicting with angular expressions
-  interpolate.$inject = ['$interpolateProvider'];
-  function interpolate($interpolateProvider){
-    $interpolateProvider.startSymbol('[[');
-    $interpolateProvider.endSymbol(']]');
-  }
+    .directive('compile', compile);
   
   //***************************************************************************
   // NOT MY CODE!! check out: https://github.com/angular/angular.js/issues/4992
   //***************************************************************************
-  compile.$inject = ['$compile', '$sce'];
-  function compile($compile, $sce) {
+  compile.$inject = ['$compile'];
+  function compile($compile) {
     // directive factory creates a link function
     return function(scope, element, attrs) {
       scope.$watch(
