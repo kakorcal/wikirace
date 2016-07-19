@@ -104,9 +104,11 @@
       vm.player = {
         id: vm.currentUser ? vm.currentUser.id : -1,
         username: vm.currentUser ? vm.currentUser.username : null,
-        socketId: id,
+        socketId: id.socket,
         clicks: 0
       };
+
+      if(id.reset) vm.player.reset = true;
       Socket.emit('Add Player To Room', vm.player);
     });
 
@@ -116,6 +118,9 @@
       vm.opponent = keys[0] !== vm.player.socketId ? players[keys[0]] : players[keys[1]];
       if(!vm.player.username) vm.player.username = 'You';
       if(!vm.opponent.username) vm.opponent.username = 'Guest';
+      if(vm.player.reset) delete vm.player.reset;
+      if(vm.opponent.reset) delete vm.opponent.reset;
+      
       console.log('Player', vm.player);
       console.log('Opponent', vm.opponent);
       if(vm.player.username === vm.opponent.username){

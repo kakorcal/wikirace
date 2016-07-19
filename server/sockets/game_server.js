@@ -8,6 +8,7 @@ const WIKILIST = '/wiki/Wikipedia:WikiProject_';
 // two player vars
 let gametype = null;
 let players = {};
+let resetCount = 0;
 
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
@@ -41,7 +42,7 @@ exports.init = (io, socket)=>{
         // Mediterranean Basin error
         // socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
         // https://docs.angularjs.org/error/$parse/ueoe
-        socket.emit('Receive Titles', titles);
+        socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
@@ -58,29 +59,34 @@ exports.init = (io, socket)=>{
     console.log('Setup Two Player Game', socket.client.id);
     // only two players per game
     if(Object.keys(players).length < 2){
-      socket.emit('Receive Socket Id', socket.client.id);
+      socket.emit('Receive Socket Id', {socket: socket.client.id, reset: false});
     }else{
       socket.emit('Room Full');
     }
   });
 
   socket.on('Reset Two Player Game', ()=>{
-    if(Object.keys(players).length <= 2){
-      socket.emit('Receive Socket Id', socket.client.id);
-    }
+    socket.emit('Receive Socket Id', {socket: socket.client.id, reset: true});
   });
 
   socket.on('Add Player To Room', player=>{
-    if(Object.keys(players).length < 2){
-      players[player.socketId] = player;
-      console.log('Add Player To Room', player);
-      console.log('Players Object', players);
-      socket.join('Wiki Room');
-    }
-
-    if(Object.keys(players).length === 2){
-      // set the players on both sockets
-      io.to('Wiki Room').emit('Set Players', players);
+    if(!player.reset){
+      if(Object.keys(players).length < 2){
+        players[player.socketId] = player;
+        console.log('Add Player To Room', player);
+        console.log('Players Object', players);
+        socket.join('Wiki Room');
+      }
+      if(Object.keys(players).length === 2){
+        // set the players on both sockets
+        io.to('Wiki Room').emit('Set Players', players);
+      }
+    }else{
+      resetCount++;
+      if(resetCount === 2){
+        io.to('Wiki Room').emit('Set Players', players);
+        resetCount = 0;
+      }
     }
   });
 
@@ -95,7 +101,7 @@ exports.init = (io, socket)=>{
       .then(titles=>{
         console.log(titles);
         // ['Alaska', 'Yukon']
-        io.to('Wiki Room').emit('Receive Titles', titles);  
+        io.to('Wiki Room').emit('Receive Titles', ['Alaska', 'Yukon']);  
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
