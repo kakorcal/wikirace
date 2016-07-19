@@ -38,7 +38,6 @@
     vm.player = null;
     vm.opponent = null;
     vm.socketId = null;
-    vm.currentPath = null;
     vm.timerRunning = false;
     vm.countdownStart = false;
     vm.isPlaying = false;
@@ -64,9 +63,8 @@
 
     vm.generateArticle = function(path){
       vm.player.clicks++;
-      vm.currentPath = path;
       vm.isLoading = true;
-      Socket.emit('Update Clicks', vm.player);
+      Socket.emit('Generate Article', path);
     };
 
     $scope.$on('timer-stopped', (e, time)=>{
@@ -121,6 +119,7 @@
         let timer = $interval(()=>{
           vm.countdown--;
           if(vm.countdown === 0){
+            vm.countdown = 'START!!!';
             $interval.cancel(timer);
             Socket.emit('Start Game');
           }
@@ -143,6 +142,10 @@
       vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
       vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
       vm.isLoading = false;
+      
+      if(vm.player.clicks){
+        Socket.emit('Update Clicks', vm.player);
+      }
 
       if(data.text === vm.last) {
         $scope.$broadcast('timer-stop');
@@ -154,7 +157,7 @@
     });
 
     Socket.on('Receive Updated Clicks', player=>{
-      Socket.emit('Generate Article', vm.currentPath);
+      if(player.socketId !== vm.player.socketId) vm.opponent.clicks++;
     });
 
     Socket.on('Room Full', ()=>{

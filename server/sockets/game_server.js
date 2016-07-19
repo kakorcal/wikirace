@@ -39,7 +39,10 @@ exports.init = (io, socket)=>{
         return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
       })
       .then(titles=>{
-        socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
+        // Mediterranean Basin error
+        // socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
+        // https://docs.angularjs.org/error/$parse/ueoe
+        socket.emit('Receive Titles', titles);
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
@@ -118,6 +121,7 @@ exports.init = (io, socket)=>{
 
         thumbnail = $('#mw-content-text .infobox .image img').attr('src');
         
+        // Angular Error still occurs without the replace method
         content = $('#bodyContent').html()
           .replace(/href=('|"|‘|’|“|”).+?('|"|‘|’|“|”)/g, match=>{
             return processLinks(match);
