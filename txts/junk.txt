@@ -99,3 +99,140 @@ router.post('/new', (req, res, next)=>{
 //     console.log(err);
 //   });
 // });
+
+// two player
+  // server
+  socket.on('Setup Two Player Game', ()=>{
+    // adding gametype flag to use interchangeable socket methods
+    gametype = '2';
+    console.log('setup two player game', players);
+    if(socketIds.length < 2){
+      socketIds.push(socket.client.id);
+      socket.join('Wiki Room');
+      io.to('Wiki Room').emit('Player Join', socket.client.id);
+    }else{
+      socket.emit('Room Full');
+    }
+  });
+
+  socket.on('Check Game Status', player=>{
+    if(socketIds.length === 2){
+      players.push(player);
+      if(players.length === 2){
+        console.log('Ready To Play', players);
+        socket.emit('Ready To Play', players);
+      }
+    }else{
+      console.log('Not Ready');
+      socket.emit('Not Ready');
+    }
+  }); 
+
+  socket.on('Load Game', ()=>{
+    // TODO: should refactor this into a function
+    Promise.all([generateRandomTopic(), generateRandomTopic()])
+      .then(topics=>{
+        let titles = helpers.replaceInvalidTopics(
+            helpers.findUniqueTopics(topics[0], topics[1])
+          );
+        return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
+      })
+      .then(titles=>{
+        console.log(titles);
+        io.to('Wiki Room').emit('Receive Titles', titles);  
+      })
+      .catch(err=>{
+        socket.emit('Error', 'Failed To Retrieve Data');
+      });
+  });
+
+  socket.on('Start Game', ()=>{
+    socket.emit('Load First Article');
+  });
+
+  socket.on('disconnect', ()=>{
+    if(gametype === '2'){
+      players = players.filter(player => player.socketId !== socket.client.id);
+      socketIds.splice(socketIds.indexOf(socket.client.id), 1);
+      console.log('Leaving socket', socket.client.id);
+      console.log('Player Leave', players);
+      console.log('Socket Id', socketIds);
+      socket.leave('Wiki Room');
+      io.to('Wiki Room').emit('Player Leave');      
+    }
+    console.log('CLIENT DISCONNECT');
+  });
+
+  // client
+  Socket.on('Player Join', id=>{
+    if(!vm.socketId) {
+      vm.socketId = id;
+      vm.player = new Player(vm);
+    }
+    Socket.emit('Check Game Status', vm.player);
+  });
+
+  Socket.on('Player Leave', ()=>{
+    Socket.emit('Check Game Status');
+  });
+
+  Socket.on('Ready To Play', players=>{
+    vm.players = players
+    Socket.emit('Load Game');
+  });
+
+  Socket.on('Not Ready', ids=>{
+    console.log('Not Ready', vm.player);
+    vm.players = null;
+  });
+
+  Socket.on('Receive Titles', titles=>{
+    // since two people are emitting load game, extra titles get received from the server.
+    // so only set vm.first and vm.last to titles if the extra titles were received.
+    if(!vm.extraTitles){
+      vm.extraTitles = titles;
+    }else{
+      [vm.first, vm.last] = titles;
+
+      let timer = $interval(()=>{
+        vm.countdown--;
+        if(vm.countdown === 0){
+          $interval.cancel(timer);
+          Socket.emit('Start Game');
+        }
+      }, 1000);
+    }
+  });
+
+  Socket.on('Load First Article', ()=>{
+    $scope.$broadcast('timer-start');
+    vm.timerRunning = true;
+    vm.isPlaying = true;
+    vm.isLoading = true;
+    Socket.emit('Generate Article', `/wiki/${vm.first}`);
+  });
+
+  Socket.on('Receive Article', data=>{
+    vm.title = data.title;
+    vm.content = data.content;
+    vm.styles = data.styles;
+    vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
+    vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
+    vm.isLoading = false;
+
+    if(data.text === vm.last) {
+      $scope.$broadcast('timer-stop');
+      vm.timerRunning = false;
+      vm.isPlaying = false;
+      vm.isWin = true;
+      Socket.emit('Game Finished');
+    }
+  });
+
+
+  function Player(vm){
+    this.socketId = vm.socketId;
+    this.username = vm.currentUser ? vm.currentUser.username : 'Guest';
+    this.id = vm.currentUser ? vm.currentUser.id : null;
+    this.clicks = 0;
+  }

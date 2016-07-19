@@ -8,8 +8,7 @@ const _ = require('lodash');
 
 // two player vars
 let gametype = null;
-let players = [];
-let socketIds = [];
+let players = {};
 
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
@@ -53,51 +52,18 @@ exports.init = (io, socket)=>{
     // TWO PLAYER
   //***************************************************************************
   socket.on('Setup Two Player Game', ()=>{
-    // adding gametype flag to use interchangeable socket methods
     gametype = '2';
+    console.log('ON CONNECT', socket.client.id);
+    socket.emit('Receive Socket Id', socket.client.id);
+  });
 
-    if(socketIds.length < 2){
-      socketIds.push(socket.client.id);
+  socket.on('Add Player To Room', player=>{
+    if(Object.keys(players).length < 2){
+      players[player.socketId] = player;
+      console.log('ADDING Player TO ROOM', player);
+      console.log('Players Object', players);
       socket.join('Wiki Room');
-      io.to('Wiki Room').emit('Player Join', socket.client.id);
-    }else{
-      socket.emit('Room Full');
     }
-  });
-
-  socket.on('Check Game Status', player=>{
-    if(socketIds.length === 2){
-      players.push(player);
-      console.log('Ready To Play', players);
-      if(players.length === 2){
-        io.to('Wiki Room').emit('Ready To Play', players);
-      }
-    }else{
-      console.log('Not Ready', players);
-      socket.emit('Not Ready');
-    }
-  }); 
-
-  socket.on('Load Game', ()=>{
-    // TODO: should refactor this into a function
-    Promise.all([generateRandomTopic(), generateRandomTopic()])
-      .then(topics=>{
-        let titles = helpers.replaceInvalidTopics(
-            helpers.findUniqueTopics(topics[0], topics[1])
-          );
-        return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
-      })
-      .then(titles=>{
-        console.log(titles);
-        io.to('Wiki Room').emit('Receive Titles', titles);  
-      })
-      .catch(err=>{
-        socket.emit('Error', 'Failed To Retrieve Data');
-      });
-  });
-
-  socket.on('Start Game', ()=>{
-    socket.emit('Load First Article');
   });
 
   //***************************************************************************
@@ -139,10 +105,12 @@ exports.init = (io, socket)=>{
 
   socket.on('disconnect', ()=>{
     if(gametype === '2'){
-      players = players.filter(player => player.socketId !== socket.client.id);
-      socketIds.splice(socketIds.indexOf(socket.client.id), 1);
+      delete players[socket.client.id];
+      console.log('player deleted', socket.client.id);
+      console.log('remaining player', players);
+      console.log('ON DISCONNECT');
       socket.leave('Wiki Room');
-      io.to('Wiki Room').emit('Player Leave');      
+      io.to('Wiki Room').emit('Player Leave', players);      
     }
     console.log('CLIENT DISCONNECT');
   });

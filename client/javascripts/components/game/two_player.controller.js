@@ -34,12 +34,10 @@
     // For two players, the option to pause the game doesn't exist so vm.time is same for both
     let vm = this;
     vm.currentUser = UserService.getCurrentUser();
-    vm.players = [];
     vm.articles = [];
     vm.player = null;
     vm.opponent = null;
     vm.socketId = null;
-    vm.extraTitles = null;
     vm.timerRunning = false;
     vm.isPlaying = false;
     vm.isLoading = false;
@@ -73,72 +71,21 @@
     });
 
     Socket.connect().emit('Setup Two Player Game');
+    
+    Socket.on('Receive Socket Id', id=>{
+      vm.player = {
+        id: vm.currentUser ? vm.currentUser.id : -1,
+        username: vm.currentUser ? vm.currentUser.username : 'Guest',
+        socketId: id,
+        clicks: 0
+      };
 
-    Socket.on('Player Join', id=>{
-      if(!vm.socketId) {
-        vm.socketId = id;
-        vm.player = new Player(vm);
-      }
-      Socket.emit('Check Game Status', vm.player);
+      Socket.emit('Add Player To Room', vm.player);
     });
 
-    Socket.on('Player Leave', ()=>{
-      Socket.emit('Check Game Status', vm.player);
-    });
-
-    Socket.on('Ready To Play', players=>{
-      console.log('PLAYERS', players);
-      vm.players = players
-      Socket.emit('Load Game');
-    });
-
-    Socket.on('Not Ready', ids=>{
-      console.log('Not Ready', vm.player);
-      vm.players = null;
-    });
-
-    Socket.on('Receive Titles', titles=>{
-      // since two people are emitting load game, extra titles get received from the server.
-      // so only set vm.first and vm.last to titles if the extra titles were received.
-      if(!vm.extraTitles){
-        vm.extraTitles = titles;
-      }else{
-        [vm.first, vm.last] = titles;
-
-        let timer = $interval(()=>{
-          vm.countdown--;
-          if(vm.countdown === 0){
-            $interval.cancel(timer);
-            Socket.emit('Start Game');
-          }
-        }, 1000);
-      }
-    });
-
-    Socket.on('Load First Article', ()=>{
-      $scope.$broadcast('timer-start');
-      vm.timerRunning = true;
-      vm.isPlaying = true;
-      vm.isLoading = true;
-      Socket.emit('Generate Article', `/wiki/${vm.first}`);
-    });
-
-    Socket.on('Receive Article', data=>{
-      vm.title = data.title;
-      vm.content = data.content;
-      vm.styles = data.styles;
-      vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
-      vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
-      vm.isLoading = false;
-
-      if(data.text === vm.last) {
-        $scope.$broadcast('timer-stop');
-        vm.timerRunning = false;
-        vm.isPlaying = false;
-        vm.isWin = true;
-        Socket.emit('Game Finished');
-      }
-    });
+    Socket.on('Player Leave', players=>{
+      vm.players = players;
+    }); 
 
     Socket.on('Room Full', ()=>{
       $ngBootbox.alert('Sorry :( please try again at another time').then(()=>{
@@ -156,13 +103,6 @@
     $scope.$on('$locationChangeStart', e=>{
       Socket.disconnect(true);
     });
-  }
-
-  function Player(vm){
-    this.socketId = vm.socketId;
-    this.username = vm.currentUser ? vm.currentUser.username : 'Guest';
-    this.id = vm.currentUser ? vm.currentUser.id : null;
-    this.clicks = 0;
   }
 
   function Stat(vm){
