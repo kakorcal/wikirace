@@ -53,16 +53,26 @@ exports.init = (io, socket)=>{
   //***************************************************************************
   socket.on('Setup Two Player Game', ()=>{
     gametype = '2';
-    console.log('ON CONNECT', socket.client.id);
-    socket.emit('Receive Socket Id', socket.client.id);
+    console.log('Setup Two Player Game', socket.client.id);
+    // only two players per game
+    if(Object.keys(players).length < 2){
+      socket.emit('Receive Socket Id', socket.client.id);
+    }else{
+      socket.emit('Room Full');
+    }
   });
 
   socket.on('Add Player To Room', player=>{
     if(Object.keys(players).length < 2){
       players[player.socketId] = player;
-      console.log('ADDING Player TO ROOM', player);
+      console.log('Add Player To Room', player);
       console.log('Players Object', players);
       socket.join('Wiki Room');
+    }
+
+    if(Object.keys(players).length === 2){
+      // set the players on both sockets
+      io.to('Wiki Room').emit('Set Players', players);
     }
   });
 
