@@ -151,12 +151,42 @@
         vm.timerRunning = false;
         vm.isPlaying = false;
         vm.isWin = true;
-        Socket.emit('Game Finished');
+        Socket.emit('Game Finished', vm.player);
       }
     });
 
     Socket.on('Receive Updated Clicks', player=>{
       if(player.socketId !== vm.player.socketId) vm.opponent.clicks++;
+    });
+
+    Socket.on('Evaluate Score', player=>{
+      console.log('Evaluate Score');
+      if(vm.isWin){
+        if(vm.time > 5){
+          vm.points = Math.floor((1000 - (vm.time * (vm.player.clicks / 4))));
+          if(vm.points < 0) vm.points = 0;
+        }else{
+          vm.points = 1000;
+        }
+      }else{
+        $scope.$broadcast('timer-stop');
+        vm.timerRunning = false;
+        vm.isPlaying = false;
+        // TODO: shouldn't call this isWin. Maybe isGameFinish
+        vm.isWin = true;
+        vm.points = 0;
+      }
+
+      // if(vm.currentUser){
+      //   // add score to db
+      //   UserService.addScore({user: new Stat(vm)}).then(({data})=>{
+      //     console.log(data);
+      //   }).catch(err=>{
+      //     $ngBootbox.alert('An Error Has Occurred', ()=>{
+      //       console.log(err);
+      //     });
+      //   });
+      // }
     });
 
     Socket.on('Room Full', ()=>{

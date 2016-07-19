@@ -142,8 +142,12 @@ exports.init = (io, socket)=>{
       });
   });
 
-  socket.on('Game Finished', ()=>{
-    socket.emit('Evaluate Score');
+  socket.on('Game Finished', player=>{
+    if(player && gametype === '2'){
+      io.to('Wiki Room').emit('Evaluate Score', player);
+    }else{
+      socket.emit('Evaluate Score');
+    }
   });
 
   socket.on('disconnect', ()=>{
