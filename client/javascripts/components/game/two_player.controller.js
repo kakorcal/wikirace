@@ -67,6 +67,33 @@
       Socket.emit('Generate Article', path);
     };
 
+    vm.resetGame = function(){
+      $scope.$broadcast('timer-reset');
+      vm.player = null;
+      vm.opponent = null;
+      vm.socketId = null;
+      vm.title = null;
+      vm.content = null;
+      vm.styles = null;
+      vm.thumbnail = null;
+      vm.first = null;
+      vm.last = null;
+      vm.countdownStart = false;
+      vm.countdown = 10;
+
+      // this is janky but it makes the transition a little smoother
+      $timeout(()=>{
+        vm.articles = [];
+        vm.isWin = false;
+        $timeout(()=>{
+          vm.points = 0;
+          vm.clicks = 0;
+          vm.time = 0;
+          Socket.emit('Reset Two Player Game');        
+        }, 100);
+      }, 100);
+    };
+
     $scope.$on('timer-stopped', (e, time)=>{
       vm.time = (time.minutes * 60) + time.seconds;
     });
@@ -103,7 +130,7 @@
 
     Socket.on('Player Leave', players=>{
       if(vm.isPlaying){
-        $ngBootbox.alert('Your Opponent Left The Game. This Game Will Not Be Counted Towards Your Rankings.')
+        $ngBootbox.alert('Your Opponent Left The Game. This Game Will Be Terminated And Not Counted.')
           .then(()=>{
             Socket.removeAllListeners();
             $location.path('/play');

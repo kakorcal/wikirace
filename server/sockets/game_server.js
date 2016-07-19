@@ -4,7 +4,6 @@ const rp = require('request-promise');
 const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
-const _ = require('lodash');
 
 // two player vars
 let gametype = null;
@@ -62,6 +61,12 @@ exports.init = (io, socket)=>{
       socket.emit('Receive Socket Id', socket.client.id);
     }else{
       socket.emit('Room Full');
+    }
+  });
+
+  socket.on('Reset Two Player Game', ()=>{
+    if(Object.keys(players).length <= 2){
+      socket.emit('Receive Socket Id', socket.client.id);
     }
   });
 
