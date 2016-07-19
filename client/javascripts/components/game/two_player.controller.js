@@ -90,7 +90,7 @@
       if(!vm.opponent.username) vm.opponent.username = 'OTHER';
       console.log('Player', vm.player);
       console.log('Opponent', vm.opponent);
-      // Socket.emit('Load Game');
+      Socket.emit('Load Game');
     });
 
     Socket.on('Player Leave', players=>{
@@ -101,6 +101,12 @@
         });        
       }
     }); 
+
+    Socket.on('Receive Titles', titles=>{
+      if(!vm.first && !vm.last){
+        [vm.first, vm.last] = titles;
+      }
+    });
 
     Socket.on('Room Full', ()=>{
       $ngBootbox.alert('Sorry :( please try again at another time').then(()=>{
