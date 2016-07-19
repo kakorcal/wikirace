@@ -93,6 +93,14 @@ exports.init = (io, socket)=>{
       });
   });
 
+  socket.on('Start Game', ()=>{
+    socket.emit('Load Initial Article');
+  });
+
+  socket.on('Set Countdown', ()=>{
+    socket.emit('Start Countdown');
+  });
+
   //***************************************************************************
     // END
   //***************************************************************************
