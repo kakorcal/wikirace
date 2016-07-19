@@ -64,8 +64,8 @@
 
     vm.generateArticle = function(path){
       vm.player.clicks++;
-      vm.isLoading = true;
       vm.currentPath = path;
+      vm.isLoading = true;
       Socket.emit('Update Clicks', vm.player);
     };
 

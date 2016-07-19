@@ -260,10 +260,12 @@
   cursor: pointer;;
 }
 
-.wiki-disabled {
+.wiki-disabled,
+a.external.text, a[rel='nofollow'].external {
   pointer-events: none;
   cursor: default;
   text-decoration: none;
+  color: #000;
 }
 
 .wiki-loading-tween {

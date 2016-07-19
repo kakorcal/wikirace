@@ -39,7 +39,7 @@ exports.init = (io, socket)=>{
         return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
       })
       .then(titles=>{
-        socket.emit('Receive Titles', titles);
+        socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
@@ -190,7 +190,7 @@ function processLinks(str){
   if(str.includes('/wiki/') && str.search(/(:|#|jpg|jpeg|png|gif)/) === -1){
     // regular links
     return `href='#' ng-click=vm.generateArticle('${str.substring(6, str.length-1)}')`;
-  }else if(str.includes('#') && str.search(/(\/wiki\/|http)/) === -1){
+  }else if(str.includes('#') && str.search(/(\/wiki\/|http|\d)/) === -1){
     // anchor tags
     return `target='_self' class='wiki-clickable' ng-click=vm.onHashClick('${str.substring(7, str.length-1)}')`;
   }else{
