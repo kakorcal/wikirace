@@ -79,8 +79,16 @@
         socketId: id,
         clicks: 0
       };
-
       Socket.emit('Add Player To Room', vm.player);
+    });
+
+    Socket.on('Set Players', players=>{
+      let keys = Object.keys(players);
+      vm.player = players[vm.player.socketId];
+      vm.opponent = keys[0] !== vm.player.socketId ? players[keys[0]] : players[keys[1]];
+
+      console.log('Player', vm.player);
+      console.log('Opponent', vm.opponent);
     });
 
     Socket.on('Player Leave', players=>{
