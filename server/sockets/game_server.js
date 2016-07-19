@@ -42,7 +42,7 @@ exports.init = (io, socket)=>{
         // Mediterranean Basin error
         // socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
         // https://docs.angularjs.org/error/$parse/ueoe
-        socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
+        socket.emit('Receive Titles', titles);
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
@@ -101,7 +101,7 @@ exports.init = (io, socket)=>{
       .then(titles=>{
         console.log(titles);
         // ['Alaska', 'Yukon']
-        io.to('Wiki Room').emit('Receive Titles', ['Mediterranean Basin', titles[1]]);  
+        io.to('Wiki Room').emit('Receive Titles', titles);  
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
