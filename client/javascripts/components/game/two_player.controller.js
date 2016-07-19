@@ -91,15 +91,23 @@
       if(!vm.opponent.username) vm.opponent.username = 'Guest';
       console.log('Player', vm.player);
       console.log('Opponent', vm.opponent);
-      Socket.emit('Load Game');
+      if(vm.player.username === vm.opponent.username){
+        $ngBootbox.alert('Cannot Play Against Yourself').then(()=>{
+          Socket.removeAllListeners();
+          $location.path('/play');
+        });
+      }else{
+        Socket.emit('Load Game');
+      }
     });
 
     Socket.on('Player Leave', players=>{
       if(vm.isPlaying){
-        $ngBootbox.alert('Your Opponent Left The Game. This Game Will Not Be Counted').then(()=>{
-          Socket.removeAllListeners();
-          $location.path('/play');
-        });        
+        $ngBootbox.alert('Your Opponent Left The Game. This Game Will Not Be Counted Towards Your Rankings.')
+          .then(()=>{
+            Socket.removeAllListeners();
+            $location.path('/play');
+          });        
       }
     }); 
 
@@ -177,16 +185,16 @@
         vm.points = 0;
       }
 
-      // if(vm.currentUser){
-      //   // add score to db
-      //   UserService.addScore({user: new Stat(vm)}).then(({data})=>{
-      //     console.log(data);
-      //   }).catch(err=>{
-      //     $ngBootbox.alert('An Error Has Occurred', ()=>{
-      //       console.log(err);
-      //     });
-      //   });
-      // }
+      if(vm.currentUser){
+        // add score to db
+        UserService.addScore({user: new Stat(vm)}).then(({data})=>{
+          console.log(data);
+        }).catch(err=>{
+          $ngBootbox.alert('An Error Has Occurred', ()=>{
+            console.log(err);
+          });
+        });
+      }
     });
 
     Socket.on('Room Full', ()=>{
@@ -215,7 +223,7 @@
       user_id: vm.currentUser.id,
       points: vm.points,
       time: vm.time,
-      clicks: vm.clicks,
+      clicks: vm.player.clicks,
       game_type: vm.gameType,
       result: vm.points ? 'win' : 'lose'
     };
