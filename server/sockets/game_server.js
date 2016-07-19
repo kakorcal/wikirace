@@ -5,7 +5,7 @@ const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
 
-// two player vars
+// two player variables
 let gametype = null;
 let players = {};
 let resetCount = 0;
@@ -101,7 +101,7 @@ exports.init = (io, socket)=>{
       .then(titles=>{
         console.log(titles);
         // ['Alaska', 'Yukon']
-        io.to('Wiki Room').emit('Receive Titles', titles);  
+        io.to('Wiki Room').emit('Receive Titles', ['Mediterranean Basin', titles[1]]);  
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');

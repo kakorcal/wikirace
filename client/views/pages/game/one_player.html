@@ -2,7 +2,7 @@
   <md-toolbar id='wiki-titlebar'>
     <div class='md-toolbar-tools'>
       <h4 flex>WIKIRACE</h4>
-      <md-button ng-click='vm.toggleTime()' class='md-accent md-raised md-hue-1'>{{vm.timerRunning ? 'Pause' : 'Play'}}</md-button>
+      <md-button ng-click='vm.toggleTime()' class='md-accent md-raised md-hue-1'>[[vm.timerRunning ? 'Pause' : 'Play']]</md-button>
       <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
     </div>
   </md-toolbar>  
@@ -15,7 +15,7 @@
     class="md-whiteframe-z2">
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-time'>
       <div class="md-toolbar-tools" layout-align='center center'>
-        <h4>TIME: <timer interval="1000" autostart='false'>{{mminutes}}:{{sseconds}}</timer></h4>
+        <h4>TIME: <timer interval="1000" autostart='false'>[[mminutes]]:[[sseconds]]</timer></h4>
       </div>
     </md-toolbar>
     <md-toolbar flex layout='row' layout-padding id='wiki-sidebar'>
@@ -23,9 +23,9 @@
         <md-list flex ng-class="vm.timerRunning ? 'wiki-playing' : 'wiki-paused'">
           <div class='wiki-repeat' ng-repeat='article in vm.articles'>
             <md-list-item class='noright' ng-click='vm.generateArticle(article.path)'>
-              <img ng-src='{{article.thumbnail}}' class="md-avatar" alt="pic" />
+              <img ng-src='[[article.thumbnail]]' class="md-avatar" alt="pic" />
               <div class="md-list-item-text" layout="column">
-                <p>{{article.title | truncate: 17}}</p>
+                <p>[[article.title | truncate: 17]]</p>
               </div>
             </md-list-item>
             <md-divider></md-divider> 
@@ -35,14 +35,14 @@
     </md-toolbar>    
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-clicks'>
       <div class="md-toolbar-tools" layout-align="space-around center">
-        <h4>CLICKS: {{vm.clicks}}</h4>
+        <h4>CLICKS: [[vm.clicks]]</h4>
       </div>
     </md-toolbar>
   </md-sidenav>
   <md-content flex layout='column'>
     <md-toolbar layout-align='center center' id='wiki-path'>
       <div class="md-toolbar-tools" ng-show='vm.isPlaying'>
-        <h4 id='wiki-hints'>FROM: <a ng-href="https://en.wikipedia.org/wiki/{{vm.first}}" target='_blank'>{{vm.first}}</a> <i class="fa fa-arrow-right"></i> TO: <a ng-href="https://en.wikipedia.org/wiki/{{vm.last}}" target='_blank'>{{vm.last}}</a></h4>
+        <h4 id='wiki-hints'>FROM: <a ng-href="https://en.wikipedia.org/wiki/[[vm.first]]" target='_blank'>[[vm.first]]</a> <i class="fa fa-arrow-right"></i> TO: <a ng-href="https://en.wikipedia.org/wiki/[[vm.last]]" target='_blank'>[[vm.last]]</a></h4>
       </div>
     </md-toolbar>
     <md-content flex layout-padding id='wiki'>
@@ -51,9 +51,9 @@
           <h1 class='wiki-loading-tween'>LOADING...</h1>
         </div>
         <div ng-show='vm.first && vm.last'>
-          <h1>FROM: {{vm.first}}</h1>
+          <h1>FROM: [[vm.first]]</h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
-          <h1>TO: {{vm.last}}</h1>    
+          <h1>TO: [[vm.last]]</h1>    
           <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>START GAME!!!</md-button>              
           <md-button ng-click='vm.changeArticles()' class='md-raised wiki-button'>CHANGE ARTICLES</md-button>    
         </div>
@@ -62,12 +62,12 @@
         <h1 class='wiki-loading-tween'>LOADING...</h1>
       </div>
       <div id="victory-view" ng-show='vm.isWin'>
-        <h1>{{vm.points ? 'YOU WIN!!!' : 'YOU LOSE!!!'}}</h1>
-        <h1>SCORE: {{vm.points}}</h1>
+        <h1>[[vm.points ? 'YOU WIN!!!' : 'YOU LOSE!!!']]</h1>
+        <h1>SCORE: [[vm.points]]</h1>
         <md-button ng-click='vm.resetGame()' class='md-raised wiki-button'>PLAY AGAIN?</md-button>
       </div>
       <div id='article-view' ng-hide='vm.isLoading || vm.isWin' ng-class="vm.timerRunning ? 'wiki-playing' : 'wiki-paused'">
-        <style scoped>{{vm.styles}}</style>
+        <style scoped>[[vm.styles]]</style>
         <h1 ng-show='vm.title' ng-bind-html='vm.title'></h1>
         <div ng-show='vm.content' compile='vm.content'></div>
       </div>

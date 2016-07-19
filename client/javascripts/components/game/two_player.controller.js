@@ -1,7 +1,15 @@
 (()=>{
   angular.module('two_player.controller', [])
     .controller('TwoPlayerGame', TwoPlayerGame)
-    .directive('compile', compile);
+    .directive('compile', compile)
+    .config(interpolate);
+
+  // Prevent wikipedia templating from conflicting with angular expressions
+  interpolate.$inject = ['$interpolateProvider'];
+  function interpolate($interpolateProvider){
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+  }
     
   //***************************************************************************
   // NOT MY CODE!! check out: https://github.com/angular/angular.js/issues/4992
