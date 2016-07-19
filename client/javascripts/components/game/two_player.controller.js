@@ -75,7 +75,7 @@
     Socket.on('Receive Socket Id', id=>{
       vm.player = {
         id: vm.currentUser ? vm.currentUser.id : -1,
-        username: vm.currentUser ? vm.currentUser.username : 'Guest',
+        username: vm.currentUser ? vm.currentUser.username : null,
         socketId: id,
         clicks: 0
       };
@@ -86,13 +86,20 @@
       let keys = Object.keys(players);
       vm.player = players[vm.player.socketId];
       vm.opponent = keys[0] !== vm.player.socketId ? players[keys[0]] : players[keys[1]];
-
+      if(!vm.player.username) vm.player.username = 'YOU';
+      if(!vm.opponent.username) vm.opponent.username = 'OTHER';
       console.log('Player', vm.player);
       console.log('Opponent', vm.opponent);
+      // Socket.emit('Load Game');
     });
 
     Socket.on('Player Leave', players=>{
-      vm.players = players;
+      if(vm.isPlaying){
+        $ngBootbox.alert('Your Opponent Left The Game. This Game Will Not Be Counted').then(()=>{
+          Socket.removeAllListeners();
+          $location.path('/play');
+        });        
+      }
     }); 
 
     Socket.on('Room Full', ()=>{

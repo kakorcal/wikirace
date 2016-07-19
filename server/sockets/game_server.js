@@ -76,6 +76,23 @@ exports.init = (io, socket)=>{
     }
   });
 
+  socket.on('Load Game', ()=>{
+    Promise.all([generateRandomTopic(), generateRandomTopic()])
+      .then(topics=>{
+        let titles = helpers.replaceInvalidTopics(
+            helpers.findUniqueTopics(topics[0], topics[1])
+          );
+        return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
+      })
+      .then(titles=>{
+        console.log(titles);
+        io.to('Wiki Room').emit('Receive Titles', titles);  
+      })
+      .catch(err=>{
+        socket.emit('Error', 'Failed To Retrieve Data');
+      });
+  });
+
   //***************************************************************************
     // END
   //***************************************************************************

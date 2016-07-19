@@ -3,7 +3,7 @@
     <div class='md-toolbar-tools'>
       <h4 flex>WIKIRACE</h4>
       <div flex ng-show='vm.isPlaying'>
-        <h4 id='wiki-vs'>{{}} vs {{}}</h4>
+        <h4 id='wiki-vs'>{{vm.player.username}} vs {{vm.opponent.username}}</h4>
       </div>
       <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
     </div>
@@ -38,7 +38,7 @@
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-clicks'>
       <div class="md-toolbar-tools" ng-show='vm.isPlaying' layout='column' layout-align="space-around center">
         <h4>{{vm.player.username | truncate: 15}} : {{vm.player.clicks}}</h4>
-        <h4>{{vm.player.username | truncate: 15}} : {{vm.player.clicks}}</h4>
+        <h4>{{vm.opponent.username | truncate: 15}} : {{vm.opponent.clicks}}</h4>
       </div>
     </md-toolbar>
   </md-sidenav>
