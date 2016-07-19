@@ -87,8 +87,8 @@
       let keys = Object.keys(players);
       vm.player = players[vm.player.socketId];
       vm.opponent = keys[0] !== vm.player.socketId ? players[keys[0]] : players[keys[1]];
-      if(!vm.player.username) vm.player.username = 'YOU';
-      if(!vm.opponent.username) vm.opponent.username = 'OTHER';
+      if(!vm.player.username) vm.player.username = 'You';
+      if(!vm.opponent.username) vm.opponent.username = 'Guest';
       console.log('Player', vm.player);
       console.log('Opponent', vm.opponent);
       Socket.emit('Load Game');
@@ -119,7 +119,6 @@
         let timer = $interval(()=>{
           vm.countdown--;
           if(vm.countdown === 0){
-            vm.countdown = 'START!!!';
             $interval.cancel(timer);
             Socket.emit('Start Game');
           }
@@ -142,7 +141,7 @@
       vm.thumbnail = data.thumbnail ? `https:${data.thumbnail}` : '/assets/wiki-logo.png';
       vm.articles.push({title: data.text, path: data.path, thumbnail: vm.thumbnail});
       vm.isLoading = false;
-      
+
       if(vm.player.clicks){
         Socket.emit('Update Clicks', vm.player);
       }
