@@ -57,7 +57,7 @@ exports.init = (io, socket)=>{
     if(players.length < 2){
       players.push(socket.client.id);
       socket.join('Wiki Room');
-      io.to('Wiki Room').emit('Player Join');
+      io.to('Wiki Room').emit('Player Join', socket.client.id);
     }else{
       socket.emit('Room Full');
     }

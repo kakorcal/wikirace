@@ -33,16 +33,20 @@
   function TwoPlayerGame($scope, $window, $timeout, $interval, $location, $ngBootbox, $anchorScroll, Socket, UserService){
     // For two players, the option to pause the game doesn't exist so vm.time is same for both
     let vm = this;
+    vm.currentUser = UserService.getCurrentUser();
     vm.players = [];
     vm.articles = [];
+    vm.player = null;
+    vm.opponent = null;
+    vm.socketId = null;
     vm.extraTitles = null;
-    vm.countdown = 3;
-    vm.time = 0;
-    vm.gameType = '2';
     vm.timerRunning = false;
     vm.isPlaying = false;
     vm.isLoading = false;
     vm.isWin = false;
+    vm.countdown = 3;
+    vm.gameType = '2';
+    vm.time = 0;
 
     vm.quitGame = function(){
       $ngBootbox.confirm('Are You Sure?').then(()=>{
@@ -59,7 +63,7 @@
     };
 
     vm.generateArticle = function(path){
-      vm.clicks++;
+      vm.player.clicks++;
       vm.isLoading = true;
       Socket.emit('Generate Article', path);
     };
@@ -70,20 +74,28 @@
 
     Socket.connect().emit('Setup Two Player Game');
 
-    Socket.on('Player Join', ()=>{
+    Socket.on('Player Join', id=>{
+      if(!vm.socketId) {
+        vm.socketId = id;
+        vm.player = new Player(vm);
+      }
+      console.log('Player Join', vm.player);
       Socket.emit('Check Game Status');
     });
 
     Socket.on('Player Leave', ()=>{
+      console.log('Player Leave', vm.player);
       Socket.emit('Check Game Status');
     });
 
     Socket.on('Ready To Play', ids=>{
-      vm.players = [new Player(ids[0]), new Player(ids[1])];
+      console.log('Ready To Play', vm.player);
+      vm.players = [ids[0], ids[1]];
       Socket.emit('Load Game');
     });
 
     Socket.on('Not Ready', ids=>{
+      console.log('Not Ready', vm.player);
       vm.players = null;
     });
 
@@ -149,14 +161,11 @@
     });
   }
 
-  function Player(socketId){
-    this.socketId = socketId;
-    this.clicks= 0;
-    this.points= 0;
-    this.articles= [];
-    this.isPlaying= false;
-    this.isLoading= false;
-    this.isWin= false;
+  function Player(vm){
+    this.socketId = vm.socketId;
+    this.username = vm.currentUser ? vm.currentUser.username : 'Guest';
+    this.id = vm.currentUser ? vm.currentUser.id : null;
+    this.clicks = 0;
   }
 
   function Stat(vm){
