@@ -120,7 +120,7 @@
       if(!vm.opponent.username) vm.opponent.username = 'Guest';
       if(vm.player.reset) delete vm.player.reset;
       if(vm.opponent.reset) delete vm.opponent.reset;
-      
+
       console.log('Player', vm.player);
       console.log('Opponent', vm.opponent);
       if(vm.player.username === vm.opponent.username){

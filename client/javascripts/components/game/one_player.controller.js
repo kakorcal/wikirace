@@ -6,8 +6,8 @@
   //***************************************************************************
   // NOT MY CODE!! check out: https://github.com/angular/angular.js/issues/4992
   //***************************************************************************
-  compile.$inject = ['$compile'];
-  function compile($compile) {
+  compile.$inject = ['$compile', '$sce'];
+  function compile($compile, $sce) {
     // directive factory creates a link function
     return function(scope, element, attrs) {
       scope.$watch(
