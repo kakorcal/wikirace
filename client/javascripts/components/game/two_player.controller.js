@@ -79,18 +79,16 @@
         vm.socketId = id;
         vm.player = new Player(vm);
       }
-      console.log('Player Join', vm.player);
-      Socket.emit('Check Game Status');
+      Socket.emit('Check Game Status', vm.player);
     });
 
     Socket.on('Player Leave', ()=>{
-      console.log('Player Leave', vm.player);
-      Socket.emit('Check Game Status');
+      Socket.emit('Check Game Status', vm.player);
     });
 
-    Socket.on('Ready To Play', ids=>{
-      console.log('Ready To Play', vm.player);
-      vm.players = [ids[0], ids[1]];
+    Socket.on('Ready To Play', players=>{
+      console.log('PLAYERS', players);
+      vm.players = players
       Socket.emit('Load Game');
     });
 
@@ -126,7 +124,6 @@
     });
 
     Socket.on('Receive Article', data=>{
-      console.log('Receive Article');
       vm.title = data.title;
       vm.content = data.content;
       vm.styles = data.styles;

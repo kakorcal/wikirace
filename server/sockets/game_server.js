@@ -4,10 +4,12 @@ const rp = require('request-promise');
 const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
+const _ = require('lodash');
 
 // two player vars
 let gametype = null;
 let players = [];
+let socketIds = [];
 
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
@@ -54,20 +56,24 @@ exports.init = (io, socket)=>{
     // adding gametype flag to use interchangeable socket methods
     gametype = '2';
 
-    if(players.length < 2){
-      players.push(socket.client.id);
+    if(socketIds.length < 2){
+      socketIds.push(socket.client.id);
       socket.join('Wiki Room');
       io.to('Wiki Room').emit('Player Join', socket.client.id);
     }else{
       socket.emit('Room Full');
     }
-    console.log(players);
   });
 
-  socket.on('Check Game Status', ()=>{
-    if(players.length === 2){
-      socket.emit('Ready To Play', players);
+  socket.on('Check Game Status', player=>{
+    if(socketIds.length === 2){
+      players.push(player);
+      console.log('Ready To Play', players);
+      if(players.length === 2){
+        io.to('Wiki Room').emit('Ready To Play', players);
+      }
     }else{
+      console.log('Not Ready', players);
       socket.emit('Not Ready');
     }
   }); 
@@ -133,7 +139,8 @@ exports.init = (io, socket)=>{
 
   socket.on('disconnect', ()=>{
     if(gametype === '2'){
-      players.splice(players.indexOf(socket.client.id), 1);
+      players = players.filter(player => player.socketId !== socket.client.id);
+      socketIds.splice(socketIds.indexOf(socket.client.id), 1);
       socket.leave('Wiki Room');
       io.to('Wiki Room').emit('Player Leave');      
     }
