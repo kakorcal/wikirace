@@ -38,6 +38,7 @@
     vm.player = null;
     vm.opponent = null;
     vm.socketId = null;
+    vm.currentPath = null;
     vm.timerRunning = false;
     vm.countdownStart = false;
     vm.isPlaying = false;
@@ -64,7 +65,8 @@
     vm.generateArticle = function(path){
       vm.player.clicks++;
       vm.isLoading = true;
-      Socket.emit('Generate Article', path);
+      vm.currentPath = path;
+      Socket.emit('Update Clicks', vm.player);
     };
 
     $scope.$on('timer-stopped', (e, time)=>{
@@ -149,6 +151,10 @@
         vm.isWin = true;
         Socket.emit('Game Finished');
       }
+    });
+
+    Socket.on('Receive Updated Clicks', player=>{
+      Socket.emit('Generate Article', vm.currentPath);
     });
 
     Socket.on('Room Full', ()=>{

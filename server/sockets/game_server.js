@@ -101,6 +101,10 @@ exports.init = (io, socket)=>{
     socket.emit('Start Countdown');
   });
 
+  socket.on('Update Clicks', player=>{
+    io.to('Wiki Room').emit('Receive Updated Clicks', player);
+  });
+
   //***************************************************************************
     // END
   //***************************************************************************
