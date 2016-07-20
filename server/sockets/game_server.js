@@ -164,12 +164,18 @@ exports.init = (io, socket)=>{
 
   socket.on('disconnect', ()=>{
     if(gametype === '2'){
-      delete players[socket.client.id];
-      console.log('player deleted', socket.client.id);
-      console.log('remaining player', players);
-      console.log('ON DISCONNECT');
-      socket.leave('Wiki Room');
-      io.to('Wiki Room').emit('Player Leave', players);      
+      if(players[socket.client.id]){
+        delete players[socket.client.id];
+        console.log('player deleted', socket.client.id);
+        console.log('remaining player', players);
+        console.log('ON DISCONNECT');
+        socket.leave('Wiki Room');
+        io.to('Wiki Room').emit('Player Leave', players);      
+      }else{
+        console.log('ROOM FULL');
+        console.log('disconnected', socket.client.id);
+        console.log('players', players);
+      }
     }
     console.log('CLIENT DISCONNECT');
   });
