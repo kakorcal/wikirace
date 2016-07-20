@@ -101,7 +101,7 @@ exports.init = (io, socket)=>{
       .then(titles=>{
         console.log(titles);
         // ['Alaska', 'Yukon']
-        io.to('Wiki Room').emit('Receive Titles', titles);  
+        io.to('Wiki Room').emit('Receive Titles', ['Alaska', 'Yukon']);  
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');

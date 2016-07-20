@@ -177,21 +177,20 @@
       });
     });
 
-    $scope.$on('$routeChangeStart', e=>{
+    $scope.$on('$locationChangeStart', e=>{
       if(vm.isPlaying){
         e.preventDefault();
         $ngBootbox.confirm(
           'Are You Sure? Note: If you want to go back to the previous articles,'+ 
           ' please click on the search history listed in the sidebar.').then(()=>{
           Socket.removeAllListeners();
+          Socket.disconnect(true);
           vm.isPlaying = false;
           $location.path('/play');
         });
+      }else{
+        Socket.disconnect(true);
       }
-    });
-
-    $scope.$on('$locationChangeStart', e=>{
-      Socket.disconnect(true);
     });
   }
 

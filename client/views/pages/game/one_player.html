@@ -51,9 +51,9 @@
           <h1 class='wiki-loading-tween'>LOADING...</h1>
         </div>
         <div ng-show='vm.first && vm.last'>
-          <h1>FROM: <%vm.first%></h1>
+          <h1>FROM: <a ng-href="https://en.wikipedia.org/wiki/<%vm.first%>" target='_blank'><%vm.first%></a></h1>
           <h1><i class='fa fa-arrow-down'></i></h1>
-          <h1>TO: <%vm.last%></h1>    
+          <h1>TO: <a ng-href="https://en.wikipedia.org/wiki/<%vm.last%>" target='_blank'><%vm.last%></a></h1>    
           <md-button ng-click='vm.startGame()' class='md-raised wiki-button'>START GAME!!!</md-button>              
           <md-button ng-click='vm.changeArticles()' class='md-raised wiki-button'>CHANGE ARTICLES</md-button>    
         </div>
