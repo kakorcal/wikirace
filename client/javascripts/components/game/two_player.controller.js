@@ -43,7 +43,7 @@
     vm.isPlaying = false;
     vm.isLoading = false;
     vm.isWin = false;
-    vm.countdown = 10;
+    vm.countdown = 3;
     vm.gameType = '2';
     vm.time = 0;
 
@@ -80,7 +80,7 @@
       vm.first = null;
       vm.last = null;
       vm.countdownStart = false;
-      vm.countdown = 10;
+      vm.countdown = 3;
 
       // this is janky but it makes the transition a little smoother
       $timeout(()=>{
