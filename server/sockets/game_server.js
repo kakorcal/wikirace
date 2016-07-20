@@ -103,7 +103,7 @@ exports.init = (io, socket)=>{
         console.log(titles);
         // ['Alaska', 'Yukon']
         // pokemon go -> gps -> united states -> george washington
-        io.to('Wiki Room').emit('Receive Titles', ['Pokémon_Go', 'George_Washington']);  
+        io.to('Wiki Room').emit('Receive Titles', ['Pokémon Go', 'George Washington']);  
       })
       .catch(err=>{
         socket.emit('Error', 'Failed To Retrieve Data');
