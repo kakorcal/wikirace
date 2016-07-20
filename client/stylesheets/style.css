@@ -362,6 +362,18 @@ a.external.text, a[rel='nofollow'].external {
   letter-spacing: 0.010em;
 }
 
+#wiki-vs img {
+  width: 50px;
+}
+
+#wiki-vs .wiki-player {
+  margin-right: 15px;
+}
+
+#wiki-vs .wiki-opponent {
+  margin-left: 15px;
+}
+
 /* rankings.html */
 
 .wikiracer-nav {

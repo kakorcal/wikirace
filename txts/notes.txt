@@ -120,7 +120,7 @@ script
 
   Now that we have a basic idea of how the game works and the interface, I would like to bring up my assistant Matt to go through a demo of the second player
 
-  And to wrap it up. I would like to talk about the technologies involved in the app
+  and while matt is getting setup, I would like to talk about the technologies involved in the app
   The technologies involved are
     angular js for the front end
     socket io for the real time gaming 

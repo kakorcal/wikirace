@@ -3,7 +3,7 @@
     <div class='md-toolbar-tools'>
       <h4 flex>WIKIRACE</h4>
       <div flex ng-show='vm.isPlaying'>
-        <h4 id='wiki-vs'><%vm.player.username%> vs <%vm.opponent.username%></h4>
+        <h4 id='wiki-vs'><img class='wiki-player' src="/assets/thumbnails/ken.gif" alt="pic"><%vm.player.username%> vs <%vm.opponent.username%><img class='wiki-opponent' src="/assets/thumbnails/sagat.gif" alt="pic"></h4>
       </div>
       <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
     </div>
