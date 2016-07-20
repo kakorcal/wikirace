@@ -236,3 +236,27 @@ router.post('/new', (req, res, next)=>{
     this.id = vm.currentUser ? vm.currentUser.id : null;
     this.clicks = 0;
   }
+
+// add player to room 
+if(!player.reset){
+  console.log('NEW PLAYER', player);
+  if(Object.keys(players).length < 2){
+    players[player.socketId] = player;
+    console.log('Add Player To Room', player);
+    console.log('Players', players);
+    socket.join('Wiki Room');
+  }
+  if(Object.keys(players).length === 2){
+    // set the players on both sockets
+    console.log('Two Players in Room', players);
+    io.to('Wiki Room').emit('Set Players', players);
+  }
+}else{
+  resetCount++;
+  console.log('Reset Count', resetCount);
+  if(resetCount === 2){
+    console.log('RESETTING');
+    io.to('Wiki Room').emit('Set Players', players);
+    resetCount = 0;
+  }
+}

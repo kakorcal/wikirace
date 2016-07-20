@@ -8,7 +8,6 @@ const WIKILIST = '/wiki/Wikipedia:WikiProject_';
 // two player variables
 let gametype = null;
 let players = {};
-let resetCount = 0;
 
 // TODO: find random category first. and within that category, select two articles
 // get all categories from https://en.wikipedia.org/wiki/Portal:Contents/Categories
@@ -59,33 +58,33 @@ exports.init = (io, socket)=>{
     console.log('Setup Two Player Game', socket.client.id);
     // only two players per game
     if(Object.keys(players).length < 2){
-      socket.emit('Receive Socket Id', {socket: socket.client.id, reset: false});
+      socket.emit('Receive Socket Id', socket.client.id);
     }else{
       socket.emit('Room Full');
     }
   });
 
   socket.on('Reset Two Player Game', ()=>{
-    socket.emit('Receive Socket Id', {socket: socket.client.id, reset: true});
+    socket.emit('Receive Socket Id', socket.client.id);
   });
 
   socket.on('Add Player To Room', player=>{
-    if(!player.reset){
-      if(Object.keys(players).length < 2){
-        players[player.socketId] = player;
-        console.log('Add Player To Room', player);
-        console.log('Players Object', players);
-        socket.join('Wiki Room');
-      }
-      if(Object.keys(players).length === 2){
-        // set the players on both sockets
+    console.log('PLAYER ADDED', player);
+    if(player.playCount === 0){
+      console.log('NEW PLAYER', player);
+      // need to add into room
+      players[player.socketId] = player;
+      console.log('PLAYERS', players);
+      socket.join('Wiki Room');
+    }
+
+    if(Object.keys(players).length === 2){
+      // check if both players are ready
+      if(isReady(players)){
+        console.log('PLAYERS READY', players);
         io.to('Wiki Room').emit('Set Players', players);
-      }
-    }else{
-      resetCount++;
-      if(resetCount === 2){
-        io.to('Wiki Room').emit('Set Players', players);
-        resetCount = 0;
+      }else{
+        console.log('NOT READY', players);
       }
     }
   });
@@ -118,6 +117,12 @@ exports.init = (io, socket)=>{
 
   socket.on('Update Clicks', player=>{
     io.to('Wiki Room').emit('Receive Updated Clicks', player);
+  });
+
+  socket.on('Post Game Update', player=>{
+    console.log('UPDATE PLAYER', player);
+    players[player.socketId] = player;
+    console.log('POST GAME UPDATE', players);
   });
 
   //***************************************************************************
@@ -185,6 +190,13 @@ exports.init = (io, socket)=>{
 //***************************************************************************
   // HELPERS
 //***************************************************************************
+
+function isReady(players){
+  for(let prop in players){
+    if(!players[prop].isReady) return false;
+  }
+  return true;
+}
 
 function generateTitle(PATH){
   return rp({uri: `${BASE_URL}${PATH}`, transform: body=>cheerio.load(body)})

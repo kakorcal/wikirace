@@ -45,6 +45,8 @@
     vm.isWin = false;
     vm.countdown = 3;
     vm.gameType = '2';
+    vm.playCount = 0;
+    vm.isReady = !vm.playCount ? true : false;
     vm.time = 0;
 
     vm.quitGame = function(){
@@ -81,6 +83,7 @@
       vm.last = null;
       vm.countdownStart = false;
       vm.countdown = 3;
+      vm.isReady = true;
 
       // this is janky but it makes the transition a little smoother
       $timeout(()=>{
@@ -105,11 +108,12 @@
       vm.player = {
         id: vm.currentUser ? vm.currentUser.id : -1,
         username: vm.currentUser ? vm.currentUser.username : null,
-        socketId: id.socket,
-        clicks: 0
+        socketId: id,
+        clicks: 0,
+        playCount: vm.playCount,
+        isReady: vm.isReady
       };
 
-      if(id.reset) vm.player.reset = true;
       Socket.emit('Add Player To Room', vm.player);
     });
 
@@ -218,6 +222,10 @@
         vm.isWin = true;
         vm.points = 0;
       }
+
+      vm.player.isReady = false;
+      vm.player.playCount++;
+      Socket.emit('Post Game Update', vm.player);
 
       if(vm.currentUser){
         // add score to db
