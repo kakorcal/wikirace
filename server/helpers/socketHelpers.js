@@ -21,9 +21,7 @@ module.exports = {
     // link: https://en.wikipedia.org/wiki/Wikipedia:Lists_of_popular_pages_by_WikiProject
     // skipping href that links to inappropriate or inapplicable topics
     return [
-      'Academic_Journals',
       'Actors_and_Filmmakers',
-      'Albums',
       'Amphibians_and_Reptiles',
       'Animals',
       'Animals_in_media',
@@ -32,7 +30,6 @@ module.exports = {
       'Architecture',
       'Arthropods',
       'Astronomical_objects',
-      'Athletics',
       'Automobiles',
       'Bible',
       'Bivalves',
@@ -52,7 +49,7 @@ module.exports = {
       'Companies',
       'Composers',
       'Computer_science',
-      'Computing',
+      'Conservatism',
       'Countries',
       'Dance',
       'Databases',
@@ -70,6 +67,7 @@ module.exports = {
       'Free_software',
       'Genetics',
       'Gastropods',
+      'Globalization',
       'Graphic_design',
       'Hinduism',
       'Hip_hop',
@@ -100,6 +98,7 @@ module.exports = {
       'Physics',
       'Plants',
       'Primates',
+      'Professional_Wrestling',
       'Psychology',
       'Religion',
       'Retailing',
@@ -118,7 +117,6 @@ module.exports = {
       'Video_games',
       'Visual_arts',
       'Volcanoes',
-      'Websites',
       'Women%27s_History',
       'Turtles',
       'Spiders'
