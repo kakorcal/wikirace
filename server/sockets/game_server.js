@@ -38,7 +38,9 @@ exports.init = (io, socket)=>{
         return Promise.all([generateTitle(titles[0]), generateTitle(titles[1])]);
       })
       .then(titles=>{
-        // Mediterranean Basin error
+        // Mediterranean Basin Error 
+          // UPDATE: error is caused by angular trying to evaluate wikipedia templates
+          // which have the same double bracket notation. 
         // socket.emit('Receive Titles', ['Mediterranean Basin', titles[1]]);
         // https://docs.angularjs.org/error/$parse/ueoe
         socket.emit('Receive Titles', titles);

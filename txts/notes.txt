@@ -84,9 +84,25 @@ Xdebug heroku errors
 Xcontinue finishing two player game
 
 7/19
-find any bugs while playing the game
+Xfind any bugs while playing the game
+
+7/20
 how to page
+  Welcome
+    What is this?
+    Rules
+    Tips
+  One Player
+    How to win
+    How to lose
+  Two Player
+    How to win
+    How to lose
+  Contact
+    For more info...
+
 screencast
+script
 
 // probably won't have time for these:
 update readme
