@@ -100,13 +100,48 @@ how to page
     How to lose
   Contact
     For more info...
-
 screencast?
-script
-  Hi my name is Ken. For my project, I built a game called the Wikirace, which is inspired by original wikipedia game. And for those who do not know, the wikipedia game is a simple game where you start from one article and try to reach another article in the least amount of time and clicks possible.
-  The platform I built makes it possible for people to play in first player as well as in second player. And it also makes it possible to keep record of your score if you create an account. So the first thing should do is to login.
 
-  As you can see...
+
+
+
+script
+  Hi everybody, my name is Ken. For my project, I built a game called the Wikirace, which is inspired by original wikipedia game. And for those who do not know, the wikipedia game is a simple game where you start from one article and try to reach another article by clicking through the links on the wikipedia page. And the goal is to be able to get to the destination article in the least amount of time and clicks possible.
+  The platform I built makes it possible for users to play in first player as well as in second player. And it also makes it possible to keep record of your score if you create an account. So the first thing should do is to login. As you can see...
+
+  if you want to see the stats of other players, Rankings...
+
+  now onto the game itself... One Player...
+    from to...
+    change articles...
+    click through...
+    sidebar...
+    max points...
+
+  Now that we have a basic idea of how the game works and the interface, I would like to bring up my assistant Matt to go through a demo of the second player
+
+  And to wrap it up. I would like to talk about the technologies involved in the app
+  The technologies involved are
+    angular js for the front end
+    socket io for the real time gaming 
+    node js for the backend
+    cheerio js and request js for web scraping wiki
+    json web tokens for authenticating users
+
+  And that is the Wikirace. Please check it out on: wikirace.heroku .Thank you very much for listening. Any Questions?
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // probably won't have time for these:
 update readme
