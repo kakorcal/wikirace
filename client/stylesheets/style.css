@@ -362,6 +362,11 @@ a.external.text, a[rel='nofollow'].external {
   letter-spacing: 0.010em;
 }
 
+#wiki-vs {
+  position: relative;
+  right: 70px;
+}
+
 #wiki-vs img {
   width: 50px;
 }
