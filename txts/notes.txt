@@ -101,8 +101,12 @@ how to page
   Contact
     For more info...
 
-screencast
+screencast?
 script
+  Hi my name is Ken. For my project, I built a game called the Wikirace, which is inspired by original wikipedia game. And for those who do not know, the wikipedia game is a simple game where you start from one article and try to reach another article in the least amount of time and clicks possible.
+  The platform I built makes it possible for people to play in first player as well as in second player. And it also makes it possible to keep record of your score if you create an account. So the first thing should do is to login.
+
+  As you can see...
 
 // probably won't have time for these:
 update readme
