@@ -81,11 +81,15 @@ Finish two player game
 7/18 ~ 7/19
 XCreate rankings pages
 Xdebug heroku errors
-continue finishing two player game
+Xcontinue finishing two player game
+
+7/19
+find any bugs while playing the game
 how to page
 screencast
-update readme
+
 // probably won't have time for these:
+update readme
 add audio
 add tests
 refactor

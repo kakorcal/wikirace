@@ -177,6 +177,19 @@
       });
     });
 
+    $scope.$on('$routeChangeStart', e=>{
+      if(vm.isPlaying){
+        e.preventDefault();
+        $ngBootbox.confirm(
+          'Are You Sure? Note: If you want to go back to the previous articles,'+ 
+          ' please click on the search history listed in the sidebar.').then(()=>{
+          Socket.removeAllListeners();
+          vm.isPlaying = false;
+          $location.path('/play');
+        });
+      }
+    });
+
     $scope.$on('$locationChangeStart', e=>{
       Socket.disconnect(true);
     });
