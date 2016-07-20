@@ -43,7 +43,7 @@
     vm.isPlaying = false;
     vm.isLoading = false;
     vm.isWin = false;
-    vm.countdown = 3;
+    vm.countdown = 5;
     vm.gameType = '2';
     vm.playCount = 0;
     vm.isReady = !vm.playCount ? true : false;
@@ -82,7 +82,7 @@
       vm.first = null;
       vm.last = null;
       vm.countdownStart = false;
-      vm.countdown = 3;
+      vm.countdown = 5;
       vm.isReady = true;
 
       // this is janky but it makes the transition a little smoother
