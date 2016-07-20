@@ -258,12 +258,14 @@
         $ngBootbox.confirm(
           'Are You Sure? Note: If you want to go back to the previous articles,'+ 
           ' please click on the search history listed in the sidebar.').then(()=>{
+          vm.isPlaying = false;
           Socket.removeAllListeners();
           Socket.disconnect(true);
-          vm.isPlaying = false;
           $location.path('/play');
         });
       }else{
+        vm.isPlaying = false;
+        Socket.removeAllListeners();
         Socket.disconnect(true);
       }
     });
