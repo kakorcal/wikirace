@@ -264,7 +264,6 @@
           $location.path('/play');
         });
       }else{
-        Socket.removeAllListeners();
         Socket.disconnect(true);
       }
     });
