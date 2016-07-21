@@ -2,8 +2,8 @@
   <md-toolbar id='wiki-titlebar'>
     <div class='md-toolbar-tools'>
       <h4 flex>WIKIRACE</h4>
-      <div flex id='wiki-vs' ng-show='vm.isPlaying'>
-        <h4><img class='wiki-player' src="/assets/thumbnails/ken.gif" alt="pic"><%vm.player.username%> vs <%vm.opponent.username%><img class='wiki-opponent' src="/assets/thumbnails/sagat.gif" alt="pic"></h4>
+      <div flex id='wiki-vs' ng-show='vm.isPlaying || vm.isWin'>
+        <h4><img class='wiki-player' src="/assets/thumbnails/ken.gif" alt="pic"><%vm.player.username%> vs <%vm.opponent.username%><img class='wiki-opponent' src="/assets/thumbnails/blanka.gif" alt="pic"></h4>
       </div>
       <md-button ng-click='vm.quitGame()' class='md-warn md-raised md-hue-1'>Quit</md-button>
     </div>
@@ -36,7 +36,7 @@
       </md-content>
     </md-toolbar>    
     <md-toolbar layout='row' layout-padding id='wiki-sidebar-clicks'>
-      <div class="md-toolbar-tools" ng-show='vm.isPlaying' layout='column' layout-align="space-around center">
+      <div class="md-toolbar-tools" ng-show='vm.isPlaying || vm.isWin' layout='column' layout-align="space-around center">
         <h4><%vm.player.username | truncate: 15%> : <%vm.player.clicks%></h4>
         <h4><%vm.opponent.username | truncate: 15%> : <%vm.opponent.clicks%></h4>
       </div>

@@ -84,7 +84,7 @@
       vm.countdownStart = false;
       vm.countdown = 5;
       vm.isReady = true;
-
+      // TODO: the transition of the user clicks and names should be fixed
       // this is janky but it makes the transition a little smoother
       $timeout(()=>{
         vm.articles = [];

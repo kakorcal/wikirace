@@ -4,6 +4,7 @@ const rp = require('request-promise');
 const helpers = require('../helpers/socketHelpers');
 const BASE_URL = 'https://en.wikipedia.org';
 const WIKILIST = '/wiki/Wikipedia:WikiProject_';
+// TOPIC LINKS: https://en.wikipedia.org/wiki/Wikipedia:Lists_of_popular_pages_by_WikiProject
 
 // two player variables
 let gametype = null;
