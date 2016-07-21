@@ -79,10 +79,12 @@ exports.init = (io, socket)=>{
       console.log('PLAYERS', players);
       socket.join('Wiki Room');
     }
-
+    console.log('BEFORE ISREADY CHECK');
     if(Object.keys(players).length === 2){
+    console.log('INSIDE ISREADY CHECK');
       // check if both players are ready
       if(isReady(players)){
+        console.log('ON ISREADY CHECK');
         console.log('PLAYERS READY', players);
         io.to('Wiki Room').emit('Set Players', players);
       }else{

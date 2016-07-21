@@ -139,11 +139,12 @@
     });
 
     Socket.on('Player Leave', players=>{
+      // possible bug?
       if(vm.isPlaying){
         $ngBootbox.alert('Your Opponent Left The Game. This Game Will Be Terminated And Not Counted.')
           .then(()=>{
-            Socket.removeAllListeners();
             vm.isPlaying = false;
+            Socket.removeAllListeners();
             $location.path('/play');
           });        
       }
@@ -264,6 +265,7 @@
           $location.path('/play');
         });
       }else{
+        console.log('LEAVE GAME');
         vm.isPlaying = false;
         Socket.removeAllListeners();
         Socket.disconnect(true);
