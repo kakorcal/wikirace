@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const SALT_WORK_FACTOR = 10;
-const SECRET = process.env.LOCAL_SECRET;
+const SECRET = process.env.JWT_SECRET;
 let token;
 
 // middleware to check the token against params to authorize a user
